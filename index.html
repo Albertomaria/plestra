@@ -190,6 +190,9 @@ body { max-width: 480px; margin: 0 auto; }
 .step-n { color: var(--accent); font-weight: 700; flex-shrink: 0; min-width: 22px; }
 .info-steps li.lordosi-step { color: var(--lordosi); }
 .info-steps li.lordosi-step .step-n { color: var(--lordosi); }
+.info-steps li.tecnica-step { color: var(--accent); }
+.info-steps li.tecnica-step .step-n { color: var(--accent); }
+.banner-warn { background: rgba(255,159,10,.12); border: 1.5px solid var(--lordosi); border-radius: 12px; padding: 12px 14px; margin-bottom: 12px; font-size: 13px; color: var(--lordosi); line-height: 1.5; }
 
 /* Nav bar fissa */
 .nav-bar {
@@ -305,49 +308,43 @@ const SCHEDA = {
           "Il corpo forma una linea retta dalla testa ai talloni.",
           "⚠️ LORDOSI: spingi attivamente il bacino verso il basso — non lasciare che la pancia cada.",
           "Contrai glutei e addome contemporaneamente per tutta la durata.",
-          "Guarda il pavimento, collo neutro.",
-          "Respira normalmente — non trattenere il fiato."
+          "Guarda il pavimento, collo neutro. Respira normalmente."
         ]}},
-      { id:"A3", sez:"Riscaldamento — NON saltare", nome:"Retroversione bacino alla sbarra", serie:2, reps:"10 rip. lente", riposo:0, peso:"", lordosi:true, warm:true,
+      { id:"A3", sez:"Riscaldamento — NON saltare", nome:"Bird dog", serie:2, reps:"10 rip. per lato", riposo:0, peso:"", lordosi:true, warm:true,
+        video:"https://musclewiki.com/it-it/exercise/bird-dog?model=m",
+        info:{ muscoli:"Core profondo, stabilizzatori lombari, glutei", steps:[
+          "A quattro zampe: mani sotto le spalle, ginocchia sotto i fianchi, schiena piatta.",
+          "⚠️ LORDOSI: mantieni la schiena perfettamente piatta per tutta la serie — è l obiettivo principale.",
+          "Estendi contemporaneamente il braccio destro in avanti e la gamba sinistra indietro.",
+          "Tieni 2–3 secondi senza ruotare il bacino o alzare il fianco.",
+          "Torna lentamente e ripeti con braccio sinistro + gamba destra.",
+          "Movimento lento e controllato — non è un esercizio di velocità."
+        ]}},
+      { id:"A4", sez:"Riscaldamento — NON saltare", nome:"Retroversione bacino alla sbarra", serie:2, reps:"10 rip. lente", riposo:0, peso:"", lordosi:true, warm:true,
         video:null,
         info:{ muscoli:"Core profondo, flessori anca, mobilità lombare", steps:[
           "Appenditi alla sbarra con presa prona, braccia tese.",
           "Parti in posizione neutra con leggera curva lombare naturale.",
           "Contrai l'addome e spingi il bacino in avanti e verso l'alto.",
           "⚠️ LORDOSI: allena il controllo attivo della curva lombare — esercizio chiave per te.",
-          "Tieni 2–3 secondi sentendo la lombare appiattirsi.",
-          "Torna lentamente. 10 ripetizioni lente."
+          "Tieni 2–3 secondi sentendo la lombare appiattirsi. Torna lentamente. 10 rip. lente."
         ]}},
-      { id:"A4", sez:"Riscaldamento — NON saltare", nome:"Mobilità spalle (cerchi braccia)", serie:1, reps:"30 sec", riposo:0, peso:"", lordosi:false, warm:true, durataSec:30,
+      { id:"A5", sez:"Riscaldamento — NON saltare", nome:"Mobilità spalle (cerchi braccia)", serie:1, reps:"30 sec", riposo:0, peso:"", lordosi:false, warm:true, durataSec:30,
         video:null,
         info:{ muscoli:"Cuffia dei rotatori, deltoide, mobilità articolare", steps:[
           "In piedi, piedi larghezza spalle, braccia lungo i fianchi.",
-          "Fai ruotare le braccia in cerchi ampi in avanti per 15 secondi.",
-          "Inverti la direzione per altri 15 secondi.",
-          "Mantieni le spalle basse e rilassate — non sollevarle verso le orecchie.",
-          "Aumenta progressivamente l'ampiezza del cerchio."
+          "Ruota le braccia in cerchi ampi in avanti per 15 secondi, poi inverti.",
+          "Mantieni le spalle basse e rilassate. Aumenta progressivamente l'ampiezza."
         ]}},
-      { id:"A5", sez:"Petto", nome:"Panca inclinata con manubri", serie:4, reps:"10–12 rip.", riposo:90, peso:"10", lordosi:false, warm:false, sugPeso:"10–14 kg/br",
+      { id:"A6", sez:"Petto", nome:"Panca inclinata con manubri", serie:4, reps:"10–12 rip.", riposo:90, peso:"10", lordosi:false, warm:false, sugPeso:"10–14 kg/br",
         video:"https://musclewiki.com/it-it/exercise/dumbbell-incline-bench-press?model=m",
-        note:"Sostituisce la piana, protegge spalle e cuffia dei rotatori",
+        note:"Panca a 45°, gomiti a 45° rispetto al busto",
         info:{ muscoli:"Pettorale medio-alto, deltoide anteriore, tricipiti", steps:[
-          "Regola la panca a 45°. Siediti con i manubri sulle cosce.",
-          "Sdraiati portando i manubri all'altezza del petto, gomiti a 45° rispetto al busto.",
-          "Piedi ben piantati a terra, schiena aderente alla panca.",
+          "Regola la panca a 45°. Siediti con i manubri sulle cosce, poi sdraiati.",
+          "Gomiti a 45° rispetto al busto — non aperti a 90°. Piedi ben piantati a terra.",
           "Spingi i manubri verso l'alto e leggermente verso il centro.",
-          "Scendi lentamente (2–3 secondi) fino a quando i gomiti sono appena sotto la panca.",
+          "Scendi lentamente (2–3 secondi) fino a gomiti appena sotto la panca.",
           "Respira: inspira scendendo, espira spingendo."
-        ]}},
-      { id:"A6", sez:"Petto", nome:"Croci (fly) con manubri", serie:3, reps:"12 rip.", riposo:75, peso:"6", lordosi:false, warm:false, sugPeso:"6–10 kg/br",
-        video:"https://musclewiki.com/it-it/exercise/dumbbell-chest-fly?model=m",
-        note:"Gomiti fissi leggermente piegati, apertura controllata",
-        info:{ muscoli:"Pettorale medio, allargamento del petto", steps:[
-          "Sdraiati su panca, un manubrio per mano, palmi che si guardano, braccia tese verso l'alto.",
-          "⚠️ TECNICA: i gomiti restano FISSI leggermente piegati — non cambiano angolo mai.",
-          "Apri le braccia lateralmente in un arco, finché i gomiti sono all'altezza delle spalle.",
-          "Non scendere oltre: il carico passa alla cuffia dei rotatori, non al petto.",
-          "Richiudi in alto seguendo lo stesso arco — come abbracciare un albero grande.",
-          "Respira: inspira aprendo, espira chiudendo."
         ]}},
       { id:"A7", sez:"Petto", nome:"High Incline Dumbbell Press", serie:3, reps:"12 rip.", riposo:75, peso:"10", lordosi:false, warm:false, sugPeso:"10–14 kg/br",
         video:"https://musclewiki.com/it-it/exercise/dumbbell-high-incline-bench-press?model=m",
@@ -355,77 +352,102 @@ const SCHEDA = {
         info:{ muscoli:"Pettorale alto (clavicolare), deltoide anteriore, tricipiti", steps:[
           "Regola la panca a circa 60° — più ripida della panca inclinata classica.",
           "Siediti con i manubri sulle cosce, poi sdraiati portandoli all'altezza delle spalle.",
-          "I gomiti partono leggermente sotto le spalle.",
           "Spingi i manubri verso l'alto in linea retta — movimento quasi verticale.",
           "Senti il lavoro concentrarsi sulla parte alta del petto, vicino alle clavicole.",
           "Scendi lentamente. Non aprire i gomiti oltre le spalle.",
           "Respira: inspira scendendo, espira spingendo."
         ]}},
-      { id:"A8", sez:"Spalle", nome:"Military press", serie:3, reps:"10 rip.", riposo:90, peso:"20", lordosi:true, warm:false, sugPeso:"20–30 kg tot.",
+      { id:"A8", sez:"Petto", nome:"Croci (fly) con manubri", serie:3, reps:"12 rip.", riposo:75, peso:"6", lordosi:false, warm:false, sugPeso:"6–10 kg/br",
+        video:"https://musclewiki.com/it-it/exercise/dumbbell-chest-fly?model=m",
+        note:"Gomiti fissi leggermente piegati, non scendere oltre le spalle",
+        info:{ muscoli:"Pettorale medio, allargamento del petto", steps:[
+          "Sdraiati su panca, braccia tese verso l'alto, palmi che si guardano.",
+          "⚠️ TECNICA (video Vlad): i gomiti restano FISSI leggermente piegati — non cambiano angolo mai.",
+          "Apri le braccia lateralmente finché i gomiti sono all'altezza delle spalle — non oltre.",
+          "Richiudi verso l'alto seguendo lo stesso arco — come abbracciare un albero grande.",
+          "Respira: inspira aprendo, espira chiudendo."
+        ]}},
+      { id:"A9", sez:"Petto", nome:"Pull-over con manubrio", serie:3, reps:"12 rip.", riposo:75, peso:"12", lordosi:false, warm:false, sugPeso:"12–16 kg",
+        video:"https://musclewiki.com/it-it/exercise/dumbbell-pullover?model=m",
+        note:"Sdraiato sulla panca, apre la cassa toracica, movimento lento",
+        info:{ muscoli:"Gran dorsale, pettorale, cassa toracica", steps:[
+          "Sdraiati trasversalmente sulla panca con solo le spalle appoggiate, piedi a terra.",
+          "Tieni un manubrio con entrambe le mani sopra il petto, braccia quasi tese.",
+          "Abbassa lentamente il manubrio dietro la testa seguendo un arco, fino a sentire un buon allungamento.",
+          "Riporta il manubrio sopra il petto seguendo lo stesso arco.",
+          "Movimento lento e controllato — non forzare la discesa oltre il comfort.",
+          "Respira: inspira scendendo, espira risalendo."
+        ]}},
+      { id:"A10", sez:"Spalle", nome:"Military press", serie:3, reps:"10 rip.", riposo:90, peso:"20", lordosi:true, warm:false, sugPeso:"20–30 kg tot.",
         video:"https://musclewiki.com/it-it/exercise/smith-machine-seated-overhead-press?model=m",
         note:"Core contratto — protegge la lordosi",
         info:{ muscoli:"Deltoide anteriore e laterale, trapezio, tricipiti", steps:[
-          "Siediti su panca con schienale verticale (preferibile a in piedi per la lordosi).",
+          "Siediti su panca con schienale verticale — preferibile a in piedi per la lordosi.",
           "⚠️ LORDOSI: lo schienale deve supportare la schiena bassa. Contrai l'addome prima di spingere.",
           "Impugna bilanciere o manubri all'altezza delle orecchie, gomiti a 90°.",
           "Spingi verso l'alto fino a quasi estendere le braccia.",
-          "Scendi lentamente al punto di partenza.",
-          "Respira: inspira in basso, espira spingendo su."
+          "Scendi lentamente al punto di partenza. Respira: inspira in basso, espira spingendo su."
         ]}},
-      { id:"A9", sez:"Spalle", nome:"Alzate laterali con manubri", serie:3, reps:"12 rip.", riposo:60, peso:"6", lordosi:false, warm:false, sugPeso:"6–10 kg/br",
+      { id:"A11", sez:"Spalle", nome:"Alzate laterali con manubri", serie:2, reps:"12 rip.", riposo:60, peso:"4", lordosi:false, warm:false, sugPeso:"4–6 kg/br",
         video:"https://musclewiki.com/it-it/exercise/dumbbell-lateral-raise?model=m",
         note:"Gomiti leggermente piegati, non oltre le spalle",
+        tempWarning:"⚠️ Peso ridotto temporaneo — 2 serie da 4–6 kg fino a rinforzo della spalla",
         info:{ muscoli:"Deltoide laterale", steps:[
           "In piedi o seduto, un manubrio per mano lungo i fianchi, palmi verso il corpo.",
-          "⚠️ TECNICA: gomiti SEMPRE leggermente piegati — non cambiare questo angolo mai.",
+          "⚠️ TEMPORANEO: usa 4–6 kg e solo 2 serie finché la spalla non si rinforza.",
+          "⚠️ TECNICA (video Vlad): gomiti SEMPRE leggermente piegati — non cambiare questo angolo mai.",
           "Solleva le braccia lateralmente fino all'altezza delle spalle — non oltre.",
-          "Il mignolo sale leggermente più alto del pollice per massimizzare l'attivazione.",
-          "Scendi lentamente in 2–3 secondi — la discesa conta quanto la salita.",
+          "Scendi lentamente in 2–3 secondi. Non dondolare il busto.",
           "Respira: inspira in basso, espira alzando."
         ]}},
-      { id:"A10", sez:"Tricipiti", nome:"Pushdown al cavo con sbarra a V", serie:3, reps:"12 rip.", riposo:60, peso:"15", lordosi:false, warm:false, sugPeso:"15–25 kg",
+      { id:"A12", sez:"Spalle", nome:"Reverse fly su panca inclinata", serie:3, reps:"12 rip.", riposo:60, peso:"4", lordosi:false, warm:false, sugPeso:"4–8 kg/br",
+        video:"https://musclewiki.com/it-it/exercise/dumbbell-laying-reverse-fly?model=m",
+        note:"Busto frontale sulla panca, alzate posteriori — deltoide posteriore",
+        info:{ muscoli:"Deltoide posteriore, rotatori esterni, romboidi", steps:[
+          "Siediti a cavalcioni su una panca inclinata a 45°, busto appoggiato allo schienale frontalmente.",
+          "Un manubrio per mano lungo i fianchi, gomiti leggermente piegati — fissi per tutta la serie.",
+          "Solleva le braccia lateralmente e verso l'alto fino all'altezza delle spalle.",
+          "In cima, stringi le scapole insieme per 1 secondo.",
+          "Scendi lentamente resistendo al peso. Usa un peso leggero — è un muscolo piccolo.",
+          "Respira: inspira scendendo, espira sollevando."
+        ]}},
+      { id:"A13", sez:"Tricipiti", nome:"Pushdown al cavo con sbarra a V", serie:3, reps:"12 rip.", riposo:60, peso:"15", lordosi:false, warm:false, sugPeso:"15–25 kg",
         video:"https://musclewiki.com/it-it/exercise/machine-cable-v-bar-push-downs?model=m",
         note:"Gomiti stretti ai fianchi, distensione completa",
         info:{ muscoli:"Tricipiti (tutti e tre i capi)", steps:[
           "In piedi davanti al cavo alto, impugna la sbarra a V con palmi verso il basso.",
           "I gomiti restano FERMI e stretti ai fianchi per tutta la serie.",
-          "Parti con i gomiti a 90°, spingi verso il basso estendendo completamente le braccia.",
-          "In basso, stringi i tricipiti per 1 secondo.",
-          "Risali lentamente fino a 90° — non oltre, per mantenere tensione.",
+          "Spingi verso il basso estendendo completamente le braccia. Stringi i tricipiti 1 secondo.",
+          "Risali lentamente fino a 90° — non oltre per mantenere tensione.",
           "Respira: inspira salendo, espira spingendo giù."
         ]}},
-      { id:"A11", sez:"Tricipiti", nome:"Estensioni tricipiti da seduto", serie:3, reps:"12 rip.", riposo:60, peso:"10", lordosi:false, warm:false, sugPeso:"10–14 kg",
+      { id:"A14", sez:"Tricipiti", nome:"Estensioni tricipiti da seduto", serie:3, reps:"12 rip.", riposo:60, peso:"10", lordosi:true, warm:false, sugPeso:"10–14 kg",
         video:"https://musclewiki.com/it-it/exercise/kettlebell-standing-tricep-extension?model=m",
-        note:"Un manubrio sopra la testa, gomiti fermi",
+        note:"Un manubrio sopra la testa, gomiti fermi, core contratto",
         info:{ muscoli:"Tricipiti (capo lungo)", steps:[
-          "Siediti con schienale, impugna un manubrio con entrambe le mani tenendolo verticale sopra la testa.",
+          "Siediti con schienale, impugna un manubrio con entrambe le mani verticale sopra la testa.",
           "I gomiti puntano al soffitto e restano FERMI vicini alla testa per tutta l'esecuzione.",
           "Piega i gomiti abbassando il manubrio dietro la testa fino a parallelo al pavimento.",
           "⚠️ LORDOSI: core contratto, non inarcare la schiena quando il peso scende.",
-          "Estendi i gomiti spingendo il manubrio verso l'alto.",
-          "Respira: inspira scendendo, espira spingendo su."
+          "Estendi i gomiti spingendo il manubrio verso l'alto. Respira: inspira scendendo, espira su."
         ]}},
-      { id:"A12", sez:"Bicipiti", nome:"Curl con bilanciere EZ", serie:2, reps:"12 rip.", riposo:45, peso:"15", lordosi:false, warm:false, sugPeso:"15–20 kg tot.",
+      { id:"A15", sez:"Bicipiti", nome:"Curl con bilanciere EZ", serie:2, reps:"12 rip.", riposo:45, peso:"15", lordosi:false, warm:false, sugPeso:"15–20 kg tot.",
         video:"https://musclewiki.com/it-it/exercise/barbell-curl?model=m",
         note:"Gomiti fermi ai fianchi",
         info:{ muscoli:"Bicipiti, brachiale", steps:[
           "In piedi, impugna il bilanciere EZ sulle curve interne, palmi verso l'alto.",
-          "Braccia lungo i fianchi, gomiti aderenti al busto — i gomiti NON si muovono.",
-          "Piega i gomiti portando il bilanciere verso le spalle in un arco controllato.",
-          "In alto, stringi i bicipiti per 1 secondo.",
+          "Braccia lungo i fianchi, gomiti aderenti al busto — i gomiti NON si muovono mai.",
+          "Piega i gomiti portando il bilanciere verso le spalle. Stringi i bicipiti 1 secondo in cima.",
           "Scendi lentamente (2–3 secondi) fino all'estensione completa.",
-          "Non dondolare il busto — se lo fai, il peso è troppo.",
-          "Respira: inspira scendendo, espira salendo."
+          "Non dondolare il busto — se lo fai, il peso è troppo. Respira: inspira scendendo, espira salendo."
         ]}},
-      { id:"A13", sez:"Bicipiti", nome:"Curl al cavo alto", serie:2, reps:"12 rip.", riposo:45, peso:"8", lordosi:false, warm:false, sugPeso:"8–12 kg",
+      { id:"A16", sez:"Bicipiti", nome:"Curl al cavo alto", serie:2, reps:"12 rip.", riposo:45, peso:"8", lordosi:false, warm:false, sugPeso:"8–12 kg",
         video:"https://musclewiki.com/it-it/exercise/cable-single-arm-bayesian-curl?model=m",
         note:"Tensione costante su tutto il ROM, braccio a 90°",
         info:{ muscoli:"Bicipiti (tensione costante su tutto il ROM)", steps:[
           "Regola il cavo all'altezza della spalla. Stai di fianco alla macchina.",
-          "Impugna la maniglia, porta il braccio a 90° rispetto al busto — posizione di partenza fissa.",
-          "Il gomito resta FERMO in quella posizione per tutta la serie.",
+          "Porta il braccio a 90° rispetto al busto — il gomito resta FERMO lì per tutta la serie.",
           "Piega il gomito portando la mano verso la spalla, massima contrazione in cima.",
-          "Il vantaggio: il cavo mantiene tensione anche dove il bilanciere scarica.",
           "Scendi lentamente resistendo al cavo. Poi cambia lato.",
           "Respira: inspira scendendo, espira contraendo."
         ]}},
@@ -452,20 +474,28 @@ const SCHEDA = {
           "Il corpo forma una linea retta dalla testa ai talloni.",
           "⚠️ LORDOSI: spingi attivamente il bacino verso il basso — non lasciare che la pancia cada.",
           "Contrai glutei e addome contemporaneamente per tutta la durata.",
-          "Guarda il pavimento, collo neutro.",
-          "Respira normalmente — non trattenere il fiato."
+          "Guarda il pavimento, collo neutro. Respira normalmente."
         ]}},
-      { id:"B3", sez:"Riscaldamento — NON saltare", nome:"Retroversione bacino alla sbarra", serie:2, reps:"10 rip. lente", riposo:0, peso:"", lordosi:true, warm:true,
+      { id:"B3", sez:"Riscaldamento — NON saltare", nome:"Bird dog", serie:2, reps:"10 rip. per lato", riposo:0, peso:"", lordosi:true, warm:true,
+        video:"https://musclewiki.com/it-it/exercise/bird-dog?model=m",
+        info:{ muscoli:"Core profondo, stabilizzatori lombari, glutei", steps:[
+          "A quattro zampe: mani sotto le spalle, ginocchia sotto i fianchi, schiena piatta.",
+          "⚠️ LORDOSI: mantieni la schiena perfettamente piatta per tutta la serie — è l obiettivo principale.",
+          "Estendi contemporaneamente il braccio destro in avanti e la gamba sinistra indietro.",
+          "Tieni 2–3 secondi senza ruotare il bacino o alzare il fianco.",
+          "Torna lentamente e ripeti con braccio sinistro + gamba destra.",
+          "Movimento lento e controllato — non è un esercizio di velocità."
+        ]}},
+      { id:"B4", sez:"Riscaldamento — NON saltare", nome:"Retroversione bacino alla sbarra", serie:2, reps:"10 rip. lente", riposo:0, peso:"", lordosi:true, warm:true,
         video:null,
         info:{ muscoli:"Core profondo, flessori anca, mobilità lombare", steps:[
           "Appenditi alla sbarra con presa prona, braccia tese.",
           "Parti in posizione neutra con leggera curva lombare naturale.",
           "Contrai l'addome e spingi il bacino in avanti e verso l'alto.",
           "⚠️ LORDOSI: allena il controllo attivo della curva lombare — esercizio chiave per te.",
-          "Tieni 2–3 secondi sentendo la lombare appiattirsi.",
-          "Torna lentamente. 10 ripetizioni lente."
+          "Tieni 2–3 secondi sentendo la lombare appiattirsi. Torna lentamente. 10 rip. lente."
         ]}},
-      { id:"B4", sez:"Riscaldamento — NON saltare", nome:"Push-up di attivazione", serie:2, reps:"10–12 rip.", riposo:0, peso:"", lordosi:true, warm:true,
+      { id:"B5", sez:"Riscaldamento — NON saltare", nome:"Push-up di attivazione", serie:2, reps:"10–12 rip.", riposo:0, peso:"", lordosi:true, warm:true,
         video:"https://musclewiki.com/it-it/exercise/push-up?model=m",
         note:"Corpo dritto, bacino neutro",
         info:{ muscoli:"Pettorali, tricipiti, core stabilizzatori", steps:[
@@ -473,103 +503,106 @@ const SCHEDA = {
           "⚠️ LORDOSI: contrai addome e glutei PRIMA di scendere — il bacino non cede mai.",
           "Scendi piegando i gomiti a 45° rispetto al busto (non aperti a 90°).",
           "Scendi fino a sfiorare il petto a terra, poi spingi su in modo controllato.",
-          "Se non mantieni la schiena dritta, fallo sulle ginocchia.",
-          "Respira: inspira scendendo, espira spingendo su."
+          "Se non mantieni la schiena dritta, fallo sulle ginocchia. Respira: inspira scendendo, espira su."
         ]}},
-      { id:"B5", sez:"Riscaldamento — NON saltare", nome:"Mobilità anche (cerchi bacino)", serie:1, reps:"20\" per lato", riposo:0, peso:"", lordosi:false, warm:true, durataSec:20,
+      { id:"B6", sez:"Riscaldamento — NON saltare", nome:"Mobilità anche (cerchi bacino)", serie:1, reps:"20\" per lato", riposo:0, peso:"", lordosi:false, warm:true, durataSec:20,
         video:null,
         info:{ muscoli:"Flessori anca, piriforme, mobilità lombopelvica", steps:[
           "In piedi, piedi larghezza spalle, mani sui fianchi.",
-          "Fai ruotare il bacino in cerchi ampi come con un hula hoop.",
           "⚠️ LORDOSI: scioglie la rigidità dell'anca che contribuisce all'iperlordosi.",
-          "20 secondi in senso orario, 20 antiorario.",
+          "Ruota il bacino in cerchi ampi — 20 secondi per senso, poi inverti.",
           "Ginocchia leggermente piegate, busto fermo."
         ]}},
-      { id:"B6", sez:"Gambe", nome:"Leg press", serie:4, reps:"12/12/10/8", riposo:90, peso:"60", lordosi:true, warm:false, sugPeso:"60–100 kg",
+      { id:"B7", sez:"Gambe", nome:"Leg press", serie:4, reps:"12/12/10/8", riposo:90, peso:"60", lordosi:true, warm:false, sugPeso:"60–100 kg",
         video:"https://musclewiki.com/it-it/exercise/machine-leg-press?model=m",
         note:"Piedi alti e larghi — scarica la colonna",
         info:{ muscoli:"Quadricipiti, glutei, posteriori coscia", steps:[
           "Siediti con schiena e sacro ben aderenti allo schienale.",
           "⚠️ LORDOSI: la colonna è supportata — preferibile allo squat libero per te.",
-          "Piedi alti e larghi sulla pedana (larghezza spalle o più) — coinvolge più glutei.",
-          "Sblocca le sicure, piega le ginocchia scendendo lentamente — ginocchia seguono i piedi.",
-          "Scendi fino a 90° oppure fermati prima se il basso schiena si stacca dallo schienale.",
-          "⚠️ LORDOSI: il segnale di stop è il bacino che ruota — non scendere oltre.",
-          "Schema piramidale: 12 / 12 / 10 / 8 rip. aumentando il carico ogni serie.",
+          "Piedi alti e larghi sulla pedana — coinvolge più glutei e scarica i quadricipiti.",
+          "Piega le ginocchia scendendo lentamente — le ginocchia seguono la direzione dei piedi.",
+          "⚠️ LORDOSI: fermati prima che il bacino inizi a ruotare — non scendere oltre.",
+          "Schema piramidale: 12/12/10/8 aumentando il carico ogni serie.",
           "Respira: inspira scendendo, espira spingendo."
         ]}},
-      { id:"B7", sez:"Gambe", nome:"Leg extension", serie:3, reps:"12 rip.", riposo:60, peso:"", lordosi:false, warm:false, sugPeso:"da PT",
+      { id:"B8", sez:"Gambe", nome:"Leg extension", serie:3, reps:"12 rip.", riposo:60, peso:"", lordosi:false, warm:false, sugPeso:"da PT",
         video:"https://musclewiki.com/it-it/exercise/machine-plate-loaded-leg-extension?model=m",
         note:"No strattoni",
         info:{ muscoli:"Quadricipiti", steps:[
-          "Siediti sulla macchina, cuscinetto sulle tibie appena sopra le caviglie. Schiena aderente.",
+          "Siediti, cuscinetto sulle tibie appena sopra le caviglie. Schiena aderente allo schienale.",
           "Le cosce restano ferme sul sedile — solo gli stinchi si muovono.",
-          "Estendi le gambe verso l'alto in modo controllato, senza strattoni.",
-          "In alto, contrai i quadricipiti per 1 secondo.",
-          "Scendi lentamente (2–3 secondi) senza arrivare completamente a 90°.",
+          "Estendi le gambe verso l'alto senza strattoni. Contrai i quadricipiti 1 secondo in cima.",
+          "Scendi lentamente (2–3 secondi) senza tornare completamente a 90°.",
           "Respira: inspira scendendo, espira estendendo."
         ]}},
-      { id:"B8", sez:"Gambe", nome:"Leg curl", serie:3, reps:"12 rip.", riposo:60, peso:"", lordosi:false, warm:false, sugPeso:"da PT",
+      { id:"B9", sez:"Gambe", nome:"Leg curl", serie:3, reps:"12 rip.", riposo:60, peso:"", lordosi:false, warm:false, sugPeso:"da PT",
         video:"https://musclewiki.com/it-it/exercise/seated-leg-curl?model=m",
         note:"Pausa 1\" al picco di contrazione",
         info:{ muscoli:"Posteriori coscia", steps:[
-          "Siediti sulla macchina, schiena aderente, cuscinetto sulle caviglie.",
-          "Le cosce restano ferme per tutta la serie.",
+          "Siediti, schiena aderente, cuscinetto sulle caviglie. Le cosce restano ferme.",
           "Tira il cuscinetto verso il basso piegando le ginocchia in modo controllato.",
           "In fondo, stringi i posteriori coscia per 1–2 secondi.",
           "Risali lentamente resistendo al peso — non lasciare che risalga da solo.",
           "Respira: inspira salendo, espira contraendo in basso."
         ]}},
-      { id:"B9", sez:"Gambe", nome:"Polpacci", serie:3, reps:"15 rip.", riposo:60, peso:"", lordosi:false, warm:false, sugPeso:"da PT",
+      { id:"B10", sez:"Gambe", nome:"Polpacci", serie:3, reps:"15 rip.", riposo:60, peso:"", lordosi:false, warm:false, sugPeso:"da PT",
         video:"https://musclewiki.com/it-it/exercises/calves",
         note:"ROM completo: tallone basso, poi punta alta",
         info:{ muscoli:"Gastrocnemio, soleo", steps:[
           "Punte dei piedi su un rialzo, talloni nel vuoto. Mani appoggiate per equilibrio.",
           "Scendi lentamente fino al massimo allungamento del polpaccio.",
-          "Spingi verso l'alto sulle punte il più in alto possibile.",
-          "Tieni la contrazione 1 secondo in cima.",
-          "ROM completo: la discesa conta quanto la salita.",
-          "Respira: inspira scendendo, espira salendo."
+          "Spingi verso l'alto il più possibile. Tieni la contrazione 1 secondo in cima.",
+          "ROM completo: la discesa conta quanto la salita. Respira: inspira scendendo, espira salendo."
         ]}},
-      { id:"B10", sez:"Schiena", nome:"Trazioni assistite alla macchina", serie:4, reps:"8–10 rip.", riposo:90, peso:"", lordosi:false, warm:false, sugPeso:"assistenza",
+      { id:"B11", sez:"Schiena", nome:"Trazioni assistite alla macchina", serie:4, reps:"8–10 rip.", riposo:90, peso:"", lordosi:false, warm:false, sugPeso:"assistenza",
         video:"https://musclewiki.com/it-it/exercise/machine-assisted-pull-up?model=m",
         note:"Gran dorsale, sicuro per la schiena",
         info:{ muscoli:"Gran dorsale, bicipiti, romboidi", steps:[
-          "Regola l'assistenza con Vlad la prima volta. Più peso = movimento più facile.",
+          "Regola l'assistenza con Vlad la prima volta. Più peso assistenza = più facile.",
           "Impugna la sbarra con presa prona, larghezza spalle o più.",
           "Parti con braccia quasi tese, spalle leggermente retratte — non alle orecchie.",
-          "Tira verso il basso portando il petto verso la sbarra — pensa 'gomiti verso i fianchi'.",
+          "Tira verso il basso pensando 'gomiti verso i fianchi' — non 'mani verso il basso'.",
           "In alto, stringi le scapole insieme per 1 secondo.",
           "Scendi lentamente resistendo — la fase di discesa è fondamentale.",
           "Respira: inspira scendendo, espira tirando su."
         ]}},
-      { id:"B11", sez:"Schiena", nome:"Low row (pulley basso)", serie:3, reps:"10 rip.", riposo:90, peso:"30", lordosi:false, warm:false, sugPeso:"30–45 kg",
+      { id:"B12", sez:"Schiena", nome:"Low row (pulley basso)", serie:3, reps:"10 rip.", riposo:90, peso:"30", lordosi:false, warm:false, sugPeso:"30–45 kg",
         video:"https://musclewiki.com/it-it/exercise/machine-neutral-row?model=m",
         note:"Schiena dritta, tira verso ombelico, stringi scapole",
         info:{ muscoli:"Gran dorsale, romboidi, trapezio medio, bicipiti", steps:[
           "Siediti con piedi sulle staffe, ginocchia leggermente piegate.",
           "Impugna la maniglia a triangolo (presa neutra, palmi che si guardano).",
           "Parti con braccia tese e schiena dritta — non arrotondata.",
-          "Tira la maniglia verso l'ombelico, gomiti vicini al busto.",
-          "⚠️ TECNICA CHIAVE: a fine movimento stringi le scapole come se schiacciassi una matita tra di loro — tieni 1 secondo.",
-          "Torna lentamente lasciando che le scapole si aprano — non affrettare il ritorno.",
-          "Non dondolare il busto — il movimento parte dalla schiena.",
-          "Respira: inspira allungando, espira tirando."
+          "Tira verso l'ombelico, gomiti vicini al busto.",
+          "⚠️ TECNICA CHIAVE: stringi le scapole come se schiacciassi una matita tra di loro — tieni 1 secondo.",
+          "Torna lentamente lasciando aprire le scapole — non affrettare il ritorno.",
+          "Non dondolare il busto. Respira: inspira allungando, espira tirando."
         ]}},
-      { id:"B12", sez:"Core / Chiusura", nome:"Plank a braccia tese", serie:2, reps:"max tempo", riposo:60, peso:"", lordosi:true, warm:false, tempoMax:true,
+      { id:"B13", sez:"Schiena", nome:"Reverse fly con manubri in piedi", serie:3, reps:"12 rip.", riposo:60, peso:"4", lordosi:false, warm:false, sugPeso:"4–8 kg/br",
+        video:"https://musclewiki.com/it-it/exercise/dumbbell-rear-delt-fly?model=m",
+        note:"Busto piegato 45°, alzate laterali posteriori — deltoide posteriore e trapezio",
+        info:{ muscoli:"Deltoide posteriore, romboidi, trapezio medio", steps:[
+          "In piedi, piedi larghezza spalle, busto piegato in avanti a circa 45°, schiena piatta.",
+          "Un manubrio per mano con i palmi che si guardano, gomiti leggermente piegati — fissi per tutta la serie.",
+          "Solleva le braccia lateralmente e verso l'alto finché sono parallele al pavimento.",
+          "In cima, stringi le scapole insieme per 1 secondo.",
+          "Scendi lentamente resistendo al peso. Usa un peso leggero.",
+          "Non dondolare il busto per aiutarti. Respira: inspira scendendo, espira sollevando."
+        ]}},
+      { id:"B14", sez:"Core / Chiusura", nome:"Plank a braccia tese", serie:2, reps:"max tempo", riposo:60, peso:"", lordosi:true, warm:false, tempoMax:true,
         video:"https://musclewiki.com/it-it/exercise/hand-plank?model=m",
         note:"Aumenta il tempo ogni settimana",
         info:{ muscoli:"Core, stabilizzatori lombari, spalle", steps:[
           "Posizione come un push-up: mani sotto le spalle, braccia tese, corpo in linea retta.",
           "⚠️ LORDOSI: retroversione attiva del bacino — spingi il bacino verso il basso e contrai l'addome.",
           "Glutei contratti, collo neutro (guarda il pavimento).",
-          "Respira normalmente — non trattenere il fiato o perdi stabilità.",
-          "Obiettivo: aumentare il tempo di 5 secondi ogni settimana.",
-          "Fermati se senti dolore lombare — il core ha ceduto."
+          "Respira normalmente — non trattenere il fiato.",
+          "Obiettivo: aumentare di 5 secondi ogni settimana. Fermati se senti dolore lombare."
         ]}},
     ]
   }
 };
+
 
 // =========================================================
 // STATO
@@ -925,6 +958,7 @@ function renderEx() {
         <button class="btn-skip" onclick="saltaRiposo()">Salta →</button>
       </div>
       ${skipHTML}
+      ${ex.tempWarning ? `<div class="banner-warn">${ex.tempWarning}</div>` : ''}
       <div class="ex-actions">
         ${ex.video ? `<a href="${ex.video}" target="_blank" rel="noopener" class="btn-vid">📹 Video</a>` : ''}
         <button class="btn-info" onclick="apriInfo('${ex.id}')">ℹ️ Info</button>
@@ -1016,8 +1050,10 @@ function apriInfo(exId) {
   if (!ex || !ex.info) return;
 
   const steps = ex.info.steps.map((s, i) => {
-    const isLordosi = s.includes('⚠️');
-    return `<li class="${isLordosi ? 'lordosi-step' : ''}"><span class="step-n">${i+1}.</span><span>${s}</span></li>`;
+    const isTecnica = s.includes('⚠️ TECNICA');
+    const isLordosi = !isTecnica && s.includes('⚠️ LORDOSI');
+    const cls = isTecnica ? 'tecnica-step' : isLordosi ? 'lordosi-step' : '';
+    return `<li class="${cls}"><span class="step-n">${i+1}.</span><span>${s}</span></li>`;
   }).join('');
 
   document.getElementById('info-overlay').classList.remove('hidden');
