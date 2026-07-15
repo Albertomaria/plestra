@@ -194,6 +194,21 @@ body { max-width: 480px; margin: 0 auto; }
 .info-steps li.tecnica-step .step-n { color: var(--accent); }
 .banner-warn { background: rgba(255,159,10,.12); border: 1.5px solid var(--lordosi); border-radius: 12px; padding: 12px 14px; margin-bottom: 12px; font-size: 13px; color: var(--lordosi); line-height: 1.5; }
 
+/* Prossimo esercizio */
+.next-ex-block { background: var(--bg2); border-radius: 12px; padding: 12px 14px; margin-bottom: 12px; border-left: 3px solid var(--bg4); }
+.ne-lbl { font-size: 10px; color: var(--text2); text-transform: uppercase; letter-spacing: .6px; margin-bottom: 4px; }
+.ne-name { font-size: 15px; font-weight: 600; }
+.ne-muscoli { font-size: 12px; color: var(--text2); margin-top: 2px; }
+
+/* Riposo adjustable */
+.riposo-adj { display: flex; align-items: center; justify-content: space-between; background: var(--bg2); border-radius: 12px; padding: 10px 14px; margin-bottom: 10px; }
+.riposo-adj-lbl { font-size: 12px; color: var(--text2); }
+.riposo-adj-btns { display: flex; align-items: center; gap: 10px; }
+.btn-riposo-adj { width: 38px; height: 38px; border-radius: 50%; border: 1.5px solid var(--bg4); background: var(--bg3); color: var(--text); font-size: 20px; cursor: pointer; line-height: 1; }
+.riposo-adj-val { font-size: 16px; font-weight: 700; min-width: 44px; text-align: center; }
+.btn-plus15 { background: var(--bg3); border: 1.5px solid var(--bg4); color: var(--text); padding: 9px 22px; border-radius: 10px; font-size: 14px; font-weight: 700; cursor: pointer; margin-top: 8px; }
+.btn-plus15:active { background: var(--bg4); }
+
 /* Nav bar fissa */
 .nav-bar {
   position: fixed; bottom: 0; left: 50%; transform: translateX(-50%);
@@ -616,6 +631,7 @@ let S = {
   progGiorno: 'A', progDettaglioId: null,
   progTab: 'pesi', // 'pesi' | 'salti'
   backStack: [], // stack schermate per il tasto back
+  riposaAdj: null, // override tempo riposo per serie corrente (null = usa ex.riposo)
 };
 
 // Timer esercizio (countdown o cronometro) — separato dal timer riposo
@@ -627,6 +643,10 @@ let ET = { mode: null, interval: null, value: 0, running: false };
 // carichi correnti: { exId: "12" }
 function loadCarichi() { return JSON.parse(localStorage.getItem('p_carichi') || '{}'); }
 function saveCarichi(c) { localStorage.setItem('p_carichi', JSON.stringify(c)); }
+
+// ripetizioni custom: { exId: "10" }
+function loadReps() { return JSON.parse(localStorage.getItem('p_reps') || '{}'); }
+function saveReps(r) { localStorage.setItem('p_reps', JSON.stringify(r)); }
 
 // storico: { exId: [{data:"2026-06-25", peso:"12", rip:"10-12", serie:4}] }
 function loadStoria() { return JSON.parse(localStorage.getItem('p_storia') || '{}'); }
@@ -849,6 +869,7 @@ function apriEx(idx) {
 function renderEx() {
   const G = SCHEDA[S.giorno];
   const ex = G.esercizi[S.exIdx];
+  S.riposaAdj = null; // reset ogni volta che si apre un esercizio
   setHeader(`${S.exIdx+1} / ${G.esercizi.length}`, '← Lista');
   show('s-exercise');
   initExTimer(ex);
@@ -859,6 +880,10 @@ function renderEx() {
 
   // peso corrente: da localStorage > default scheda
   const pesoAttuale = carichi[ex.id] !== undefined ? carichi[ex.id] : ex.peso;
+
+  // reps correnti: da localStorage > default scheda
+  const repsLS = loadReps();
+  const repsAttuale = repsLS[ex.id] !== undefined ? repsLS[ex.id] : ex.reps;
 
   // ultimo diverso da oggi per mostrare delta
   const ultimaDiversa = storiaEx.find(r => r.data !== oggi());
@@ -876,7 +901,7 @@ function renderEx() {
   const caricoCard = `
     <div class="ic">
       <div class="ic-lbl">${lblCarico}</div>
-      <div class="ic-val"><input type="number" inputmode="decimal" id="inp-peso" value="${pesoAttuale}" placeholder="${ex.sugPeso||'–'}" oninput="salvaPeso()"></div>
+      <div class="ic-val"><input type="number" inputmode="decimal" id="inp-peso" value="${pesoAttuale}" placeholder="${ex.sugPeso||'–'}" oninput="salvaPeso()" onblur="salvaPeso()"></div>
       <div class="ic-unit">${sugLabel}</div>
       ${storiaSug}
     </div>`;
@@ -943,19 +968,31 @@ function renderEx() {
       <div class="info-row">
         <div class="ic">
           <div class="ic-lbl">Ripetizioni</div>
-          <div class="ic-val" style="font-size:17px;">${ex.reps}</div>
-          <div class="ic-unit">${ex.riposo?'riposo '+ex.riposo+'"':'nessun riposo'}</div>
+          <div class="ic-val"><input type="text" inputmode="numeric" id="inp-reps" value="${repsAttuale}" placeholder="${ex.reps}" oninput="salvaReps()" onblur="salvaReps()"></div>
+          <div class="ic-unit">suggerito: ${ex.reps}</div>
         </div>
         ${caricoCard}
       </div>
+      ${!bloccato && getRiposa(ex) > 0 ? `
+      <div class="riposo-adj">
+        <span class="riposo-adj-lbl">⏱ Riposo serie</span>
+        <div class="riposo-adj-btns">
+          <button class="btn-riposo-adj" onclick="setRiposaAdj(-5)">−</button>
+          <span class="riposo-adj-val" id="riposa-adj-val">${getRiposa(ex)}"</span>
+          <button class="btn-riposo-adj" onclick="setRiposaAdj(+5)">+</button>
+        </div>
+      </div>` : ''}
       <button class="btn-fs" id="btn-fs" onclick="fineSerie()" ${bloccato?'disabled':''}>
-        ${isDone?'✅ Completato':isSkip?'⏭ Saltato':ex.riposo?`Fine serie ${S.serieN} → riposo ${ex.riposo}"`:`Fine serie ${S.serieN}`}
+        ${isDone?'✅ Completato':isSkip?'⏭ Saltato':getRiposa(ex)?`Fine serie ${S.serieN} → riposo ${getRiposa(ex)}"`:`Fine serie ${S.serieN}`}
       </button>
       <div class="rest-block" id="rest-block">
         <div class="rl">⏱ Riposo</div>
         <div class="rt" id="rt">0:00</div>
         <div class="rp"><div class="rpb" id="rpb" style="width:100%"></div></div>
-        <button class="btn-skip" onclick="saltaRiposo()">Salta →</button>
+        <div style="display:flex;gap:8px;justify-content:center;margin-top:8px;">
+          <button class="btn-plus15" onclick="aggiungi15()">+15"</button>
+          <button class="btn-skip" onclick="saltaRiposo()">Salta →</button>
+        </div>
       </div>
       ${skipHTML}
       ${ex.tempWarning ? `<div class="banner-warn">${ex.tempWarning}</div>` : ''}
@@ -963,6 +1000,12 @@ function renderEx() {
         ${ex.video ? `<a href="${ex.video}" target="_blank" rel="noopener" class="btn-vid">📹 Video</a>` : ''}
         <button class="btn-info" onclick="apriInfo('${ex.id}')">ℹ️ Info</button>
       </div>
+      ${(() => {
+        const nex = G.esercizi[S.exIdx + 1];
+        return nex
+          ? `<div class="next-ex-block"><div class="ne-lbl">PROSSIMO</div><div class="ne-name">${nex.nome}</div>${nex.info ? `<div class="ne-muscoli">${nex.info.muscoli}</div>` : ''}</div>`
+          : `<div class="next-ex-block"><div class="ne-lbl">PROSSIMO</div><div class="ne-name">🏁 Fine sessione</div></div>`;
+      })()}
     </div>
     <div class="nav-bar">
       <button class="nb" onclick="exPrec()" ${isPrima?'disabled':''}>← Prec.</button>
@@ -977,9 +1020,68 @@ function renderEx() {
 function salvaPeso() {
   const inp = document.getElementById('inp-peso');
   if (!inp) return;
+  const ex = S.giorno ? SCHEDA[S.giorno].esercizi[S.exIdx] : null;
+  if (!ex) return;
   const carichi = loadCarichi();
-  carichi[S.giorno ? SCHEDA[S.giorno].esercizi[S.exIdx].id : ''] = inp.value;
+  carichi[ex.id] = inp.value;
   saveCarichi(carichi);
+  console.log('Salvato peso:', ex.id, inp.value);
+}
+
+function salvaReps() {
+  const inp = document.getElementById('inp-reps');
+  if (!inp) return;
+  const ex = S.giorno ? SCHEDA[S.giorno].esercizi[S.exIdx] : null;
+  if (!ex) return;
+  const reps = loadReps();
+  reps[ex.id] = inp.value;
+  saveReps(reps);
+  console.log('Salvato reps:', ex.id, inp.value);
+}
+
+// =========================================================
+// HELPERS RIPOSO / AVANZAMENTO SERIE
+// =========================================================
+function getRiposa(ex) { return S.riposaAdj !== null ? S.riposaAdj : ex.riposo; }
+
+function setRiposaAdj(delta) {
+  const ex = SCHEDA[S.giorno].esercizi[S.exIdx];
+  if (S.riposaAdj === null) S.riposaAdj = ex.riposo;
+  S.riposaAdj = Math.max(5, S.riposaAdj + delta);
+  const el = document.getElementById('riposa-adj-val');
+  if (el) el.textContent = S.riposaAdj + '"';
+  const btn = document.getElementById('btn-fs');
+  if (btn && !btn.disabled) btn.textContent = `Fine serie ${S.serieN} → riposo ${S.riposaAdj}"`;
+}
+
+function aggiungi15() {
+  S.restLeft += 15;
+  if (S.restLeft > S.restTotal) S.restTotal = S.restLeft;
+  aggRiposo();
+}
+
+function avanzaSerie(ex) {
+  const inp = document.getElementById('inp-peso');
+  const peso = inp ? inp.value : '';
+  if (S.serieN < ex.serie) {
+    S.serieN++;
+    const sn = document.getElementById('sn');
+    if (sn) sn.textContent = S.serieN;
+    const btn = document.getElementById('btn-fs');
+    if (btn) {
+      btn.disabled = false;
+      const r = getRiposa(ex);
+      btn.textContent = r ? `Fine serie ${S.serieN} → riposo ${r}"` : `Fine serie ${S.serieN}`;
+    }
+    const adjEl = document.getElementById('riposa-adj-val');
+    if (adjEl) adjEl.textContent = getRiposa(ex) + '"';
+  } else {
+    S.done[ex.id] = 'done'; saveDone();
+    if (peso) registraPeso(ex.id, peso, ex.reps, ex.serie);
+    toast('✅ Esercizio completato!');
+    const btn = document.getElementById('btn-fs');
+    if (btn) { btn.textContent = '✅ Completato'; btn.disabled = true; }
+  }
 }
 
 function cambiaSerie(d) {
@@ -987,30 +1089,22 @@ function cambiaSerie(d) {
   S.serieN = Math.max(1, Math.min(ex.serie, S.serieN + d));
   document.getElementById('sn').textContent = S.serieN;
   const btn = document.getElementById('btn-fs');
-  if (btn && !btn.disabled)
-    btn.textContent = ex.riposo ? `Fine serie ${S.serieN} → riposo ${ex.riposo}"` : `Fine serie ${S.serieN}`;
+  if (btn && !btn.disabled) {
+    const r = getRiposa(ex);
+    btn.textContent = r ? `Fine serie ${S.serieN} → riposo ${r}"` : `Fine serie ${S.serieN}`;
+  }
 }
 
 function fineSerie() {
   const ex = SCHEDA[S.giorno].esercizi[S.exIdx];
-  const inp = document.getElementById('inp-peso');
-  const peso = inp ? inp.value : '';
-
-  if (ex.riposo > 0) avviaRiposo(ex.riposo);
-  else { toast('Serie ✓'); beep(660, 100); }
-
-  if (S.serieN < ex.serie) {
-    S.serieN++;
-    document.getElementById('sn').textContent = S.serieN;
+  const r = getRiposa(ex);
+  if (r > 0) {
+    avviaRiposo(r);
     const btn = document.getElementById('btn-fs');
-    if (btn) btn.textContent = ex.riposo ? `Fine serie ${S.serieN} → riposo ${ex.riposo}"` : `Fine serie ${S.serieN}`;
+    if (btn) btn.disabled = true;
   } else {
-    // Tutte le serie → segna completato e salva storico
-    S.done[ex.id] = 'done'; saveDone();
-    if (peso) registraPeso(ex.id, peso, ex.reps, ex.serie);
-    toast('✅ Esercizio completato!');
-    const btn = document.getElementById('btn-fs');
-    if (btn) { btn.textContent = '✅ Completato'; btn.disabled = true; }
+    avanzaSerie(ex);
+    beep(660, 100);
   }
 }
 
@@ -1082,7 +1176,13 @@ function avviaRiposo(sec) {
   S.restTimer = setInterval(() => {
     S.restLeft--;
     aggRiposo();
-    if (S.restLeft <= 0) { fermaRiposo(); segnaleFinale(); toast('Riposo finito! Prossima serie 💪'); }
+    if (S.restLeft <= 0) {
+      fermaRiposo();
+      segnaleFinale();
+      const ex = S.giorno ? SCHEDA[S.giorno].esercizi[S.exIdx] : null;
+      if (ex) avanzaSerie(ex);
+      else toast('Riposo finito! 💪');
+    }
   }, 1000);
 }
 function aggRiposo() {
@@ -1091,14 +1191,19 @@ function aggRiposo() {
   const s = S.restLeft;
   el.textContent = Math.floor(s/60) + ':' + String(s%60).padStart(2,'0');
   el.classList.toggle('ending', s<=10 && s>0);
-  if (bar) bar.style.width = (s/S.restTotal*100)+'%';
+  if (bar && S.restTotal > 0) bar.style.width = (s/S.restTotal*100)+'%';
 }
 function fermaRiposo() {
   clearInterval(S.restTimer); S.restTimer = null; S.restLeft = 0;
   const rb = document.getElementById('rest-block');
   if (rb) rb.classList.remove('active');
 }
-function saltaRiposo() { fermaRiposo(); toast('Riposo saltato →'); }
+function saltaRiposo() {
+  fermaRiposo();
+  const ex = S.giorno ? SCHEDA[S.giorno].esercizi[S.exIdx] : null;
+  if (ex) avanzaSerie(ex);
+  else toast('Riposo saltato →');
+}
 
 // =========================================================
 // TIMER ESERCIZIO (countdown per durata fissa, cronometro per tempo massimo)
