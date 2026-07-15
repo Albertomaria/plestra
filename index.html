@@ -918,9 +918,16 @@ function renderEx() {
   if (ex.durataSec) {
     timerHTML = `
       <div class="ex-timer-block">
-        <div class="sl">⏱ Timer esercizio — ${ex.durataSec}s</div>
-        <div class="ex-timer-display" id="ex-timer-display">${fmtSec(ex.durataSec)}</div>
-        <button class="btn-extimer" id="ex-timer-btn" onclick="toggleExTimer()">▶ Avvia timer</button>
+        <div class="sl">⏱ Timer esercizio</div>
+        <div style="display:flex;align-items:center;justify-content:center;gap:16px;margin:8px 0 14px;">
+          <button class="btn-riposo-adj" id="ex-adj-minus" onclick="adjustExTimer(-5)">−</button>
+          <div class="ex-timer-display" id="ex-timer-display" style="margin:0">${fmtSec(ex.durataSec)}</div>
+          <button class="btn-riposo-adj" id="ex-adj-plus" onclick="adjustExTimer(+5)">+</button>
+        </div>
+        <div style="display:flex;gap:8px;justify-content:center;">
+          <button class="btn-extimer" id="ex-timer-btn" onclick="toggleExTimer()">▶ Avvia timer</button>
+          <button class="btn-plus15" id="ex-add-time" onclick="aggiungiTempoEx()" style="display:none">+15"</button>
+        </div>
       </div>`;
   } else if (ex.tempoMax) {
     timerHTML = `
@@ -989,10 +996,7 @@ function renderEx() {
         <div class="rl">⏱ Riposo</div>
         <div class="rt" id="rt">0:00</div>
         <div class="rp"><div class="rpb" id="rpb" style="width:100%"></div></div>
-        <div style="display:flex;gap:8px;justify-content:center;margin-top:8px;">
-          <button class="btn-plus15" onclick="aggiungi15()">+15"</button>
-          <button class="btn-skip" onclick="saltaRiposo()">Salta →</button>
-        </div>
+        <button class="btn-skip" onclick="saltaRiposo()">Salta →</button>
       </div>
       ${skipHTML}
       ${ex.tempWarning ? `<div class="banner-warn">${ex.tempWarning}</div>` : ''}
@@ -1214,9 +1218,33 @@ function fmtSec(s) {
 }
 function initExTimer(ex) {
   clearInterval(ET.interval);
-  ET = { mode: ex.tempoMax ? 'up' : (ex.durataSec ? 'down' : null), interval: null, value: ex.durataSec || 0, running: false };
+  ET = { mode: ex.tempoMax ? 'up' : (ex.durataSec ? 'down' : null), interval: null, value: ex.durataSec || 0, adjSec: ex.durataSec || 0, running: false };
 }
 function fermaExTimer() { clearInterval(ET.interval); ET.interval = null; ET.running = false; }
+
+function adjustExTimer(delta) {
+  if (ET.running) return;
+  ET.adjSec = Math.max(5, ET.adjSec + delta);
+  ET.value = ET.adjSec;
+  const disp = document.getElementById('ex-timer-display');
+  if (disp) { disp.textContent = fmtSec(ET.value); disp.classList.remove('zero'); }
+}
+
+function aggiungiTempoEx() {
+  ET.value += 15;
+  ET.adjSec = ET.value;
+  const disp = document.getElementById('ex-timer-display');
+  if (disp) { disp.textContent = fmtSec(ET.value); disp.classList.remove('zero'); }
+}
+
+function setExTimerAdjVisible(visible) {
+  const minus = document.getElementById('ex-adj-minus');
+  const plus  = document.getElementById('ex-adj-plus');
+  const add   = document.getElementById('ex-add-time');
+  if (minus) minus.style.display = visible ? '' : 'none';
+  if (plus)  plus.style.display  = visible ? '' : 'none';
+  if (add)   add.style.display   = visible ? 'none' : '';
+}
 
 function toggleExTimer() {
   const ex = SCHEDA[S.giorno].esercizi[S.exIdx];
@@ -1228,7 +1256,6 @@ function toggleExTimer() {
     // pausa / stop
     clearInterval(ET.interval); ET.running = false;
     if (ET.mode === 'up') {
-      // cronometro: salva il tempo raggiunto nel campo "carico"
       const inp = document.getElementById('inp-peso');
       if (inp) { inp.value = ET.value; salvaPeso(); }
       toast('⏱ Tempo registrato: ' + fmtSec(ET.value));
@@ -1236,12 +1263,16 @@ function toggleExTimer() {
       btn.onclick = () => { ET.value = 0; disp.textContent = '0:00'; disp.classList.remove('zero'); initExTimerBtn(ex); };
     } else {
       btn.textContent = '▶ Riprendi';
+      setExTimerAdjVisible(true);
     }
     return;
   }
 
+  // avvia
   ET.running = true;
+  setExTimerAdjVisible(false);
   btn.textContent = ET.mode === 'up' ? '⏸ Stop e salva' : '⏸ Pausa';
+  btn.onclick = toggleExTimer;
   ET.interval = setInterval(() => {
     if (ET.mode === 'down') {
       ET.value--;
@@ -1250,8 +1281,14 @@ function toggleExTimer() {
       if (ET.value <= 0) {
         clearInterval(ET.interval); ET.running = false;
         segnaleFinale(); toast('⏱ Tempo scaduto!');
-        ET.value = ex.durataSec;
-        btn.textContent = '↺ Ripeti'; btn.onclick = () => { disp.classList.remove('zero'); toggleExTimer(); };
+        setExTimerAdjVisible(true);
+        const addBtn = document.getElementById('ex-add-time');
+        if (addBtn) addBtn.style.display = 'none';
+        btn.textContent = '↺ Ripeti';
+        btn.onclick = () => {
+          ET.value = ET.adjSec; disp.textContent = fmtSec(ET.adjSec);
+          disp.classList.remove('zero'); initExTimerBtn(ex);
+        };
       }
     } else {
       ET.value++;

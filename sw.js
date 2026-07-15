@@ -1,4 +1,4 @@
-const CACHE = 'plestra-v4';
+const CACHE = 'plestra-v5';
 const FILES = ['./', './index.html', './manifest.json'];
 
 self.addEventListener('install', e => {
