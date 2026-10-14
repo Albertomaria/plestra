@@ -1,0 +1,461 @@
+{
+  "versione": "2.0",
+  "profilo": {
+    "nome": "Alberto",
+    "eta": 41,
+    "altezza_cm": 184,
+    "peso_kg": 84,
+    "note_fisiche": ["iperlordosi lombare", "spalla instabile in rinforzo"],
+    "obiettivi": ["forza", "definizione", "stabilità spalla", "propedeutica golf"]
+  },
+  "progressione": {
+    "tipo": "doppia",
+    "descrizione": "Lavora al limite superiore del range mantenendo la forma. Quando arrivi a 3×12 con buona forma, aumenta il peso di 1-2 kg e torna a 3×8.",
+    "scarico_ogni_settimane": 8
+  },
+  "giorni": {
+    "A": {
+      "nome": "Giorno A",
+      "focus": "Upper — Spinta + Tirata bilanciata",
+      "sottotitolo": "Petto · Schiena alta · Spalle · Braccia",
+      "durata_stimata_min": 62,
+      "sezioni": [
+        {
+          "id": "riscaldamento",
+          "nome": "Riscaldamento",
+          "tipo": "warmup",
+          "durata_min": 10,
+          "esercizi": [
+            {
+              "id": "A_W1",
+              "nome": "Cerchi con i gomiti",
+              "serie": 2,
+              "rip": "10 avanti + 10 indietro",
+              "riposo_sec": 0,
+              "tipo": "tempo",
+              "note": "Mobilità generale spalla",
+              "badges": []
+            },
+            {
+              "id": "A_W2",
+              "nome": "Apertura spalle con rotazioni",
+              "serie": 2,
+              "rip": "10 rip.",
+              "riposo_sec": 0,
+              "tipo": "rip",
+              "note": "Braccia distese, rotazione completa",
+              "badges": []
+            },
+            {
+              "id": "A_W3",
+              "nome": "Retrazione scapolare",
+              "serie": 2,
+              "rip": "10 rip.",
+              "riposo_sec": 0,
+              "tipo": "rip",
+              "note": "Porta le scapole indietro e in basso, tieni 2 secondi. Senza peso.",
+              "badges": ["spalla"]
+            },
+            {
+              "id": "A_W4",
+              "nome": "Wall slide",
+              "serie": 2,
+              "rip": "10 rip.",
+              "riposo_sec": 0,
+              "tipo": "rip",
+              "note": "Schiena al muro, braccia a 90° appoggiate, sali mantenendo il contatto.",
+              "badges": ["spalla"]
+            },
+            {
+              "id": "A_W5",
+              "nome": "Push and pull al cavo leggero",
+              "serie": 2,
+              "rip": "10 rip.",
+              "riposo_sec": 0,
+              "tipo": "rip",
+              "note": "Rotazione esterna + spinta al cavo. Prepara la cuffia dei rotatori.",
+              "badges": ["spalla"]
+            },
+            {
+              "id": "A_W6",
+              "nome": "Bird dog",
+              "serie": 2,
+              "rip": "8 per lato",
+              "riposo_sec": 0,
+              "tipo": "rip",
+              "note": "Quattro zampe, schiena piatta. Estendi braccio e gamba opposti simultaneamente.",
+              "badges": ["lordosi", "golf"]
+            },
+            {
+              "id": "A_W7",
+              "nome": "Retroversione bacino alla sbarra",
+              "serie": 2,
+              "rip": "10 rip. lente",
+              "riposo_sec": 0,
+              "tipo": "rip",
+              "note": "Appeso, spingi bacino in avanti e verso l'alto. Tieni 2-3 secondi.",
+              "badges": ["lordosi"]
+            }
+          ]
+        },
+        {
+          "id": "principale",
+          "nome": "Allenamento principale",
+          "tipo": "main",
+          "esercizi": [
+            {
+              "id": "A1",
+              "nome": "Chest press alla macchina",
+              "serie": 4,
+              "rip_min": 8,
+              "rip_max": 12,
+              "riposo_sec": 90,
+              "tipo": "rip",
+              "peso_suggerito_kg": null,
+              "note": "Scapole retratte e abbassate PRIMA di spingere. Movimento guidato — protegge la spalla durante il rinforzo.",
+              "badges": ["spalla"],
+              "superset_con": "A2",
+              "link_musclewiki": "https://musclewiki.com/it-it/exercise/machine-chest-press?model=m"
+            },
+            {
+              "id": "A2",
+              "nome": "Low row al cavo (pulley basso)",
+              "serie": 4,
+              "rip_min": 8,
+              "rip_max": 12,
+              "riposo_sec": 90,
+              "tipo": "rip",
+              "peso_suggerito_kg": null,
+              "note": "Schiena dritta, tira verso l'ombelico, stringi le scapole in fondo. Superset con chest press: fai A1 → A2 senza riposo, poi 90\".",
+              "badges": [],
+              "superset_con": "A1",
+              "link_musclewiki": "https://musclewiki.com/it-it/exercise/machine-neutral-row?model=m"
+            },
+            {
+              "id": "A3",
+              "nome": "Croci ai cavi",
+              "serie": 3,
+              "rip_min": 10,
+              "rip_max": 15,
+              "riposo_sec": 75,
+              "tipo": "rip",
+              "peso_suggerito_kg": null,
+              "note": "Cavi bassi o medi. Gomiti fissi leggermente piegati per tutta la serie. Tensione costante — meglio delle croci con manubri per la spalla.",
+              "badges": [],
+              "link_musclewiki": "https://musclewiki.com/it-it/exercise/cable-fly?model=m"
+            },
+            {
+              "id": "A4",
+              "nome": "Face pull al cavo",
+              "serie": 3,
+              "rip_min": 12,
+              "rip_max": 15,
+              "riposo_sec": 60,
+              "tipo": "rip",
+              "peso_suggerito_kg": null,
+              "note": "Cavo all'altezza del viso, accessorio corda. Tira verso la fronte aprendo le mani alla fine. Fondamentale per la salute della spalla.",
+              "badges": ["spalla"],
+              "link_musclewiki": "https://musclewiki.com/it-it/exercise/cable-face-pull?model=m"
+            },
+            {
+              "id": "A5",
+              "nome": "Military press con manubri seduto",
+              "serie": 3,
+              "rip_min": 8,
+              "rip_max": 12,
+              "riposo_sec": 90,
+              "tipo": "rip",
+              "peso_suggerito_kg": 15,
+              "note": "Seduto con schienale. Contrai 3 secondi l'addome PRIMA di ogni serie. Se incarchi la schiena il peso è troppo — scendi.",
+              "badges": ["lordosi", "spalla"],
+              "link_musclewiki": "https://musclewiki.com/it-it/exercise/dumbbell-shoulder-press?model=m"
+            },
+            {
+              "id": "A6",
+              "nome": "Curl con bilanciere EZ",
+              "serie": 2,
+              "rip_min": 10,
+              "rip_max": 12,
+              "riposo_sec": 60,
+              "tipo": "rip",
+              "peso_suggerito_kg": null,
+              "note": "Gomiti fermi ai fianchi. Discesa lenta 2-3 secondi. Superset con pushdown: fai A6 → A7 senza riposo, poi 60\".",
+              "badges": [],
+              "superset_con": "A7",
+              "link_musclewiki": "https://musclewiki.com/it-it/exercise/barbell-curl?model=m"
+            },
+            {
+              "id": "A7",
+              "nome": "Pushdown al cavo con sbarra a V",
+              "serie": 2,
+              "rip_min": 10,
+              "rip_max": 12,
+              "riposo_sec": 60,
+              "tipo": "rip",
+              "peso_suggerito_kg": null,
+              "note": "Gomiti fermi e stretti ai fianchi. Distensione completa, stringi i tricipiti 1 secondo in basso.",
+              "badges": [],
+              "superset_con": "A6",
+              "link_musclewiki": "https://musclewiki.com/it-it/exercise/machine-cable-v-bar-push-downs?model=m"
+            }
+          ]
+        },
+        {
+          "id": "core",
+          "nome": "Core (fine sessione)",
+          "tipo": "core",
+          "esercizi": [
+            {
+              "id": "A_C1",
+              "nome": "Pallof Press al cavo",
+              "serie": 2,
+              "rip": "10 per lato",
+              "riposo_sec": 60,
+              "tipo": "rip",
+              "note": "Cavo all'altezza del petto, braccia tese davanti. Resisti alla rotazione — non girare il busto.",
+              "badges": ["lordosi", "golf"],
+              "link_musclewiki": "https://musclewiki.com/it-it/exercise/cable-pallof-press?model=m"
+            },
+            {
+              "id": "A_C2",
+              "nome": "Plank a braccia tese",
+              "serie": 2,
+              "rip": "max secondi",
+              "riposo_sec": 60,
+              "tipo": "tempo",
+              "note": "Retroversione attiva del bacino. Obiettivo: +5 secondi ogni settimana.",
+              "badges": ["lordosi"],
+              "link_musclewiki": "https://musclewiki.com/it-it/exercise/hand-plank?model=m"
+            }
+          ]
+        }
+      ]
+    },
+    "B": {
+      "nome": "Giorno B",
+      "focus": "Upper Tirata + Gambe leggere",
+      "sottotitolo": "Schiena larga · Spalla posteriore · Bicipiti · Gambe",
+      "durata_stimata_min": 62,
+      "sezioni": [
+        {
+          "id": "riscaldamento",
+          "nome": "Riscaldamento",
+          "tipo": "warmup",
+          "durata_min": 10,
+          "esercizi": [
+            {
+              "id": "B_W1",
+              "nome": "Cerchi con i gomiti",
+              "serie": 2,
+              "rip": "10 avanti + 10 indietro",
+              "riposo_sec": 0,
+              "tipo": "tempo",
+              "note": "Come Giorno A",
+              "badges": []
+            },
+            {
+              "id": "B_W2",
+              "nome": "Apertura spalle con rotazioni",
+              "serie": 2,
+              "rip": "10 rip.",
+              "riposo_sec": 0,
+              "tipo": "rip",
+              "note": "Come Giorno A",
+              "badges": []
+            },
+            {
+              "id": "B_W3",
+              "nome": "Retrazione scapolare",
+              "serie": 2,
+              "rip": "10 rip.",
+              "riposo_sec": 0,
+              "tipo": "rip",
+              "note": "Come Giorno A",
+              "badges": ["spalla"]
+            },
+            {
+              "id": "B_W4",
+              "nome": "Wall slide",
+              "serie": 2,
+              "rip": "10 rip.",
+              "riposo_sec": 0,
+              "tipo": "rip",
+              "note": "Come Giorno A",
+              "badges": ["spalla"]
+            },
+            {
+              "id": "B_W5",
+              "nome": "Push-up di attivazione",
+              "serie": 2,
+              "rip": "10-12 rip.",
+              "riposo_sec": 0,
+              "tipo": "rip",
+              "note": "Corpo dritto, contrai addome e glutei prima di scendere. Se cede il bacino, fallo sulle ginocchia.",
+              "badges": ["lordosi"],
+              "link_musclewiki": "https://musclewiki.com/it-it/exercise/push-up?model=m"
+            },
+            {
+              "id": "B_W6",
+              "nome": "Bird dog",
+              "serie": 2,
+              "rip": "8 per lato",
+              "riposo_sec": 0,
+              "tipo": "rip",
+              "note": "Come Giorno A",
+              "badges": ["lordosi", "golf"]
+            },
+            {
+              "id": "B_W7",
+              "nome": "Retroversione bacino alla sbarra",
+              "serie": 2,
+              "rip": "10 rip. lente",
+              "riposo_sec": 0,
+              "tipo": "rip",
+              "note": "Come Giorno A",
+              "badges": ["lordosi"]
+            },
+            {
+              "id": "B_W8",
+              "nome": "Cerchi con le anche",
+              "serie": 1,
+              "rip": "20 sec per lato",
+              "riposo_sec": 0,
+              "tipo": "tempo",
+              "note": "Mani sui fianchi, ginocchia piegate. Scioglie anca e lombari.",
+              "badges": ["lordosi", "golf"]
+            }
+          ]
+        },
+        {
+          "id": "principale",
+          "nome": "Allenamento principale",
+          "tipo": "main",
+          "esercizi": [
+            {
+              "id": "B1",
+              "nome": "Trazioni assistite alla macchina",
+              "serie": 4,
+              "rip_min": 8,
+              "rip_max": 10,
+              "riposo_sec": 90,
+              "tipo": "rip",
+              "peso_suggerito_kg": null,
+              "note": "Pensa 'gomiti verso i fianchi', non 'mani verso il basso'. Stringi le scapole in cima per 1 secondo.",
+              "badges": [],
+              "link_musclewiki": "https://musclewiki.com/it-it/exercise/machine-assisted-pull-up?model=m"
+            },
+            {
+              "id": "B2",
+              "nome": "Leg press",
+              "serie": 3,
+              "rip_min": 10,
+              "rip_max": 12,
+              "riposo_sec": 90,
+              "tipo": "rip",
+              "peso_suggerito_kg": null,
+              "note": "Piedi alti e larghi. Fermati PRIMA che il bacino inizi a ruotare — non scendere oltre.",
+              "badges": ["lordosi"],
+              "link_musclewiki": "https://musclewiki.com/it-it/exercise/machine-leg-press?model=m"
+            },
+            {
+              "id": "B3",
+              "nome": "Reverse fly ai cavi bassi",
+              "serie": 3,
+              "rip_min": 12,
+              "rip_max": 15,
+              "riposo_sec": 60,
+              "tipo": "rip",
+              "peso_suggerito_kg": null,
+              "note": "In piedi, un cavo per braccio incrociati. Apri le braccia posteriormente con gomiti leggermente piegati. Molto più controllato della versione su panca.",
+              "badges": ["spalla"],
+              "link_musclewiki": "https://musclewiki.com/it-it/exercise/dumbbell-rear-delt-fly?model=m"
+            },
+            {
+              "id": "B4",
+              "nome": "Pull-over con manubrio",
+              "serie": 3,
+              "rip_min": 10,
+              "rip_max": 12,
+              "riposo_sec": 75,
+              "tipo": "rip",
+              "peso_suggerito_kg": 16,
+              "note": "Sdraiato sulla panca, un manubrio. Apre la cassa toracica e allunga i dorsali. Movimento lento e controllato.",
+              "badges": [],
+              "link_musclewiki": "https://musclewiki.com/it-it/exercise/dumbbell-pullover?model=m"
+            },
+            {
+              "id": "B5",
+              "nome": "Leg extension",
+              "serie": 2,
+              "rip_min": 12,
+              "rip_max": 15,
+              "riposo_sec": 60,
+              "tipo": "rip",
+              "peso_suggerito_kg": null,
+              "note": "Solo gli stinchi si muovono. Contrai i quadricipiti 1 secondo in cima.",
+              "badges": [],
+              "link_musclewiki": "https://musclewiki.com/it-it/exercise/machine-plate-loaded-leg-extension?model=m"
+            },
+            {
+              "id": "B6",
+              "nome": "Leg curl seduto",
+              "serie": 2,
+              "rip_min": 12,
+              "rip_max": 15,
+              "riposo_sec": 60,
+              "tipo": "rip",
+              "peso_suggerito_kg": null,
+              "note": "Pausa 1 secondo al picco della contrazione. Risali lentamente resistendo.",
+              "badges": [],
+              "link_musclewiki": "https://musclewiki.com/it-it/exercise/seated-leg-curl?model=m"
+            },
+            {
+              "id": "B7",
+              "nome": "Hammer curl con manubri",
+              "serie": 2,
+              "rip_min": 10,
+              "rip_max": 12,
+              "riposo_sec": 60,
+              "tipo": "rip",
+              "peso_suggerito_kg": null,
+              "note": "Presa neutra (palmi che si guardano). Alternato o insieme. Brachiale + bicipite.",
+              "badges": [],
+              "link_musclewiki": "https://musclewiki.com/it-it/exercise/dumbbell-hammer-curl?model=m"
+            }
+          ]
+        },
+        {
+          "id": "core",
+          "nome": "Core (fine sessione)",
+          "tipo": "core",
+          "esercizi": [
+            {
+              "id": "B_C1",
+              "nome": "Rollout con ruota",
+              "serie": 2,
+              "rip_min": 6,
+              "rip_max": 10,
+              "riposo_sec": 60,
+              "tipo": "rip",
+              "note": "Inginocchiato. Vai avanti solo fino a dove mantieni la schiena piatta — non cedere con la lombare. Inizia corto, aumenta gradualmente.",
+              "badges": ["lordosi"],
+              "acquisto_necessario": true,
+              "note_acquisto": "Ruota per addominali — circa €10 su Amazon"
+            },
+            {
+              "id": "B_C2",
+              "nome": "Pallof Press al cavo",
+              "serie": 2,
+              "rip": "10 per lato",
+              "riposo_sec": 60,
+              "tipo": "rip",
+              "note": "Come Giorno A. Resisti alla rotazione.",
+              "badges": ["lordosi", "golf"],
+              "link_musclewiki": "https://musclewiki.com/it-it/exercise/cable-pallof-press?model=m"
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

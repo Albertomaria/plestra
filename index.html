@@ -17,6 +17,7 @@
   --bg: #111; --bg2: #1c1c1e; --bg3: #2c2c2e; --bg4: #3a3a3c;
   --text: #fff; --text2: #aeaeb2;
   --accent: #0A84FF; --lordosi: #FF9F0A; --done: #30D158; --danger: #FF453A; --warm: #FF6B35;
+  --spalla: #5AC8FA; --golf: #32D74B; --superset: #BF5AF2;
 }
 html, body { height: 100%; background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; overflow-x: hidden; }
 body { max-width: 480px; margin: 0 auto; }
@@ -275,6 +276,57 @@ body { max-width: 480px; margin: 0 auto; }
 /* Reset pesi btn */
 .btn-reset { background: none; border: 1.5px solid var(--danger); color: var(--danger); padding: 10px 20px; border-radius: 10px; font-size: 13px; cursor: pointer; margin-top: 8px; }
 
+/* ===== V2 ===== */
+/* Badge spalla / golf / superset */
+.bsp { background: var(--spalla); color: #000; font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 4px; }
+.bgo { background: var(--golf); color: #000; font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 4px; }
+.bss { background: var(--superset); color: #000; font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 4px; }
+.bsp-lg { background: var(--spalla); color: #000; font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 6px; }
+.bgo-lg { background: var(--golf); color: #000; font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 6px; }
+.bss-lg { background: var(--superset); color: #000; font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 6px; }
+.info-steps li.spalla-step, .info-steps li.spalla-step .step-n { color: var(--spalla); }
+.info-steps li.golf-step, .info-steps li.golf-step .step-n { color: var(--golf); }
+.er-prog { font-size: 12px; color: var(--accent); font-weight: 700; margin-left: 6px; }
+
+/* Superset */
+.superset-block { background: rgba(191,90,242,.12); border: 1.5px solid var(--superset); border-radius: 12px; padding: 10px 14px; margin-bottom: 12px; font-size: 14px; line-height: 1.45; }
+.superset-block .ne-lbl { color: var(--superset); }
+
+/* Countdown esercizi a tempo */
+.cd-input {
+  width: 140px; background: var(--bg3); border: 1.5px solid var(--bg4); border-radius: 14px;
+  color: var(--text); font-family: inherit; font-size: 48px; font-weight: 800; text-align: center;
+  padding: 6px 0; outline: none; font-variant-numeric: tabular-nums; margin-top: 6px;
+}
+.cd-input:focus { border-color: var(--accent); }
+.cd-unit { font-size: 12px; color: var(--text2); margin: 4px 0 14px; }
+.cd-actions { display: flex; flex-direction: column; gap: 8px; }
+.cd-actions.row { flex-direction: row; justify-content: center; gap: 12px; }
+.btn-extimer.secondary { background: var(--bg3); color: var(--text); }
+.btn-plus15.big { font-size: 20px; padding: 14px 30px; margin-top: 0; border-color: var(--accent); color: var(--accent); }
+.cd-actions.row .btn-skip { margin-top: 0; padding: 14px 26px; font-size: 15px; }
+.cd-done { color: var(--done); font-weight: 700; font-size: 15px; padding: 8px 0; }
+
+/* Filtro progressi */
+.filter-row { display: flex; gap: 6px; padding: 0 16px 12px; }
+.fchip { flex: 1; padding: 7px 4px; border: 1px solid var(--bg3); border-radius: 50px; background: none; color: var(--text2); font-size: 12px; cursor: pointer; text-align: center; font-family: inherit; }
+.fchip.active { background: var(--bg3); color: var(--text); border-color: var(--bg4); }
+
+/* Health Connect */
+.hc-block { background: var(--bg2); border-radius: 14px; padding: 14px; margin: 18px 16px 0; }
+.hc-row { display: flex; align-items: center; justify-content: space-between; font-size: 15px; font-weight: 600; }
+.hc-note { font-size: 12px; color: var(--text2); margin-top: 8px; line-height: 1.5; }
+.switch { appearance: none; -webkit-appearance: none; width: 46px; height: 28px; border-radius: 14px; background: var(--bg4); position: relative; flex-shrink: 0; }
+.switch::after { content: ''; position: absolute; top: 3px; left: 3px; width: 22px; height: 22px; border-radius: 50%; background: var(--text2); transition: left .2s; }
+.switch:checked { background: var(--done); }
+.switch:checked::after { left: 21px; background: #fff; }
+.switch:disabled { opacity: .5; }
+
+/* Caricamento + sync */
+.loading { text-align: center; color: var(--text2); padding: 120px 20px; font-size: 15px; }
+.loading .big { font-size: 44px; margin-bottom: 14px; }
+.sync-line { text-align: center; font-size: 12px; color: var(--text2); margin-top: 14px; }
+
 .hidden { display: none !important; }
 </style>
 </head>
@@ -286,7 +338,7 @@ body { max-width: 480px; margin: 0 auto; }
   <div class="hdr-right"><span class="s-timer hidden" id="s-timer">0:00</span></div>
 </div>
 
-<div id="s-home"></div>
+<div id="s-home"><div class="loading"><div class="big">💪</div>Caricamento scheda…</div></div>
 <div id="s-list"  class="hidden"></div>
 <div id="s-exercise" class="hidden"></div>
 <div id="s-progress" class="hidden"></div>
@@ -299,384 +351,205 @@ body { max-width: 480px; margin: 0 auto; }
 
 <script>
 // =========================================================
-// SCHEDA ALLENAMENTO
+// CONFIG SUPABASE
 // =========================================================
-const SCHEDA = {
-  A: {
-    nome:"Giorno A", sub:"Petto · Spalle · Tricipiti · Bicipiti",
-    giorno:"Martedì",
-    esercizi:[
-      { id:"A1", sez:"Riscaldamento — NON saltare", nome:"Crunch a terra", serie:2, reps:"15 rip.", riposo:0, peso:"", lordosi:true, warm:true,
-        video:"https://musclewiki.com/it-it/exercise/crunches?model=m",
-        info:{ muscoli:"Core basso, retto addominale", steps:[
-          "Sdraiati sulla schiena, ginocchia piegate, piedi a terra larghezza fianchi.",
-          "Mani dietro la testa — non tirare il collo, gomiti aperti.",
-          "Contrai l'addome e solleva le scapole da terra di 5–8 cm.",
-          "⚠️ LORDOSI: il basso schiena NON si stacca dal pavimento in nessun momento.",
-          "Tieni la contrazione 1 secondo, scendi lentamente senza abbassare del tutto le scapole.",
-          "Respira: espira salendo, inspira scendendo."
-        ]}},
-      { id:"A2", sez:"Riscaldamento — NON saltare", nome:"Plank su avambracci", serie:2, reps:"30 sec", riposo:0, peso:"", lordosi:true, warm:true, durataSec:30,
-        video:"https://musclewiki.com/it-it/exercise/forearm-plank?model=m",
-        info:{ muscoli:"Core, traverso addominale, stabilizzatori lombari", steps:[
-          "Appoggiati su avambracci (gomiti sotto le spalle) e punte dei piedi.",
-          "Il corpo forma una linea retta dalla testa ai talloni.",
-          "⚠️ LORDOSI: spingi attivamente il bacino verso il basso — non lasciare che la pancia cada.",
-          "Contrai glutei e addome contemporaneamente per tutta la durata.",
-          "Guarda il pavimento, collo neutro. Respira normalmente."
-        ]}},
-      { id:"A3", sez:"Riscaldamento — NON saltare", nome:"Bird dog", serie:2, reps:"10 rip. per lato", riposo:0, peso:"", lordosi:true, warm:true,
-        video:"https://musclewiki.com/it-it/exercise/bird-dog?model=m",
-        info:{ muscoli:"Core profondo, stabilizzatori lombari, glutei", steps:[
-          "A quattro zampe: mani sotto le spalle, ginocchia sotto i fianchi, schiena piatta.",
-          "⚠️ LORDOSI: mantieni la schiena perfettamente piatta per tutta la serie — è l obiettivo principale.",
-          "Estendi contemporaneamente il braccio destro in avanti e la gamba sinistra indietro.",
-          "Tieni 2–3 secondi senza ruotare il bacino o alzare il fianco.",
-          "Torna lentamente e ripeti con braccio sinistro + gamba destra.",
-          "Movimento lento e controllato — non è un esercizio di velocità."
-        ]}},
-      { id:"A4", sez:"Riscaldamento — NON saltare", nome:"Retroversione bacino alla sbarra", serie:2, reps:"10 rip. lente", riposo:0, peso:"", lordosi:true, warm:true,
-        video:null,
-        info:{ muscoli:"Core profondo, flessori anca, mobilità lombare", steps:[
-          "Appenditi alla sbarra con presa prona, braccia tese.",
-          "Parti in posizione neutra con leggera curva lombare naturale.",
-          "Contrai l'addome e spingi il bacino in avanti e verso l'alto.",
-          "⚠️ LORDOSI: allena il controllo attivo della curva lombare — esercizio chiave per te.",
-          "Tieni 2–3 secondi sentendo la lombare appiattirsi. Torna lentamente. 10 rip. lente."
-        ]}},
-      { id:"A5", sez:"Riscaldamento — NON saltare", nome:"Mobilità spalle (cerchi braccia)", serie:1, reps:"30 sec", riposo:0, peso:"", lordosi:false, warm:true, durataSec:30,
-        video:null,
-        info:{ muscoli:"Cuffia dei rotatori, deltoide, mobilità articolare", steps:[
-          "In piedi, piedi larghezza spalle, braccia lungo i fianchi.",
-          "Ruota le braccia in cerchi ampi in avanti per 15 secondi, poi inverti.",
-          "Mantieni le spalle basse e rilassate. Aumenta progressivamente l'ampiezza."
-        ]}},
-      { id:"A6", sez:"Petto", nome:"Panca inclinata con manubri", serie:4, reps:"10–12 rip.", riposo:90, peso:"10", lordosi:false, warm:false, sugPeso:"10–14 kg/br",
-        video:"https://musclewiki.com/it-it/exercise/dumbbell-incline-bench-press?model=m",
-        note:"Panca a 45°, gomiti a 45° rispetto al busto",
-        info:{ muscoli:"Pettorale medio-alto, deltoide anteriore, tricipiti", steps:[
-          "Regola la panca a 45°. Siediti con i manubri sulle cosce, poi sdraiati.",
-          "Gomiti a 45° rispetto al busto — non aperti a 90°. Piedi ben piantati a terra.",
-          "Spingi i manubri verso l'alto e leggermente verso il centro.",
-          "Scendi lentamente (2–3 secondi) fino a gomiti appena sotto la panca.",
-          "Respira: inspira scendendo, espira spingendo."
-        ]}},
-      { id:"A7", sez:"Petto", nome:"High Incline Dumbbell Press", serie:3, reps:"12 rip.", riposo:75, peso:"10", lordosi:false, warm:false, sugPeso:"10–14 kg/br",
-        video:"https://musclewiki.com/it-it/exercise/dumbbell-high-incline-bench-press?model=m",
-        note:"Panca a 60°, spinta verticale. Colpisce il petto alto/clavicolare",
-        info:{ muscoli:"Pettorale alto (clavicolare), deltoide anteriore, tricipiti", steps:[
-          "Regola la panca a circa 60° — più ripida della panca inclinata classica.",
-          "Siediti con i manubri sulle cosce, poi sdraiati portandoli all'altezza delle spalle.",
-          "Spingi i manubri verso l'alto in linea retta — movimento quasi verticale.",
-          "Senti il lavoro concentrarsi sulla parte alta del petto, vicino alle clavicole.",
-          "Scendi lentamente. Non aprire i gomiti oltre le spalle.",
-          "Respira: inspira scendendo, espira spingendo."
-        ]}},
-      { id:"A8", sez:"Petto", nome:"Croci (fly) con manubri", serie:3, reps:"12 rip.", riposo:75, peso:"6", lordosi:false, warm:false, sugPeso:"6–10 kg/br",
-        video:"https://musclewiki.com/it-it/exercise/dumbbell-chest-fly?model=m",
-        note:"Gomiti fissi leggermente piegati, non scendere oltre le spalle",
-        info:{ muscoli:"Pettorale medio, allargamento del petto", steps:[
-          "Sdraiati su panca, braccia tese verso l'alto, palmi che si guardano.",
-          "⚠️ TECNICA (video Vlad): i gomiti restano FISSI leggermente piegati — non cambiano angolo mai.",
-          "Apri le braccia lateralmente finché i gomiti sono all'altezza delle spalle — non oltre.",
-          "Richiudi verso l'alto seguendo lo stesso arco — come abbracciare un albero grande.",
-          "Respira: inspira aprendo, espira chiudendo."
-        ]}},
-      { id:"A9", sez:"Petto", nome:"Pull-over con manubrio", serie:3, reps:"12 rip.", riposo:75, peso:"12", lordosi:false, warm:false, sugPeso:"12–16 kg",
-        video:"https://musclewiki.com/it-it/exercise/dumbbell-pullover?model=m",
-        note:"Sdraiato sulla panca, apre la cassa toracica, movimento lento",
-        info:{ muscoli:"Gran dorsale, pettorale, cassa toracica", steps:[
-          "Sdraiati trasversalmente sulla panca con solo le spalle appoggiate, piedi a terra.",
-          "Tieni un manubrio con entrambe le mani sopra il petto, braccia quasi tese.",
-          "Abbassa lentamente il manubrio dietro la testa seguendo un arco, fino a sentire un buon allungamento.",
-          "Riporta il manubrio sopra il petto seguendo lo stesso arco.",
-          "Movimento lento e controllato — non forzare la discesa oltre il comfort.",
-          "Respira: inspira scendendo, espira risalendo."
-        ]}},
-      { id:"A10", sez:"Spalle", nome:"Military press", serie:3, reps:"10 rip.", riposo:90, peso:"20", lordosi:true, warm:false, sugPeso:"20–30 kg tot.",
-        video:"https://musclewiki.com/it-it/exercise/smith-machine-seated-overhead-press?model=m",
-        note:"Core contratto — protegge la lordosi",
-        info:{ muscoli:"Deltoide anteriore e laterale, trapezio, tricipiti", steps:[
-          "Siediti su panca con schienale verticale — preferibile a in piedi per la lordosi.",
-          "⚠️ LORDOSI: lo schienale deve supportare la schiena bassa. Contrai l'addome prima di spingere.",
-          "Impugna bilanciere o manubri all'altezza delle orecchie, gomiti a 90°.",
-          "Spingi verso l'alto fino a quasi estendere le braccia.",
-          "Scendi lentamente al punto di partenza. Respira: inspira in basso, espira spingendo su."
-        ]}},
-      { id:"A11", sez:"Spalle", nome:"Alzate laterali con manubri", serie:2, reps:"12 rip.", riposo:60, peso:"4", lordosi:false, warm:false, sugPeso:"4–6 kg/br",
-        video:"https://musclewiki.com/it-it/exercise/dumbbell-lateral-raise?model=m",
-        note:"Gomiti leggermente piegati, non oltre le spalle",
-        tempWarning:"⚠️ Peso ridotto temporaneo — 2 serie da 4–6 kg fino a rinforzo della spalla",
-        info:{ muscoli:"Deltoide laterale", steps:[
-          "In piedi o seduto, un manubrio per mano lungo i fianchi, palmi verso il corpo.",
-          "⚠️ TEMPORANEO: usa 4–6 kg e solo 2 serie finché la spalla non si rinforza.",
-          "⚠️ TECNICA (video Vlad): gomiti SEMPRE leggermente piegati — non cambiare questo angolo mai.",
-          "Solleva le braccia lateralmente fino all'altezza delle spalle — non oltre.",
-          "Scendi lentamente in 2–3 secondi. Non dondolare il busto.",
-          "Respira: inspira in basso, espira alzando."
-        ]}},
-      { id:"A12", sez:"Spalle", nome:"Reverse fly su panca inclinata", serie:3, reps:"12 rip.", riposo:60, peso:"4", lordosi:false, warm:false, sugPeso:"4–8 kg/br",
-        video:"https://musclewiki.com/it-it/exercise/dumbbell-laying-reverse-fly?model=m",
-        note:"Busto frontale sulla panca, alzate posteriori — deltoide posteriore",
-        info:{ muscoli:"Deltoide posteriore, rotatori esterni, romboidi", steps:[
-          "Siediti a cavalcioni su una panca inclinata a 45°, busto appoggiato allo schienale frontalmente.",
-          "Un manubrio per mano lungo i fianchi, gomiti leggermente piegati — fissi per tutta la serie.",
-          "Solleva le braccia lateralmente e verso l'alto fino all'altezza delle spalle.",
-          "In cima, stringi le scapole insieme per 1 secondo.",
-          "Scendi lentamente resistendo al peso. Usa un peso leggero — è un muscolo piccolo.",
-          "Respira: inspira scendendo, espira sollevando."
-        ]}},
-      { id:"A13", sez:"Tricipiti", nome:"Pushdown al cavo con sbarra a V", serie:3, reps:"12 rip.", riposo:60, peso:"15", lordosi:false, warm:false, sugPeso:"15–25 kg",
-        video:"https://musclewiki.com/it-it/exercise/machine-cable-v-bar-push-downs?model=m",
-        note:"Gomiti stretti ai fianchi, distensione completa",
-        info:{ muscoli:"Tricipiti (tutti e tre i capi)", steps:[
-          "In piedi davanti al cavo alto, impugna la sbarra a V con palmi verso il basso.",
-          "I gomiti restano FERMI e stretti ai fianchi per tutta la serie.",
-          "Spingi verso il basso estendendo completamente le braccia. Stringi i tricipiti 1 secondo.",
-          "Risali lentamente fino a 90° — non oltre per mantenere tensione.",
-          "Respira: inspira salendo, espira spingendo giù."
-        ]}},
-      { id:"A14", sez:"Tricipiti", nome:"Estensioni tricipiti da seduto", serie:3, reps:"12 rip.", riposo:60, peso:"10", lordosi:true, warm:false, sugPeso:"10–14 kg",
-        video:"https://musclewiki.com/it-it/exercise/kettlebell-standing-tricep-extension?model=m",
-        note:"Un manubrio sopra la testa, gomiti fermi, core contratto",
-        info:{ muscoli:"Tricipiti (capo lungo)", steps:[
-          "Siediti con schienale, impugna un manubrio con entrambe le mani verticale sopra la testa.",
-          "I gomiti puntano al soffitto e restano FERMI vicini alla testa per tutta l'esecuzione.",
-          "Piega i gomiti abbassando il manubrio dietro la testa fino a parallelo al pavimento.",
-          "⚠️ LORDOSI: core contratto, non inarcare la schiena quando il peso scende.",
-          "Estendi i gomiti spingendo il manubrio verso l'alto. Respira: inspira scendendo, espira su."
-        ]}},
-      { id:"A15", sez:"Bicipiti", nome:"Curl con bilanciere EZ", serie:2, reps:"12 rip.", riposo:45, peso:"15", lordosi:false, warm:false, sugPeso:"15–20 kg tot.",
-        video:"https://musclewiki.com/it-it/exercise/barbell-curl?model=m",
-        note:"Gomiti fermi ai fianchi",
-        info:{ muscoli:"Bicipiti, brachiale", steps:[
-          "In piedi, impugna il bilanciere EZ sulle curve interne, palmi verso l'alto.",
-          "Braccia lungo i fianchi, gomiti aderenti al busto — i gomiti NON si muovono mai.",
-          "Piega i gomiti portando il bilanciere verso le spalle. Stringi i bicipiti 1 secondo in cima.",
-          "Scendi lentamente (2–3 secondi) fino all'estensione completa.",
-          "Non dondolare il busto — se lo fai, il peso è troppo. Respira: inspira scendendo, espira salendo."
-        ]}},
-      { id:"A16", sez:"Bicipiti", nome:"Curl al cavo alto", serie:2, reps:"12 rip.", riposo:45, peso:"8", lordosi:false, warm:false, sugPeso:"8–12 kg",
-        video:"https://musclewiki.com/it-it/exercise/cable-single-arm-bayesian-curl?model=m",
-        note:"Tensione costante su tutto il ROM, braccio a 90°",
-        info:{ muscoli:"Bicipiti (tensione costante su tutto il ROM)", steps:[
-          "Regola il cavo all'altezza della spalla. Stai di fianco alla macchina.",
-          "Porta il braccio a 90° rispetto al busto — il gomito resta FERMO lì per tutta la serie.",
-          "Piega il gomito portando la mano verso la spalla, massima contrazione in cima.",
-          "Scendi lentamente resistendo al cavo. Poi cambia lato.",
-          "Respira: inspira scendendo, espira contraendo."
-        ]}},
-    ]
+// Inserisci le credenziali del progetto (Supabase → Project Settings → API).
+// Finché restano i placeholder l'app funziona solo con localStorage.
+const SUPABASE_URL = 'https://jmjkqqbkqvleiqixeroj.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImptamtxcWJrcXZsZWlxaXhlcm9qIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTE5NzY1ODAsImV4cCI6MjEwNzU1MjU4MH0.5H5JhBnkYcoGksrjJ68y1dqAG902usj9asbCb9DrwqM';
+const SUPABASE_ON = !SUPABASE_URL.includes('YOUR_PROJECT') && !SUPABASE_ANON_KEY.startsWith('YOUR_');
+const USER_ID = 'alberto';
+
+// =========================================================
+// HEALTH CONNECT — da abilitare quando Alberto avrà uno smartwatch
+// Richiede app nativa Android o Trusted Web Activity
+// Per ora: struttura dati pronta, UI nascosta
+// =========================================================
+const HEALTH_CONNECT = {
+  enabled: false,
+
+  async readHeartRate(startTime, endTime) {
+    // TODO: window.HealthConnect.readRecords('HeartRate', {startTime, endTime})
+    return null;
   },
-  B: {
-    nome:"Giorno B", sub:"Gambe · Schiena · Core",
-    giorno:"Venerdì",
-    esercizi:[
-      { id:"B1", sez:"Riscaldamento — NON saltare", nome:"Crunch a terra", serie:2, reps:"15 rip.", riposo:0, peso:"", lordosi:true, warm:true,
-        video:"https://musclewiki.com/it-it/exercise/crunches?model=m",
-        info:{ muscoli:"Core basso, retto addominale", steps:[
-          "Sdraiati sulla schiena, ginocchia piegate, piedi a terra larghezza fianchi.",
-          "Mani dietro la testa — non tirare il collo, gomiti aperti.",
-          "Contrai l'addome e solleva le scapole da terra di 5–8 cm.",
-          "⚠️ LORDOSI: il basso schiena NON si stacca dal pavimento in nessun momento.",
-          "Tieni la contrazione 1 secondo, scendi lentamente senza abbassare del tutto le scapole.",
-          "Respira: espira salendo, inspira scendendo."
-        ]}},
-      { id:"B2", sez:"Riscaldamento — NON saltare", nome:"Plank su avambracci", serie:2, reps:"30 sec", riposo:0, peso:"", lordosi:true, warm:true, durataSec:30,
-        video:"https://musclewiki.com/it-it/exercise/forearm-plank?model=m",
-        info:{ muscoli:"Core, traverso addominale, stabilizzatori lombari", steps:[
-          "Appoggiati su avambracci (gomiti sotto le spalle) e punte dei piedi.",
-          "Il corpo forma una linea retta dalla testa ai talloni.",
-          "⚠️ LORDOSI: spingi attivamente il bacino verso il basso — non lasciare che la pancia cada.",
-          "Contrai glutei e addome contemporaneamente per tutta la durata.",
-          "Guarda il pavimento, collo neutro. Respira normalmente."
-        ]}},
-      { id:"B3", sez:"Riscaldamento — NON saltare", nome:"Bird dog", serie:2, reps:"10 rip. per lato", riposo:0, peso:"", lordosi:true, warm:true,
-        video:"https://musclewiki.com/it-it/exercise/bird-dog?model=m",
-        info:{ muscoli:"Core profondo, stabilizzatori lombari, glutei", steps:[
-          "A quattro zampe: mani sotto le spalle, ginocchia sotto i fianchi, schiena piatta.",
-          "⚠️ LORDOSI: mantieni la schiena perfettamente piatta per tutta la serie — è l obiettivo principale.",
-          "Estendi contemporaneamente il braccio destro in avanti e la gamba sinistra indietro.",
-          "Tieni 2–3 secondi senza ruotare il bacino o alzare il fianco.",
-          "Torna lentamente e ripeti con braccio sinistro + gamba destra.",
-          "Movimento lento e controllato — non è un esercizio di velocità."
-        ]}},
-      { id:"B4", sez:"Riscaldamento — NON saltare", nome:"Retroversione bacino alla sbarra", serie:2, reps:"10 rip. lente", riposo:0, peso:"", lordosi:true, warm:true,
-        video:null,
-        info:{ muscoli:"Core profondo, flessori anca, mobilità lombare", steps:[
-          "Appenditi alla sbarra con presa prona, braccia tese.",
-          "Parti in posizione neutra con leggera curva lombare naturale.",
-          "Contrai l'addome e spingi il bacino in avanti e verso l'alto.",
-          "⚠️ LORDOSI: allena il controllo attivo della curva lombare — esercizio chiave per te.",
-          "Tieni 2–3 secondi sentendo la lombare appiattirsi. Torna lentamente. 10 rip. lente."
-        ]}},
-      { id:"B5", sez:"Riscaldamento — NON saltare", nome:"Push-up di attivazione", serie:2, reps:"10–12 rip.", riposo:0, peso:"", lordosi:true, warm:true,
-        video:"https://musclewiki.com/it-it/exercise/push-up?model=m",
-        note:"Corpo dritto, bacino neutro",
-        info:{ muscoli:"Pettorali, tricipiti, core stabilizzatori", steps:[
-          "Mani a terra larghezza spalle, braccia tese, corpo in linea retta.",
-          "⚠️ LORDOSI: contrai addome e glutei PRIMA di scendere — il bacino non cede mai.",
-          "Scendi piegando i gomiti a 45° rispetto al busto (non aperti a 90°).",
-          "Scendi fino a sfiorare il petto a terra, poi spingi su in modo controllato.",
-          "Se non mantieni la schiena dritta, fallo sulle ginocchia. Respira: inspira scendendo, espira su."
-        ]}},
-      { id:"B6", sez:"Riscaldamento — NON saltare", nome:"Mobilità anche (cerchi bacino)", serie:1, reps:"20\" per lato", riposo:0, peso:"", lordosi:false, warm:true, durataSec:20,
-        video:null,
-        info:{ muscoli:"Flessori anca, piriforme, mobilità lombopelvica", steps:[
-          "In piedi, piedi larghezza spalle, mani sui fianchi.",
-          "⚠️ LORDOSI: scioglie la rigidità dell'anca che contribuisce all'iperlordosi.",
-          "Ruota il bacino in cerchi ampi — 20 secondi per senso, poi inverti.",
-          "Ginocchia leggermente piegate, busto fermo."
-        ]}},
-      { id:"B7", sez:"Gambe", nome:"Leg press", serie:4, reps:"12/12/10/8", riposo:90, peso:"60", lordosi:true, warm:false, sugPeso:"60–100 kg",
-        video:"https://musclewiki.com/it-it/exercise/machine-leg-press?model=m",
-        note:"Piedi alti e larghi — scarica la colonna",
-        info:{ muscoli:"Quadricipiti, glutei, posteriori coscia", steps:[
-          "Siediti con schiena e sacro ben aderenti allo schienale.",
-          "⚠️ LORDOSI: la colonna è supportata — preferibile allo squat libero per te.",
-          "Piedi alti e larghi sulla pedana — coinvolge più glutei e scarica i quadricipiti.",
-          "Piega le ginocchia scendendo lentamente — le ginocchia seguono la direzione dei piedi.",
-          "⚠️ LORDOSI: fermati prima che il bacino inizi a ruotare — non scendere oltre.",
-          "Schema piramidale: 12/12/10/8 aumentando il carico ogni serie.",
-          "Respira: inspira scendendo, espira spingendo."
-        ]}},
-      { id:"B8", sez:"Gambe", nome:"Leg extension", serie:3, reps:"12 rip.", riposo:60, peso:"", lordosi:false, warm:false, sugPeso:"da PT",
-        video:"https://musclewiki.com/it-it/exercise/machine-plate-loaded-leg-extension?model=m",
-        note:"No strattoni",
-        info:{ muscoli:"Quadricipiti", steps:[
-          "Siediti, cuscinetto sulle tibie appena sopra le caviglie. Schiena aderente allo schienale.",
-          "Le cosce restano ferme sul sedile — solo gli stinchi si muovono.",
-          "Estendi le gambe verso l'alto senza strattoni. Contrai i quadricipiti 1 secondo in cima.",
-          "Scendi lentamente (2–3 secondi) senza tornare completamente a 90°.",
-          "Respira: inspira scendendo, espira estendendo."
-        ]}},
-      { id:"B9", sez:"Gambe", nome:"Leg curl", serie:3, reps:"12 rip.", riposo:60, peso:"", lordosi:false, warm:false, sugPeso:"da PT",
-        video:"https://musclewiki.com/it-it/exercise/seated-leg-curl?model=m",
-        note:"Pausa 1\" al picco di contrazione",
-        info:{ muscoli:"Posteriori coscia", steps:[
-          "Siediti, schiena aderente, cuscinetto sulle caviglie. Le cosce restano ferme.",
-          "Tira il cuscinetto verso il basso piegando le ginocchia in modo controllato.",
-          "In fondo, stringi i posteriori coscia per 1–2 secondi.",
-          "Risali lentamente resistendo al peso — non lasciare che risalga da solo.",
-          "Respira: inspira salendo, espira contraendo in basso."
-        ]}},
-      { id:"B10", sez:"Gambe", nome:"Polpacci", serie:3, reps:"15 rip.", riposo:60, peso:"", lordosi:false, warm:false, sugPeso:"da PT",
-        video:"https://musclewiki.com/it-it/exercises/calves",
-        note:"ROM completo: tallone basso, poi punta alta",
-        info:{ muscoli:"Gastrocnemio, soleo", steps:[
-          "Punte dei piedi su un rialzo, talloni nel vuoto. Mani appoggiate per equilibrio.",
-          "Scendi lentamente fino al massimo allungamento del polpaccio.",
-          "Spingi verso l'alto il più possibile. Tieni la contrazione 1 secondo in cima.",
-          "ROM completo: la discesa conta quanto la salita. Respira: inspira scendendo, espira salendo."
-        ]}},
-      { id:"B11", sez:"Schiena", nome:"Trazioni assistite alla macchina", serie:4, reps:"8–10 rip.", riposo:90, peso:"", lordosi:false, warm:false, sugPeso:"assistenza",
-        video:"https://musclewiki.com/it-it/exercise/machine-assisted-pull-up?model=m",
-        note:"Gran dorsale, sicuro per la schiena",
-        info:{ muscoli:"Gran dorsale, bicipiti, romboidi", steps:[
-          "Regola l'assistenza con Vlad la prima volta. Più peso assistenza = più facile.",
-          "Impugna la sbarra con presa prona, larghezza spalle o più.",
-          "Parti con braccia quasi tese, spalle leggermente retratte — non alle orecchie.",
-          "Tira verso il basso pensando 'gomiti verso i fianchi' — non 'mani verso il basso'.",
-          "In alto, stringi le scapole insieme per 1 secondo.",
-          "Scendi lentamente resistendo — la fase di discesa è fondamentale.",
-          "Respira: inspira scendendo, espira tirando su."
-        ]}},
-      { id:"B12", sez:"Schiena", nome:"Low row (pulley basso)", serie:3, reps:"10 rip.", riposo:90, peso:"30", lordosi:false, warm:false, sugPeso:"30–45 kg",
-        video:"https://musclewiki.com/it-it/exercise/machine-neutral-row?model=m",
-        note:"Schiena dritta, tira verso ombelico, stringi scapole",
-        info:{ muscoli:"Gran dorsale, romboidi, trapezio medio, bicipiti", steps:[
-          "Siediti con piedi sulle staffe, ginocchia leggermente piegate.",
-          "Impugna la maniglia a triangolo (presa neutra, palmi che si guardano).",
-          "Parti con braccia tese e schiena dritta — non arrotondata.",
-          "Tira verso l'ombelico, gomiti vicini al busto.",
-          "⚠️ TECNICA CHIAVE: stringi le scapole come se schiacciassi una matita tra di loro — tieni 1 secondo.",
-          "Torna lentamente lasciando aprire le scapole — non affrettare il ritorno.",
-          "Non dondolare il busto. Respira: inspira allungando, espira tirando."
-        ]}},
-      { id:"B13", sez:"Schiena", nome:"Reverse fly con manubri in piedi", serie:3, reps:"12 rip.", riposo:60, peso:"4", lordosi:false, warm:false, sugPeso:"4–8 kg/br",
-        video:"https://musclewiki.com/it-it/exercise/dumbbell-rear-delt-fly?model=m",
-        note:"Busto piegato 45°, alzate laterali posteriori — deltoide posteriore e trapezio",
-        info:{ muscoli:"Deltoide posteriore, romboidi, trapezio medio", steps:[
-          "In piedi, piedi larghezza spalle, busto piegato in avanti a circa 45°, schiena piatta.",
-          "Un manubrio per mano con i palmi che si guardano, gomiti leggermente piegati — fissi per tutta la serie.",
-          "Solleva le braccia lateralmente e verso l'alto finché sono parallele al pavimento.",
-          "In cima, stringi le scapole insieme per 1 secondo.",
-          "Scendi lentamente resistendo al peso. Usa un peso leggero.",
-          "Non dondolare il busto per aiutarti. Respira: inspira scendendo, espira sollevando."
-        ]}},
-      { id:"B14", sez:"Core / Chiusura", nome:"Plank a braccia tese", serie:2, reps:"max tempo", riposo:60, peso:"", lordosi:true, warm:false, tempoMax:true,
-        video:"https://musclewiki.com/it-it/exercise/hand-plank?model=m",
-        note:"Aumenta il tempo ogni settimana",
-        info:{ muscoli:"Core, stabilizzatori lombari, spalle", steps:[
-          "Posizione come un push-up: mani sotto le spalle, braccia tese, corpo in linea retta.",
-          "⚠️ LORDOSI: retroversione attiva del bacino — spingi il bacino verso il basso e contrai l'addome.",
-          "Glutei contratti, collo neutro (guarda il pavimento).",
-          "Respira normalmente — non trattenere il fiato.",
-          "Obiettivo: aumentare di 5 secondi ogni settimana. Fermati se senti dolore lombare."
-        ]}},
-    ]
+
+  async readWorkout(sessionId) {
+    // TODO: leggi dati allenamento da Health Connect
+    return null;
   }
 };
 
+// =========================================================
+// SCHEDA — caricata da scheda_v2.json + esercizi_info.json
+// =========================================================
+let SCHEDA = null;        // contenuto grezzo di scheda_v2.json
+let ESERCIZI_INFO = {};   // contenuto di esercizi_info.json
+let GIORNI = {};          // { A: {...giorno, esercizi:[lista piatta con sez/warm/info]} }
+
+function fetchJSON(url) {
+  return fetch(url).then(r => { if (!r.ok) throw new Error(url + ' ' + r.status); return r.json(); });
+}
+
+async function loadScheda() {
+  try {
+    const [scheda, info] = await Promise.all([
+      fetchJSON('./scheda_v2.json'),
+      fetchJSON('./esercizi_info.json')
+    ]);
+    SCHEDA = scheda;
+    ESERCIZI_INFO = info;
+    lsSet('p2_scheda_cache', { scheda, info });
+  } catch (e) {
+    // Offline: il service worker serve i JSON dalla cache. Se anche lui fallisce
+    // (es. primissimo avvio offline) usa l'ultima copia salvata in localStorage.
+    const c = lsGet('p2_scheda_cache', null);
+    if (!c) {
+      document.getElementById('s-home').innerHTML = `
+        <div class="loading"><div class="big">📡</div>Impossibile caricare la scheda.<br>Controlla la connessione.<br><br>
+        <button class="btn-home-go" onclick="loadScheda()">Riprova</button></div>`;
+      return;
+    }
+    SCHEDA = c.scheda;
+    ESERCIZI_INFO = c.info;
+  }
+  preparaScheda();
+  migraDatiV1();
+  goHome();
+  initSync();
+}
+
+function preparaScheda() {
+  // info tecniche: per id, altrimenti per nome (es. B_W3 "Come Giorno A" → info di A_W3)
+  const infoPerNome = {};
+  Object.values(SCHEDA.giorni).forEach(g => g.sezioni.forEach(s => s.esercizi.forEach(e => {
+    if (ESERCIZI_INFO[e.id] && !infoPerNome[e.nome]) infoPerNome[e.nome] = ESERCIZI_INFO[e.id];
+  })));
+  GIORNI = {};
+  Object.entries(SCHEDA.giorni).forEach(([k, g]) => {
+    const esercizi = [];
+    g.sezioni.forEach(s => s.esercizi.forEach(e => esercizi.push({
+      ...e, sez: s.nome, warm: s.tipo === 'warmup',
+      info: ESERCIZI_INFO[e.id] || infoPerNome[e.nome] || null
+    })));
+    GIORNI[k] = { ...g, esercizi };
+  });
+}
+
+function findEx(id) {
+  for (const g of Object.values(GIORNI)) {
+    const e = g.esercizi.find(x => x.id === id);
+    if (e) return e;
+  }
+  return null;
+}
+function exCorrente() { return GIORNI[S.giorno].esercizi[S.exIdx]; }
+function partner(ex) { return ex.superset_con ? GIORNI[S.giorno].esercizi.find(e => e.id === ex.superset_con) || null : null; }
+function isTempo(ex) { return ex.tipo === 'tempo'; }
+function unita(ex) { return isTempo(ex) ? 'sec' : 'kg'; }
+function repsTarget(ex) {
+  if (ex.rip_min != null) return (ex.rip_min === ex.rip_max ? ex.rip_min : `${ex.rip_min}–${ex.rip_max}`) + ' rip.';
+  return ex.rip || '';
+}
+function repsDefault(ex) { return ex.rip_max != null ? ex.rip_max : (parseInt(ex.rip) || ''); }
+function durataDefault(ex) {
+  const salvata = loadDurate()[ex.id];
+  if (salvata) return salvata;
+  const m = /(\d+)\s*sec/.exec(ex.rip || '');
+  return m ? parseInt(m[1]) : (ex.warm ? 30 : 45);
+}
+function esc(s) {
+  return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]));
+}
 
 // =========================================================
 // STATO
 // =========================================================
 let S = {
-  giorno: null, exIdx: 0, serieN: 1,
-  done: {}, // { exId: 'done' | {skip:true, nota:'...'} }
+  giorno: null, exIdx: 0,
+  done: {},  // { exId: 'done' | {skip:true, nota:'...'} }
+  serie: {}, // { exId: serie completate }
   sessionStart: null, sessionTimer: null,
-  restTimer: null, restLeft: 0, restTotal: 0,
+  restTimer: null, restEnd: 0, restTotal: 0, restOnEnd: null,
   screen: 'home',
   progGiorno: 'A', progDettaglioId: null,
-  progTab: 'pesi', // 'pesi' | 'salti'
-  backStack: [], // stack schermate per il tasto back
-  riposaAdj: null, // override tempo riposo per serie corrente (null = usa ex.riposo)
+  progTab: 'pesi',     // 'pesi' | 'salti'
+  progFiltro: 'tutto', // 'sett' | 'mese' | 'tutto'
+  backStack: [],       // stack schermate per il tasto back
+  riposaAdj: {},       // { exId: secondi } override tempo riposo
+  postCountdown: null, // exId il cui countdown è appena finito (mostra "Inizia riposo")
 };
 
-// Timer esercizio (countdown o cronometro) — separato dal timer riposo
-let ET = { mode: null, interval: null, value: 0, running: false };
+// Countdown esercizi a tempo — separato dal timer riposo. Basato su timestamp assoluti.
+let ET = { exId: null, running: false, end: 0, total: 0, base: 0, startedAt: 0, interval: null };
 
 // =========================================================
-// PERSISTENZA
+// PERSISTENZA (localStorage, chiavi p2_* per la scheda V2)
 // =========================================================
-// carichi correnti: { exId: "12" }
-function loadCarichi() { return JSON.parse(localStorage.getItem('p_carichi') || '{}'); }
-function saveCarichi(c) { localStorage.setItem('p_carichi', JSON.stringify(c)); }
-
-// ripetizioni custom: { exId: "10" }
-function loadReps() { return JSON.parse(localStorage.getItem('p_reps') || '{}'); }
-function saveReps(r) { localStorage.setItem('p_reps', JSON.stringify(r)); }
-
-// storico: { exId: [{data:"2026-06-25", peso:"12", rip:"10-12", serie:4}] }
-function loadStoria() { return JSON.parse(localStorage.getItem('p_storia') || '{}'); }
-function saveStoria(s) { localStorage.setItem('p_storia', JSON.stringify(s)); }
-
-// done per giorno corrente — scoped alla data: se è un nuovo giorno la scheda si riattiva da sola
-function loadDone(g) {
-  const raw = JSON.parse(localStorage.getItem('p_done_' + g) || 'null');
-  if (!raw || raw.data !== oggi()) return {};
-  return raw.items || {};
+function lsGet(k, def) {
+  try { const v = localStorage.getItem(k); return v === null ? def : JSON.parse(v); } catch (e) { return def; }
 }
-function saveDone() { localStorage.setItem('p_done_' + S.giorno, JSON.stringify({ data: oggi(), items: S.done })); }
+function lsSet(k, v) {
+  try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { console.warn('localStorage non scrivibile', k, e); }
+}
 
-function oggi() { return new Date().toISOString().slice(0, 10); }
+// carichi correnti: { exId: "12" }
+function loadCarichi() { return lsGet('p2_carichi', {}); }
+function saveCarichi(c) { lsSet('p2_carichi', c); }
+
+// ripetizioni correnti: { exId: "10" }
+function loadReps() { return lsGet('p2_reps', {}); }
+function saveReps(r) { lsSet('p2_reps', r); }
+
+// durata scelta per gli esercizi a tempo: { exId: 45 }
+function loadDurate() { return lsGet('p2_durate', {}); }
+function salvaDurata(exId, sec) { const d = loadDurate(); d[exId] = sec; lsSet('p2_durate', d); }
+
+// storico: { exId: [{data:"2026-10-14", peso:"12", rip:"10", serie:4}] } — per esercizi a tempo "peso" = secondi
+function loadStoria() { return lsGet('p2_storia', {}); }
+function saveStoria(s) { lsSet('p2_storia', s); }
+
+// done + serie per giorno — scoped alla data: se è un nuovo giorno la scheda si riattiva da sola
+function loadDone(g) {
+  const raw = lsGet('p2_done_' + g, null);
+  if (!raw || raw.data !== oggi()) return { items: {}, serie: {} };
+  return { items: raw.items || {}, serie: raw.serie || {} };
+}
+function saveDone() { lsSet('p2_done_' + S.giorno, { data: oggi(), items: S.done, serie: S.serie }); }
+
+function isoLocale(d) {
+  return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+}
+function oggi() { return isoLocale(new Date()); }
+function giorniFa(n) { const d = new Date(); d.setDate(d.getDate() - n); return isoLocale(d); }
+
+function uuid() {
+  if (window.crypto && crypto.randomUUID) return crypto.randomUUID();
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
+    const r = Math.random() * 16 | 0;
+    return (c === 'x' ? r : (r & 3 | 8)).toString(16);
+  });
+}
 
 // log esercizi saltati — storico permanente, separato dallo stato della sessione
-function loadSkipLog() { return JSON.parse(localStorage.getItem('p_skiplog') || '[]'); }
+function loadSkipLog() { return lsGet('p_skiplog', []); }
 function logSkip(ex, nota) {
+  const id = uuid();
   const log = loadSkipLog();
-  log.unshift({ data: oggi(), giorno: S.giorno, exId: ex.id, nome: ex.nome, nota: nota || '' });
-  localStorage.setItem('p_skiplog', JSON.stringify(log.slice(0, 200)));
+  log.unshift({ id, data: oggi(), giorno: S.giorno, exId: ex.id, nome: ex.nome, nota: nota || '' });
+  lsSet('p_skiplog', log.slice(0, 200));
+  accoda('salti_log', {
+    id, user_id: USER_ID, data: oggi(), giorno: S.giorno,
+    esercizio_id: ex.id, esercizio_nome: ex.nome, nota: nota || null,
+    creato_at: new Date().toISOString()
+  });
 }
 
-function registraPeso(exId, peso, rips, serie) {
-  if (!peso || peso === '') return;
+function registraStoria(exId, valore, rip, serie) {
   const st = loadStoria();
   if (!st[exId]) st[exId] = [];
   // Se c'è già una voce per oggi, aggiorna
   const todayIdx = st[exId].findIndex(r => r.data === oggi());
-  const entry = { data: oggi(), peso: String(peso), rip: rips, serie: serie };
+  const entry = { data: oggi(), peso: String(valore), rip: String(rip == null ? '' : rip), serie };
   if (todayIdx >= 0) st[exId][todayIdx] = entry;
   else st[exId].unshift(entry); // più recente in testa
   // max 30 sessioni per esercizio
@@ -684,12 +557,190 @@ function registraPeso(exId, peso, rips, serie) {
   saveStoria(st);
 }
 
+// Migrazione una tantum dei dati V1: stessi esercizi, id diversi (gli id V1 collidono con i V2)
+const MIGRAZIONE_V1 = { A13:'A7', A15:'A6', A9:'B4', B7:'B2', B8:'B5', B9:'B6', B11:'B1', B12:'A2', B14:'A_C2' };
+function migraDatiV1() {
+  if (localStorage.getItem('p2_migrato')) return;
+  const mappa = obj => {
+    const out = {};
+    Object.entries(MIGRAZIONE_V1).forEach(([v1, v2]) => { if (obj[v1] !== undefined) out[v2] = obj[v1]; });
+    return out;
+  };
+  saveStoria({ ...mappa(lsGet('p_storia', {})), ...loadStoria() });
+  saveCarichi({ ...mappa(lsGet('p_carichi', {})), ...loadCarichi() });
+  localStorage.setItem('p2_migrato', '1');
+}
+
+// =========================================================
+// SESSIONE (una per giorno A/B per data)
+// =========================================================
+function getSessione(g) {
+  const s = lsGet('p2_sess_' + g, null);
+  return s && s.data === oggi() ? s : null;
+}
+function apriSessione(g) {
+  let s = getSessione(g);
+  // finché non c'è nessuna serie registrata, il cronometro riparte da quando apri il giorno
+  if (!s || !s.registrata) {
+    s = { id: s ? s.id : uuid(), data: oggi(), start: Date.now(), ultimo: null, registrata: false };
+    lsSet('p2_sess_' + g, s);
+  }
+  return s;
+}
+function registraSessione() {
+  const s = getSessione(S.giorno) || apriSessione(S.giorno);
+  s.registrata = true;
+  s.ultimo = Date.now();
+  lsSet('p2_sess_' + S.giorno, s);
+  accoda('sessioni', {
+    id: s.id, user_id: USER_ID, data: s.data, giorno: S.giorno,
+    durata_min: Math.max(1, Math.round((s.ultimo - s.start) / 60000))
+  });
+  return s;
+}
+function logSerie(ex, num, { peso, rip, durata }) {
+  const s = registraSessione();
+  accoda('serie_log', {
+    id: uuid(), sessione_id: s.id, esercizio_id: ex.id, esercizio_nome: ex.nome,
+    serie_num: num, peso_kg: peso, rip_effettive: rip, durata_sec: durata,
+    creato_at: new Date().toISOString()
+  });
+}
+
+// =========================================================
+// SYNC SUPABASE — coda locale, inviata appena c'è rete
+// =========================================================
+// Ogni scrittura va prima in coda (localStorage) e poi viene inviata.
+// Online parte subito; offline resta "da sincronizzare" fino alla riconnessione.
+let SB = null, syncInCorso = false;
+
+function loadQ() { return lsGet('p2_syncq', []); }
+function saveQ(q) { lsSet('p2_syncq', q); }
+
+function accoda(table, row) {
+  const q = loadQ();
+  const i = q.findIndex(x => x.table === table && x.row.id === row.id);
+  if (i >= 0) q[i].row = row; // es. sessione con durata aggiornata
+  else q.push({ table, row });
+  saveQ(q);
+  sincronizza();
+}
+
+async function sincronizza() {
+  if (!SB || syncInCorso || !navigator.onLine) { aggiornaStatoSync(); return; }
+  syncInCorso = true;
+  try {
+    let q = loadQ();
+    // in ordine: la sessione deve esistere prima delle sue serie (foreign key)
+    while (q.length) {
+      const item = q[0];
+      const inviato = JSON.stringify(item.row);
+      const { error } = await SB.from(item.table).upsert(item.row);
+      if (error) { console.warn('Sync fallito', item.table, error.message); break; }
+      q = loadQ();
+      // se nel frattempo la riga è stata aggiornata, la lascio in coda per reinviarla
+      if (q.length && JSON.stringify(q[0].row) === inviato) { q.shift(); saveQ(q); }
+    }
+  } catch (e) {
+    console.warn('Sync fallito', e);
+  } finally {
+    syncInCorso = false;
+    aggiornaStatoSync();
+  }
+}
+
+function initSync() {
+  if (!SUPABASE_ON) return;
+  const s = document.createElement('script');
+  s.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
+  s.onload = () => {
+    SB = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    sincronizza();
+  };
+  s.onerror = () => console.warn('Supabase non caricato (offline?) — uso solo localStorage');
+  document.head.appendChild(s);
+  window.addEventListener('online', sincronizza);
+  window.addEventListener('offline', aggiornaStatoSync);
+}
+
+function statoSyncHTML() {
+  if (!SUPABASE_ON) return `<div class="sync-line" id="sync-line">💾 Solo su questo telefono (cloud non configurato)</div>`;
+  const n = loadQ().length;
+  const txt = n ? `☁️ ${n} da sincronizzare${navigator.onLine ? '' : ' · offline'}` : '☁️ Tutto sincronizzato';
+  return `<div class="sync-line" id="sync-line">${txt}</div>`;
+}
+function aggiornaStatoSync() {
+  const el = document.getElementById('sync-line');
+  if (el) el.outerHTML = statoSyncHTML();
+}
+
+// Progressi dal cloud → unisce allo storico locale (che resta la cache offline)
+async function aggiornaDaCloud() {
+  if (!SB || !navigator.onLine) return false;
+  try {
+    await sincronizza();
+    const [serie, salti] = await Promise.all([
+      SB.from('serie_log')
+        .select('esercizio_id, serie_num, peso_kg, rip_effettive, durata_sec, creato_at, sessioni(data)')
+        .or('peso_kg.not.is.null,durata_sec.not.is.null')
+        .order('creato_at', { ascending: false })
+        .limit(1000),
+      SB.from('salti_log').select('*').eq('user_id', USER_ID)
+        .order('creato_at', { ascending: false }).limit(200)
+    ]);
+    if (serie.error) throw serie.error;
+    if (salti.error) throw salti.error;
+
+    // una voce per esercizio/giorno: valore dell'ultima serie del giorno (come lo storico locale)
+    const remota = {};
+    serie.data.forEach(r => {
+      const val = r.peso_kg != null ? r.peso_kg : r.durata_sec;
+      if (val == null || !r.sessioni) return;
+      const h = remota[r.esercizio_id] || (remota[r.esercizio_id] = []);
+      const e = h.find(x => x.data === r.sessioni.data);
+      if (!e) h.push({ data: r.sessioni.data, peso: String(val), rip: r.rip_effettive != null ? String(r.rip_effettive) : '', serie: r.serie_num });
+      else e.serie = Math.max(e.serie, r.serie_num);
+    });
+    const locale = loadStoria();
+    Object.entries(remota).forEach(([exId, h]) => {
+      const perData = {};
+      (locale[exId] || []).forEach(e => { perData[e.data] = e; });
+      // oggi vince il locale (sessione in corso), gli altri giorni il cloud
+      h.forEach(e => { if (e.data !== oggi() || !perData[e.data]) perData[e.data] = e; });
+      locale[exId] = Object.values(perData).sort((a, b) => b.data.localeCompare(a.data)).slice(0, 30);
+    });
+    saveStoria(locale);
+
+    const log = loadSkipLog();
+    const ids = new Set(log.map(s => s.id).filter(Boolean));
+    salti.data.forEach(s => {
+      if (!ids.has(s.id)) log.push({ id: s.id, data: s.data, giorno: s.giorno, exId: s.esercizio_id, nome: s.esercizio_nome, nota: s.nota || '' });
+    });
+    log.sort((a, b) => b.data.localeCompare(a.data));
+    lsSet('p_skiplog', log.slice(0, 200));
+    return true;
+  } catch (e) {
+    console.warn('Lettura cloud fallita', e);
+    return false;
+  }
+}
+
 // =========================================================
 // AUDIO / VIBRAZIONE
 // =========================================================
+let AC = null;
+function audioCtx() {
+  if (!AC) { try { AC = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) { return null; } }
+  if (AC.state === 'suspended') AC.resume();
+  return AC;
+}
+// su mobile l'audio va sbloccato da un tocco dell'utente
+document.addEventListener('pointerdown', audioCtx, { once: true });
+
 function beep(f, d) {
+  const ctx = audioCtx();
+  if (!ctx) return;
   try {
-    const ctx = new (window.AudioContext || window.webkitAudioContext)();
     const o = ctx.createOscillator(), g = ctx.createGain();
     o.connect(g); g.connect(ctx.destination);
     o.frequency.value = f; o.type = 'sine';
@@ -707,20 +758,35 @@ function toast(msg) {
   clearTimeout(t._t); t._t = setTimeout(()=>t.classList.remove('show'), 2600);
 }
 
-// =========================================================
-// TIMER SESSIONE
-// =========================================================
-function startSessionTimer() {
-  S.sessionStart = Date.now();
-  clearInterval(S.sessionTimer);
-  const el = document.getElementById('s-timer');
-  el.classList.remove('hidden');
-  S.sessionTimer = setInterval(() => {
-    const sec = Math.floor((Date.now() - S.sessionStart) / 1000);
-    el.textContent = Math.floor(sec/60) + ':' + String(sec%60).padStart(2,'0');
-    el.classList.toggle('over', sec >= 3600);
-  }, 1000);
+function fmtSec(s) {
+  s = Math.max(0, s);
+  return Math.floor(s/60) + ':' + String(s%60).padStart(2,'0');
 }
+
+// =========================================================
+// TIMER SESSIONE — tempo calcolato da timestamp, non da contatore
+// =========================================================
+function startSessionTimer(start) {
+  S.sessionStart = start;
+  clearInterval(S.sessionTimer);
+  document.getElementById('s-timer').classList.remove('hidden');
+  tickSession();
+  S.sessionTimer = setInterval(tickSession, 1000);
+}
+function tickSession() {
+  if (!S.sessionStart) return;
+  const el = document.getElementById('s-timer');
+  const sec = Math.floor((Date.now() - S.sessionStart) / 1000);
+  el.textContent = fmtSec(sec);
+  el.classList.toggle('over', sec >= 3600);
+}
+
+// Quando l'app torna in primo piano aggiorna subito tutti i timer
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) return;
+  tickSession(); tickRiposo(); tickCountdown();
+  sincronizza();
+});
 
 // =========================================================
 // NAVIGAZIONE SCHERMATE
@@ -745,52 +811,67 @@ document.getElementById('btn-back').addEventListener('click', () => {
 });
 
 // =========================================================
+// BADGE
+// =========================================================
+function badgesHTML(ex, lg) {
+  const c = lg ? '-lg' : '';
+  const b = [];
+  if (ex.warm) b.push(`<span class="bw${c}">${lg ? '🔥 ' : ''}WARM UP</span>`);
+  if (ex.superset_con) b.push(`<span class="bss${c}">🔗 SUPERSET</span>`);
+  (ex.badges || []).forEach(k => {
+    if (k === 'lordosi') b.push(`<span class="bl${c}">⚠ LORDOSI</span>`);
+    if (k === 'spalla') b.push(`<span class="bsp${c}">SPALLA</span>`);
+    if (k === 'golf') b.push(`<span class="bgo${c}">⛳ GOLF</span>`);
+  });
+  return b;
+}
+
+// =========================================================
 // HOME
 // =========================================================
 function goHome() {
-  clearInterval(S.sessionTimer);
+  clearInterval(S.sessionTimer); S.sessionStart = null;
+  fermaRiposo(); fermaExTimer();
   document.getElementById('s-timer').classList.add('hidden');
-  S.giorno = null; S.done = {};
+  S.giorno = null; S.done = {}; S.serie = {};
   S.backStack = [];
   setHeader('Palestra Alberto', null);
   show('s-home');
 
-  const carichi = loadCarichi();
   const storia = loadStoria();
+  const p = SCHEDA.profilo || {};
 
-  // Calcola ultimo peso usato per ogni giorno
-  const ul = {};
-  ['A','B'].forEach(g => {
-    const exList = SCHEDA[g].esercizi.filter(e => !e.warm && e.sugPeso);
-    const last = exList.map(e => {
-      const h = storia[e.id];
-      return h && h[0] ? parseFloat(h[0].peso) : 0;
-    }).filter(v => v > 0);
-    ul[g] = last.length ? last.length + ' esercizi tracciati' : 'nessun allenamento registrato';
-  });
+  const card = g => {
+    const G = GIORNI[g];
+    const tracciati = G.esercizi.filter(e => (storia[e.id] || []).length).length;
+    const { items } = loadDone(g);
+    const fatti = Object.keys(items).length;
+    const stato = fatti ? `▶ oggi ${fatti}/${G.esercizi.length}` : (tracciati ? `${tracciati} esercizi tracciati` : 'nessun allenamento registrato');
+    return `
+    <button class="day-card" onclick="apriGiorno('${g}')">
+      <h2>${esc(G.nome)}</h2>
+      <div class="dsub">${esc(G.focus)}<br>${esc(G.sottotitolo)}</div>
+      <div class="dmeta">${G.esercizi.length} esercizi · ~${G.durata_stimata_min} min · ${stato}</div>
+    </button>`;
+  };
 
   document.getElementById('s-home').innerHTML = `
     <div class="home-hero">
       <h1>💪 Palestra Alberto</h1>
-      <p>41 anni · 184 cm · 84 kg · con Vlad</p>
+      <p>${p.eta} anni · ${p.altezza_cm} cm · ${p.peso_kg} kg</p>
     </div>
-    <button class="day-card" onclick="apriGiorno('A')">
-      <h2>Giorno A — Martedì</h2>
-      <div class="dsub">Petto · Spalle · Tricipiti · Bicipiti</div>
-      <div class="dmeta">${SCHEDA.A.esercizi.length} esercizi · ~60 min · ${ul.A}</div>
-    </button>
-    <button class="day-card" onclick="apriGiorno('B')">
-      <h2>Giorno B — Venerdì</h2>
-      <div class="dsub">Gambe · Schiena · Core</div>
-      <div class="dmeta">${SCHEDA.B.esercizi.length} esercizi · ~60 min · ${ul.B}</div>
-    </button>
+    ${Object.keys(GIORNI).map(card).join('')}
     <button class="btn-prog" onclick="apriProgressi()">
       📊 I miei progressi
     </button>
     <div class="info-box">
-      <strong style="color:var(--lordosi);">⚠ Iperlordosi lombare</strong><br>
-      Gli esercizi con badge arancione richiedono attenzione posturale speciale.<br>Non saltare mai il riscaldamento.
+      <strong style="color:var(--lordosi);">⚠ Lordosi</strong> attenzione alla lombare ·
+      <strong style="color:var(--spalla);">Spalla</strong> stabilità/rinforzo ·
+      <strong style="color:var(--golf);">⛳ Golf</strong> core e rotazione<br>
+      Non saltare mai il riscaldamento.
+      ${SCHEDA.progressione ? `<br><br><strong style="color:var(--text);">Progressione:</strong> ${esc(SCHEDA.progressione.descrizione)}` : ''}
     </div>
+    ${statoSyncHTML()}
   `;
 }
 
@@ -798,36 +879,40 @@ function goHome() {
 // LISTA ESERCIZI
 // =========================================================
 function apriGiorno(g) {
-  S.giorno = g; S.exIdx = 0; S.serieN = 1;
-  S.done = loadDone(g);
-  startSessionTimer();
+  S.giorno = g; S.exIdx = 0; S.riposaAdj = {};
+  const d = loadDone(g);
+  S.done = d.items; S.serie = d.serie;
+  startSessionTimer(apriSessione(g).start);
   S.backStack = [goHome];
+  // riparti dal primo esercizio non ancora fatto
+  const i = GIORNI[g].esercizi.findIndex(e => !S.done[e.id]);
+  if (i >= 0) S.exIdx = i;
   renderLista();
 }
 
 function renderLista() {
-  const G = SCHEDA[S.giorno];
+  fermaRiposo(); fermaExTimer();
+  const G = GIORNI[S.giorno];
   setHeader(G.nome, '← Home');
   show('s-list');
 
   let html = '', sez = '';
   G.esercizi.forEach((ex, i) => {
-    if (ex.sez !== sez) { sez = ex.sez; html += `<div class="sec-hdr">${sez}</div>`; }
+    if (ex.sez !== sez) { sez = ex.sez; html += `<div class="sec-hdr">${esc(sez)}</div>`; }
     const voce = S.done[ex.id];
     const isDone = voce === 'done';
     const isSkip = voce && typeof voce === 'object' && voce.skip;
-    const badges = [];
-    if (ex.warm) badges.push(`<span class="bw">WARM UP</span>`);
-    if (ex.lordosi) badges.push(`<span class="bl">⚠ LORDOSI</span>`);
+    const fatte = S.serie[ex.id] || 0;
+    const badges = badgesHTML(ex, false);
     if (isSkip) badges.push(`<span class="bs-skip">⏭ SALTATO</span>`);
     html += `<div class="ex-row ${isDone?'done':''} ${isSkip?'skipped':''} ${i===S.exIdx?'current':''}" onclick="apriEx(${i})">
       <div class="er-num">${i+1}</div>
       <div class="er-info">
-        <div class="er-name">${ex.nome}</div>
-        <div class="er-detail">${ex.serie}× · ${ex.reps}${ex.riposo?' · ⏱'+ex.riposo+'"':''}</div>
+        <div class="er-name">${esc(ex.nome)}</div>
+        <div class="er-detail">${ex.serie}× · ${esc(repsTarget(ex))}${ex.riposo_sec?' · ⏱'+ex.riposo_sec+'"':''}</div>
         ${badges.length?`<div class="er-badges">${badges.join('')}</div>`:''}
       </div>
-      <div class="er-check">${isDone?'✅':isSkip?'⏭':'›'}</div>
+      <div class="er-check">${isDone?'✅':isSkip?'⏭':fatte?`<span class="er-prog">${fatte}/${ex.serie}</span>`:'›'}</div>
     </div>`;
   });
 
@@ -850,7 +935,7 @@ function renderLista() {
 
 function confermaResetScheda() {
   if (!confirm('Sei sicuro di voler resettare la scheda di oggi?\n\nTutti gli esercizi completati o saltati torneranno "da fare".')) return;
-  S.done = {};
+  S.done = {}; S.serie = {};
   saveDone();
   renderLista();
   toast('🔄 Scheda resettata');
@@ -860,51 +945,37 @@ function confermaResetScheda() {
 // SCHERMATA ESERCIZIO
 // =========================================================
 function apriEx(idx) {
-  S.exIdx = idx; S.serieN = 1;
+  S.exIdx = idx;
   fermaRiposo(); fermaExTimer();
   S.backStack = [renderLista];
   renderEx();
+  window.scrollTo(0, 0);
 }
 
 function renderEx() {
-  const G = SCHEDA[S.giorno];
+  const G = GIORNI[S.giorno];
   const ex = G.esercizi[S.exIdx];
-  S.riposaAdj = null; // reset ogni volta che si apre un esercizio
+  if (S.postCountdown !== ex.id) S.postCountdown = null;
+  if (ET.exId !== ex.id) initExTimer(ex);
   setHeader(`${S.exIdx+1} / ${G.esercizi.length}`, '← Lista');
   show('s-exercise');
-  initExTimer(ex);
 
+  const tempo = isTempo(ex);
   const carichi = loadCarichi();
-  const storia = loadStoria();
-  const storiaEx = storia[ex.id] || [];
+  const storiaEx = loadStoria()[ex.id] || [];
+  const fatte = S.serie[ex.id] || 0;
 
-  // peso corrente: da localStorage > default scheda
-  const pesoAttuale = carichi[ex.id] !== undefined ? carichi[ex.id] : ex.peso;
-
-  // reps correnti: da localStorage > default scheda
+  // peso corrente: da localStorage > suggerito dalla scheda
+  const pesoAttuale = carichi[ex.id] !== undefined ? carichi[ex.id] : (ex.peso_suggerito_kg != null ? ex.peso_suggerito_kg : '');
+  // reps correnti: da localStorage > limite alto del range
   const repsLS = loadReps();
-  const repsAttuale = repsLS[ex.id] !== undefined ? repsLS[ex.id] : ex.reps;
+  const repsAttuale = repsLS[ex.id] !== undefined ? repsLS[ex.id] : repsDefault(ex);
 
   // ultimo diverso da oggi per mostrare delta
   const ultimaDiversa = storiaEx.find(r => r.data !== oggi());
-  const ultimoPeso = ultimaDiversa ? ultimaDiversa.peso : (storiaEx[0] ? storiaEx[0].peso : null);
+  const ultimo = ultimaDiversa ? ultimaDiversa.peso : (storiaEx[0] ? storiaEx[0].peso : null);
 
-  const badges = [];
-  if (ex.warm) badges.push(`<span class="bw-lg">🔥 WARM UP</span>`);
-  if (ex.lordosi) badges.push(`<span class="bl-lg">⚠ LORDOSI</span>`);
-
-  // Card carico (kg) oppure tempo (sec) per esercizi a tempo massimo
-  const unita = ex.tempoMax ? 'sec' : 'kg';
-  const lblCarico = ex.tempoMax ? 'Miglior tempo (sec)' : 'Carico (kg)';
-  const sugLabel = ex.tempoMax ? 'tieni più a lungo possibile' : (ex.sugPeso ? `suggerito: ${ex.sugPeso}` : 'peso libero');
-  const storiaSug = ultimoPeso ? `<div class="peso-storia">↑ ultima volta: ${ultimoPeso} ${unita}</div>` : '';
-  const caricoCard = `
-    <div class="ic">
-      <div class="ic-lbl">${lblCarico}</div>
-      <div class="ic-val"><input type="number" inputmode="decimal" id="inp-peso" value="${pesoAttuale}" placeholder="${ex.sugPeso||'–'}" oninput="salvaPeso()" onblur="salvaPeso()"></div>
-      <div class="ic-unit">${sugLabel}</div>
-      ${storiaSug}
-    </div>`;
+  const badges = badgesHTML(ex, true);
 
   const isPrima = S.exIdx === 0;
   const isUltima = S.exIdx === G.esercizi.length - 1;
@@ -912,36 +983,74 @@ function renderEx() {
   const isDone = voce === 'done';
   const isSkip = voce && typeof voce === 'object' && voce.skip;
   const bloccato = isDone || isSkip;
+  const r = getRiposa(ex);
 
-  // Blocco timer esercizio (countdown o cronometro) — solo se l'esercizio è a tempo
+  // Superset
+  const p = partner(ex);
+  let supersetHTML = '';
+  if (p) {
+    const primo = G.esercizi.indexOf(ex) < G.esercizi.indexOf(p);
+    supersetHTML = `<div class="superset-block"><div class="ne-lbl">🔗 Superset</div>${primo
+      ? `Fai subito dopo: <strong>${esc(p.nome)}</strong> — senza riposo`
+      : `In coppia con <strong>${esc(p.nome)}</strong> — il riposo parte dopo questo esercizio`}</div>`;
+  }
+
+  // Countdown esercizi a tempo
   let timerHTML = '';
-  if (ex.durataSec) {
+  if (tempo) {
+    const running = ET.running && ET.exId === ex.id;
+    const post = S.postCountdown === ex.id && !bloccato;
+    let azioni;
+    if (bloccato) azioni = `<div class="cd-done">${isDone ? '✅ Esercizio completato' : '⏭ Saltato'}</div>`;
+    else if (post && r > 0) azioni = `
+      <button class="btn-extimer" onclick="iniziaRiposo()">⏱ Inizia riposo ${r}"</button>
+      <button class="btn-extimer secondary" onclick="avviaCountdown()">▶ Prossima serie (${fatte+1})</button>`;
+    else azioni = `<button class="btn-extimer" onclick="avviaCountdown()">▶ ${post ? `Prossima serie (${fatte+1})` : 'Avvia timer'}</button>`;
     timerHTML = `
       <div class="ex-timer-block">
         <div class="sl">⏱ Timer esercizio</div>
-        <div style="display:flex;align-items:center;justify-content:center;gap:16px;margin:8px 0 14px;">
-          <button class="btn-riposo-adj" id="ex-adj-minus" onclick="adjustExTimer(-5)">−</button>
-          <div class="ex-timer-display" id="ex-timer-display" style="margin:0">${fmtSec(ex.durataSec)}</div>
-          <button class="btn-riposo-adj" id="ex-adj-plus" onclick="adjustExTimer(+5)">+</button>
+        <div id="cd-idle" class="${running ? 'hidden' : ''}">
+          ${bloccato ? '' : `
+          <input type="number" inputmode="numeric" class="cd-input" id="cd-input" value="${ET.base}" min="5" onchange="salvaDurataInput()">
+          <div class="cd-unit">secondi</div>`}
+          <div class="cd-actions">${azioni}</div>
+          ${ultimo ? `<div class="peso-storia" style="margin-top:10px">ultima volta: ${esc(ultimo)} sec</div>` : ''}
         </div>
-        <div style="display:flex;gap:8px;justify-content:center;">
-          <button class="btn-extimer" id="ex-timer-btn" onclick="toggleExTimer()">▶ Avvia timer</button>
-          <button class="btn-plus15" id="ex-add-time" onclick="aggiungiTempoEx()" style="display:none">+15"</button>
+        <div id="cd-run" class="${running ? '' : 'hidden'}">
+          <div class="ex-timer-display" id="ex-timer-display">${fmtSec(ET.total)}</div>
+          <div class="rp"><div class="rpb" id="cd-bar" style="width:100%"></div></div>
+          <div class="cd-actions row">
+            <button class="btn-plus15 big" onclick="piu15()">+15"</button>
+            <button class="btn-skip" onclick="fineCountdown(true)">Salta</button>
+          </div>
         </div>
       </div>`;
-  } else if (ex.tempoMax) {
-    timerHTML = `
-      <div class="ex-timer-block">
-        <div class="sl">⏱ Cronometro — tieni più a lungo possibile</div>
-        <div class="ex-timer-display" id="ex-timer-display">0:00</div>
-        <button class="btn-extimer" id="ex-timer-btn" onclick="toggleExTimer()">▶ Avvia cronometro</button>
+  }
+
+  // Ripetizioni + carico (solo esercizi a ripetizioni)
+  let infoRowHTML = '';
+  if (!tempo) {
+    const sugLabel = ex.peso_suggerito_kg ? `suggerito: ${ex.peso_suggerito_kg} kg` : 'peso libero';
+    infoRowHTML = `
+      <div class="info-row">
+        <div class="ic">
+          <div class="ic-lbl">Ripetizioni</div>
+          <div class="ic-val"><input type="number" inputmode="numeric" id="inp-reps" value="${esc(repsAttuale)}" oninput="salvaReps()" onblur="salvaReps()"></div>
+          <div class="ic-unit">obiettivo: ${esc(repsTarget(ex))}</div>
+        </div>
+        <div class="ic">
+          <div class="ic-lbl">Carico (kg)</div>
+          <div class="ic-val"><input type="number" inputmode="decimal" id="inp-peso" value="${esc(pesoAttuale)}" placeholder="–" oninput="salvaPeso()" onblur="salvaPeso()"></div>
+          <div class="ic-unit">${sugLabel}</div>
+          ${ultimo ? `<div class="peso-storia">↑ ultima volta: ${esc(ultimo)} kg</div>` : ''}
+        </div>
       </div>`;
   }
 
   // Blocco "salta esercizio"
   let skipHTML = '';
   if (isSkip) {
-    skipHTML = `<div class="skip-done-note">⏭ Esercizio saltato${voce.nota?': "'+voce.nota+'"':''}<button class="btn-undo-skip" onclick="annullaSalto()">↩ annulla</button></div>`;
+    skipHTML = `<div class="skip-done-note">⏭ Esercizio saltato${voce.nota?': "'+esc(voce.nota)+'"':''}<button class="btn-undo-skip" onclick="annullaSalto()">↩ annulla</button></div>`;
   } else if (!isDone) {
     skipHTML = `
       <div class="skip-block">
@@ -956,66 +1065,64 @@ function renderEx() {
       </div>`;
   }
 
+  // Prossimo esercizio
+  const nex = G.esercizi[S.exIdx + 1];
+  let nextHTML;
+  if (nex) {
+    const gruppo = nex.info ? nex.info.muscoli.split(',')[0].trim() : nex.sez;
+    nextHTML = `<div class="next-ex-block"><div class="ne-lbl">PROSSIMO</div><div class="ne-name">${esc(nex.nome)}</div><div class="ne-muscoli">${esc(gruppo)} · ${nex.serie}×${esc(repsTarget(nex))}</div></div>`;
+  } else {
+    nextHTML = `<div class="next-ex-block"><div class="ne-lbl">PROSSIMO</div><div class="ne-name">🏁 Fine sessione</div></div>`;
+  }
+
   document.getElementById('s-exercise').innerHTML = `
     <div class="ex-hdr">
-      <h2>${ex.nome}</h2>
+      <h2>${esc(ex.nome)}</h2>
       ${badges.length?`<div class="bdg-row">${badges.join('')}</div>`:''}
-      ${ex.note?`<div class="ex-note">${ex.note}</div>`:''}
+      ${ex.note?`<div class="ex-note">${esc(ex.note)}</div>`:''}
     </div>
     <div class="ex-body">
+      ${supersetHTML}
+      ${ex.acquisto_necessario ? `<div class="banner-warn">🛒 ${esc(ex.note_acquisto || 'Attrezzo da acquistare')}</div>` : ''}
       <div class="series-block">
-        <div class="sl">Serie completate</div>
+        <div class="sl">Serie completate · obiettivo ${esc(repsTarget(ex))}</div>
         <div class="sc">
           <button class="cbtn" onclick="cambiaSerie(-1)">−</button>
-          <div class="sd"><span id="sn">${S.serieN}</span> / ${ex.serie}</div>
+          <div class="sd"><span id="sn">${fatte}</span> / ${ex.serie}</div>
           <button class="cbtn" onclick="cambiaSerie(+1)">+</button>
         </div>
       </div>
       ${timerHTML}
-      <div class="info-row">
-        <div class="ic">
-          <div class="ic-lbl">Ripetizioni</div>
-          <div class="ic-val"><input type="text" inputmode="numeric" id="inp-reps" value="${repsAttuale}" placeholder="${ex.reps}" oninput="salvaReps()" onblur="salvaReps()"></div>
-          <div class="ic-unit">suggerito: ${ex.reps}</div>
-        </div>
-        ${caricoCard}
-      </div>
-      ${!bloccato && getRiposa(ex) > 0 ? `
+      ${infoRowHTML}
+      ${!bloccato && r > 0 ? `
       <div class="riposo-adj">
         <span class="riposo-adj-lbl">⏱ Riposo serie</span>
         <div class="riposo-adj-btns">
           <button class="btn-riposo-adj" onclick="setRiposaAdj(-5)">−</button>
-          <span class="riposo-adj-val" id="riposa-adj-val">${getRiposa(ex)}"</span>
+          <span class="riposo-adj-val" id="riposa-adj-val">${r}"</span>
           <button class="btn-riposo-adj" onclick="setRiposaAdj(+5)">+</button>
         </div>
       </div>` : ''}
-      <button class="btn-fs" id="btn-fs" onclick="fineSerie()" ${bloccato?'disabled':''}>
-        ${isDone?'✅ Completato':isSkip?'⏭ Saltato':getRiposa(ex)?`Fine serie ${S.serieN} → riposo ${getRiposa(ex)}"`:`Fine serie ${S.serieN}`}
-      </button>
-      <div class="rest-block" id="rest-block">
+      ${!tempo || bloccato ? `<button class="btn-fs" id="btn-fs" onclick="fineSerie()" ${bloccato?'disabled':''}>${esc(labelFineSerie(ex))}</button>` : ''}
+      <div class="rest-block ${S.restTimer ? 'active' : ''}" id="rest-block">
         <div class="rl">⏱ Riposo</div>
         <div class="rt" id="rt">0:00</div>
         <div class="rp"><div class="rpb" id="rpb" style="width:100%"></div></div>
         <button class="btn-skip" onclick="saltaRiposo()">Salta →</button>
       </div>
       ${skipHTML}
-      ${ex.tempWarning ? `<div class="banner-warn">${ex.tempWarning}</div>` : ''}
       <div class="ex-actions">
-        ${ex.video ? `<a href="${ex.video}" target="_blank" rel="noopener" class="btn-vid">📹 Video</a>` : ''}
-        <button class="btn-info" onclick="apriInfo('${ex.id}')">ℹ️ Info</button>
+        ${ex.link_musclewiki ? `<a href="${esc(ex.link_musclewiki)}" target="_blank" rel="noopener" class="btn-vid">📹 Video</a>` : ''}
+        ${ex.info ? `<button class="btn-info" onclick="apriInfo('${ex.id}')">ℹ️ Info</button>` : ''}
       </div>
-      ${(() => {
-        const nex = G.esercizi[S.exIdx + 1];
-        return nex
-          ? `<div class="next-ex-block"><div class="ne-lbl">PROSSIMO</div><div class="ne-name">${nex.nome}</div>${nex.info ? `<div class="ne-muscoli">${nex.info.muscoli}</div>` : ''}</div>`
-          : `<div class="next-ex-block"><div class="ne-lbl">PROSSIMO</div><div class="ne-name">🏁 Fine sessione</div></div>`;
-      })()}
+      ${nextHTML}
     </div>
     <div class="nav-bar">
       <button class="nb" onclick="exPrec()" ${isPrima?'disabled':''}>← Prec.</button>
       <button class="nb primary" onclick="exSucc()">${isUltima?'Fine 🏁':'Succ. →'}</button>
     </div>
   `;
+  tickRiposo();
 }
 
 // =========================================================
@@ -1023,93 +1130,135 @@ function renderEx() {
 // =========================================================
 function salvaPeso() {
   const inp = document.getElementById('inp-peso');
-  if (!inp) return;
-  const ex = S.giorno ? SCHEDA[S.giorno].esercizi[S.exIdx] : null;
-  if (!ex) return;
+  if (!inp || !S.giorno) return;
   const carichi = loadCarichi();
-  carichi[ex.id] = inp.value;
+  carichi[exCorrente().id] = inp.value;
   saveCarichi(carichi);
-  console.log('Salvato peso:', ex.id, inp.value);
 }
 
 function salvaReps() {
   const inp = document.getElementById('inp-reps');
-  if (!inp) return;
-  const ex = S.giorno ? SCHEDA[S.giorno].esercizi[S.exIdx] : null;
-  if (!ex) return;
+  if (!inp || !S.giorno) return;
   const reps = loadReps();
-  reps[ex.id] = inp.value;
+  reps[exCorrente().id] = inp.value;
   saveReps(reps);
-  console.log('Salvato reps:', ex.id, inp.value);
+}
+
+function salvaDurataInput() {
+  const inp = document.getElementById('cd-input');
+  const sec = parseInt(inp && inp.value);
+  if (!sec || sec < 5) return;
+  ET.base = sec;
+  salvaDurata(exCorrente().id, sec);
 }
 
 // =========================================================
-// HELPERS RIPOSO / AVANZAMENTO SERIE
+// RIPOSO / SERIE / SUPERSET
 // =========================================================
-function getRiposa(ex) { return S.riposaAdj !== null ? S.riposaAdj : ex.riposo; }
+function getRiposa(ex) { return S.riposaAdj[ex.id] != null ? S.riposaAdj[ex.id] : (ex.riposo_sec || 0); }
 
 function setRiposaAdj(delta) {
-  const ex = SCHEDA[S.giorno].esercizi[S.exIdx];
-  if (S.riposaAdj === null) S.riposaAdj = ex.riposo;
-  S.riposaAdj = Math.max(5, S.riposaAdj + delta);
+  const ex = exCorrente();
+  S.riposaAdj[ex.id] = Math.max(5, getRiposa(ex) + delta);
   const el = document.getElementById('riposa-adj-val');
-  if (el) el.textContent = S.riposaAdj + '"';
+  if (el) el.textContent = S.riposaAdj[ex.id] + '"';
   const btn = document.getElementById('btn-fs');
-  if (btn && !btn.disabled) btn.textContent = `Fine serie ${S.serieN} → riposo ${S.riposaAdj}"`;
+  if (btn && !btn.disabled) btn.textContent = labelFineSerie(ex);
 }
 
-function aggiungi15() {
-  S.restLeft += 15;
-  if (S.restLeft > S.restTotal) S.restTotal = S.restLeft;
-  aggRiposo();
+// Secondi di riposo dopo aver completato la serie n (0 = nessun riposo)
+function riposoDopo(ex, n) {
+  const G = GIORNI[S.giorno];
+  const p = partner(ex);
+  const tuttoFatto = n >= ex.serie && (!p || S.done[p.id]);
+  const ultimoIdx = Math.max(G.esercizi.indexOf(ex), p ? G.esercizi.indexOf(p) : -1);
+  if (tuttoFatto && ultimoIdx === G.esercizi.length - 1) return 0; // fine sessione
+  return getRiposa(ex);
 }
 
-function avanzaSerie(ex) {
-  const inp = document.getElementById('inp-peso');
-  const peso = inp ? inp.value : '';
-  if (S.serieN < ex.serie) {
-    S.serieN++;
-    const sn = document.getElementById('sn');
-    if (sn) sn.textContent = S.serieN;
-    const btn = document.getElementById('btn-fs');
-    if (btn) {
-      btn.disabled = false;
-      const r = getRiposa(ex);
-      btn.textContent = r ? `Fine serie ${S.serieN} → riposo ${r}"` : `Fine serie ${S.serieN}`;
-    }
-    const adjEl = document.getElementById('riposa-adj-val');
-    if (adjEl) adjEl.textContent = getRiposa(ex) + '"';
+// Nel superset si passa al compagno se è "indietro" di una serie
+function vaiAlPartner(ex, n) {
+  const p = partner(ex);
+  return p && !S.done[p.id] && (S.serie[p.id] || 0) < n ? p : null;
+}
+
+function labelFineSerie(ex) {
+  const v = S.done[ex.id];
+  if (v === 'done') return '✅ Completato';
+  if (v && v.skip) return '⏭ Saltato';
+  const n = (S.serie[ex.id] || 0) + 1;
+  const p = vaiAlPartner(ex, n);
+  if (p) return `Fine serie ${n} → ${p.nome}`;
+  const r = riposoDopo(ex, n);
+  return r ? `Fine serie ${n} → riposo ${r}"` : `Fine serie ${n}`;
+}
+
+// 1) Azione immediata: conta la serie, salva peso/rip, toast. Il riposo è un'azione separata.
+function completaSerie(ex, durata) {
+  const n = Math.min(ex.serie, (S.serie[ex.id] || 0) + 1);
+  S.serie[ex.id] = n;
+  const finito = n >= ex.serie;
+  if (finito) S.done[ex.id] = 'done';
+  saveDone();
+
+  let peso = null, rip = null;
+  if (isTempo(ex)) {
+    registraStoria(ex.id, durata, '', n);
   } else {
-    S.done[ex.id] = 'done'; saveDone();
-    if (peso) registraPeso(ex.id, peso, ex.reps, ex.serie);
-    toast('✅ Esercizio completato!');
-    const btn = document.getElementById('btn-fs');
-    if (btn) { btn.textContent = '✅ Completato'; btn.disabled = true; }
+    const ip = document.getElementById('inp-peso'), ir = document.getElementById('inp-reps');
+    peso = ip && ip.value !== '' ? parseFloat(ip.value) : null;
+    rip = ir && ir.value !== '' ? parseInt(ir.value) : null;
+    if (isNaN(peso)) peso = null;
+    if (isNaN(rip)) rip = null;
+    if (peso != null) registraStoria(ex.id, peso, rip != null ? rip : repsTarget(ex), n);
   }
+  logSerie(ex, n, { peso, rip, durata: isTempo(ex) ? durata : null });
+
+  toast(finito ? '✅ Esercizio completato!' : `✅ Serie ${n} completata`);
+  renderEx();
+  return n;
 }
 
-function cambiaSerie(d) {
-  const ex = SCHEDA[S.giorno].esercizi[S.exIdx];
-  S.serieN = Math.max(1, Math.min(ex.serie, S.serieN + d));
-  document.getElementById('sn').textContent = S.serieN;
-  const btn = document.getElementById('btn-fs');
-  if (btn && !btn.disabled) {
-    const r = getRiposa(ex);
-    btn.textContent = r ? `Fine serie ${S.serieN} → riposo ${r}"` : `Fine serie ${S.serieN}`;
+// 2) Dopo la serie: superset → compagno, altrimenti riposo
+function dopoSerie(ex, n) {
+  const G = GIORNI[S.giorno];
+  const p = vaiAlPartner(ex, n);
+  if (p) {
+    apriEx(G.esercizi.indexOf(p));
+    toast(`✅ Serie ${n} · ora ${p.nome}`);
+    return;
   }
+  const r = riposoDopo(ex, n);
+  if (r <= 0) return;
+  // superset: finito il riposo torna al primo esercizio della coppia ancora da fare
+  let onEnd = null;
+  const compagno = partner(ex);
+  if (compagno) {
+    const primo = [ex, compagno]
+      .sort((a, b) => G.esercizi.indexOf(a) - G.esercizi.indexOf(b))
+      .find(e => !S.done[e.id]);
+    if (primo && primo !== ex) onEnd = () => apriEx(G.esercizi.indexOf(primo));
+  }
+  avviaRiposo(r, onEnd);
 }
 
 function fineSerie() {
-  const ex = SCHEDA[S.giorno].esercizi[S.exIdx];
-  const r = getRiposa(ex);
-  if (r > 0) {
-    avviaRiposo(r);
-    const btn = document.getElementById('btn-fs');
-    if (btn) btn.disabled = true;
-  } else {
-    avanzaSerie(ex);
-    beep(660, 100);
-  }
+  const ex = exCorrente();
+  if (S.done[ex.id]) return;
+  beep(660, 100);
+  const n = completaSerie(ex);
+  dopoSerie(ex, n);
+}
+
+// Correzione manuale del contatore (non registra serie)
+function cambiaSerie(d) {
+  const ex = exCorrente();
+  const n = Math.max(0, Math.min(ex.serie, (S.serie[ex.id] || 0) + d));
+  S.serie[ex.id] = n;
+  if (n >= ex.serie) S.done[ex.id] = 'done';
+  else if (S.done[ex.id] === 'done') delete S.done[ex.id];
+  saveDone();
+  renderEx();
 }
 
 // =========================================================
@@ -1120,7 +1269,7 @@ function toggleSkipForm() {
   if (f) f.classList.toggle('hidden');
 }
 function confermaSalto() {
-  const ex = SCHEDA[S.giorno].esercizi[S.exIdx];
+  const ex = exCorrente();
   const noteEl = document.getElementById('skip-note');
   const nota = noteEl ? noteEl.value.trim() : '';
   S.done[ex.id] = { skip: true, nota };
@@ -1130,7 +1279,7 @@ function confermaSalto() {
   exSucc();
 }
 function annullaSalto() {
-  const ex = SCHEDA[S.giorno].esercizi[S.exIdx];
+  const ex = exCorrente();
   delete S.done[ex.id];
   saveDone();
   renderEx();
@@ -1140,27 +1289,24 @@ function annullaSalto() {
 // INFO DRAWER
 // =========================================================
 function apriInfo(exId) {
-  let ex = null;
-  for (const g of ['A','B']) {
-    const found = SCHEDA[g].esercizi.find(e => e.id === exId);
-    if (found) { ex = found; break; }
-  }
+  const ex = findEx(exId);
   if (!ex || !ex.info) return;
 
   const steps = ex.info.steps.map((s, i) => {
-    const isTecnica = s.includes('⚠️ TECNICA');
-    const isLordosi = !isTecnica && s.includes('⚠️ LORDOSI');
-    const cls = isTecnica ? 'tecnica-step' : isLordosi ? 'lordosi-step' : '';
-    return `<li class="${cls}"><span class="step-n">${i+1}.</span><span>${s}</span></li>`;
+    const cls = s.includes('⚠️ TECNICA') ? 'tecnica-step'
+      : s.includes('⚠️ LORDOSI') ? 'lordosi-step'
+      : s.includes('⚠️ SPALLA') ? 'spalla-step'
+      : s.includes('⚠️ GOLF') ? 'golf-step' : '';
+    return `<li class="${cls}"><span class="step-n">${i+1}.</span><span>${esc(s)}</span></li>`;
   }).join('');
 
   document.getElementById('info-overlay').classList.remove('hidden');
   document.getElementById('info-drawer').innerHTML = `
     <div class="info-drawer-hdr">
-      <div class="info-drawer-title">${ex.nome}</div>
+      <div class="info-drawer-title">${esc(ex.nome)}</div>
       <button class="info-drawer-close" onclick="chiudiInfo()">✕</button>
     </div>
-    <div class="info-muscoli">💪 ${ex.info.muscoli}</div>
+    <div class="info-muscoli">💪 ${esc(ex.info.muscoli)}</div>
     <ol class="info-steps">${steps}</ol>
   `;
 }
@@ -1170,230 +1316,225 @@ function chiudiInfo() {
 }
 
 // =========================================================
-// RIPOSO
+// RIPOSO — timestamp assoluto: non si blocca se l'app va in background
 // =========================================================
-function avviaRiposo(sec) {
+function avviaRiposo(sec, onEnd) {
   fermaRiposo();
-  S.restTotal = sec; S.restLeft = sec;
-  document.getElementById('rest-block').classList.add('active');
-  aggRiposo();
-  S.restTimer = setInterval(() => {
-    S.restLeft--;
-    aggRiposo();
-    if (S.restLeft <= 0) {
-      fermaRiposo();
-      segnaleFinale();
-      const ex = S.giorno ? SCHEDA[S.giorno].esercizi[S.exIdx] : null;
-      if (ex) avanzaSerie(ex);
-      else toast('Riposo finito! 💪');
-    }
-  }, 1000);
+  S.restTotal = sec;
+  S.restEnd = Date.now() + sec * 1000;
+  S.restOnEnd = onEnd || null;
+  const rb = document.getElementById('rest-block');
+  if (rb) rb.classList.add('active');
+  S.restTimer = setInterval(tickRiposo, 250);
+  tickRiposo();
 }
-function aggRiposo() {
+function tickRiposo() {
+  if (!S.restTimer) return;
+  const s = Math.max(0, Math.ceil((S.restEnd - Date.now()) / 1000));
   const el = document.getElementById('rt'), bar = document.getElementById('rpb');
-  if (!el) return;
-  const s = S.restLeft;
-  el.textContent = Math.floor(s/60) + ':' + String(s%60).padStart(2,'0');
-  el.classList.toggle('ending', s<=10 && s>0);
+  if (el) {
+    el.textContent = fmtSec(s);
+    el.classList.toggle('ending', s<=10 && s>0);
+  }
   if (bar && S.restTotal > 0) bar.style.width = (s/S.restTotal*100)+'%';
+  if (s <= 0) {
+    const cb = S.restOnEnd;
+    fermaRiposo();
+    segnaleFinale();
+    toast('Riposo finito! 💪');
+    if (cb) cb();
+  }
 }
 function fermaRiposo() {
-  clearInterval(S.restTimer); S.restTimer = null; S.restLeft = 0;
+  clearInterval(S.restTimer); S.restTimer = null; S.restOnEnd = null;
   const rb = document.getElementById('rest-block');
   if (rb) rb.classList.remove('active');
 }
 function saltaRiposo() {
+  const cb = S.restOnEnd;
   fermaRiposo();
-  const ex = S.giorno ? SCHEDA[S.giorno].esercizi[S.exIdx] : null;
-  if (ex) avanzaSerie(ex);
-  else toast('Riposo saltato →');
+  if (cb) cb();
+}
+function iniziaRiposo() {
+  const ex = exCorrente();
+  S.postCountdown = null;
+  renderEx();
+  avviaRiposo(getRiposa(ex));
 }
 
 // =========================================================
-// TIMER ESERCIZIO (countdown per durata fissa, cronometro per tempo massimo)
+// COUNTDOWN ESERCIZI A TEMPO — timestamp assoluto
 // =========================================================
-function fmtSec(s) {
-  s = Math.max(0, s);
-  return Math.floor(s/60) + ':' + String(s%60).padStart(2,'0');
-}
 function initExTimer(ex) {
   clearInterval(ET.interval);
-  ET = { mode: ex.tempoMax ? 'up' : (ex.durataSec ? 'down' : null), interval: null, value: ex.durataSec || 0, adjSec: ex.durataSec || 0, running: false };
+  ET = { exId: ex.id, running: false, end: 0, total: 0, base: isTempo(ex) ? durataDefault(ex) : 0, startedAt: 0, interval: null };
 }
-function fermaExTimer() { clearInterval(ET.interval); ET.interval = null; ET.running = false; }
+function fermaExTimer() { clearInterval(ET.interval); ET.interval = null; ET.running = false; ET.exId = null; }
 
-function adjustExTimer(delta) {
-  if (ET.running) return;
-  ET.adjSec = Math.max(5, ET.adjSec + delta);
-  ET.value = ET.adjSec;
-  const disp = document.getElementById('ex-timer-display');
-  if (disp) { disp.textContent = fmtSec(ET.value); disp.classList.remove('zero'); }
-}
-
-function aggiungiTempoEx() {
-  ET.value += 15;
-  ET.adjSec = ET.value;
-  const disp = document.getElementById('ex-timer-display');
-  if (disp) { disp.textContent = fmtSec(ET.value); disp.classList.remove('zero'); }
-}
-
-function setExTimerAdjVisible(visible) {
-  const minus = document.getElementById('ex-adj-minus');
-  const plus  = document.getElementById('ex-adj-plus');
-  const add   = document.getElementById('ex-add-time');
-  if (minus) minus.style.display = visible ? '' : 'none';
-  if (plus)  plus.style.display  = visible ? '' : 'none';
-  if (add)   add.style.display   = visible ? 'none' : '';
+function avviaCountdown() {
+  const ex = exCorrente();
+  const inp = document.getElementById('cd-input');
+  const sec = Math.max(5, parseInt(inp && inp.value) || ET.base || 30);
+  ET.base = sec;
+  salvaDurata(ex.id, sec);
+  fermaRiposo();
+  S.postCountdown = null;
+  ET.exId = ex.id; ET.running = true; ET.total = sec;
+  ET.startedAt = Date.now(); ET.end = ET.startedAt + sec * 1000;
+  document.getElementById('cd-idle').classList.add('hidden');
+  document.getElementById('cd-run').classList.remove('hidden');
+  clearInterval(ET.interval);
+  ET.interval = setInterval(tickCountdown, 250);
+  tickCountdown();
 }
 
-function toggleExTimer() {
-  const ex = SCHEDA[S.giorno].esercizi[S.exIdx];
-  const btn = document.getElementById('ex-timer-btn');
-  const disp = document.getElementById('ex-timer-display');
-  if (!btn || !disp) return;
-
-  if (ET.running) {
-    // pausa / stop
-    clearInterval(ET.interval); ET.running = false;
-    if (ET.mode === 'up') {
-      const inp = document.getElementById('inp-peso');
-      if (inp) { inp.value = ET.value; salvaPeso(); }
-      toast('⏱ Tempo registrato: ' + fmtSec(ET.value));
-      btn.textContent = '↺ Ricomincia';
-      btn.onclick = () => { ET.value = 0; disp.textContent = '0:00'; disp.classList.remove('zero'); initExTimerBtn(ex); };
-    } else {
-      btn.textContent = '▶ Riprendi';
-      setExTimerAdjVisible(true);
-    }
-    return;
-  }
-
-  // avvia
-  ET.running = true;
-  setExTimerAdjVisible(false);
-  btn.textContent = ET.mode === 'up' ? '⏸ Stop e salva' : '⏸ Pausa';
-  btn.onclick = toggleExTimer;
-  ET.interval = setInterval(() => {
-    if (ET.mode === 'down') {
-      ET.value--;
-      disp.textContent = fmtSec(ET.value);
-      disp.classList.toggle('zero', ET.value <= 0);
-      if (ET.value <= 0) {
-        clearInterval(ET.interval); ET.running = false;
-        segnaleFinale(); toast('⏱ Tempo scaduto!');
-        setExTimerAdjVisible(true);
-        const addBtn = document.getElementById('ex-add-time');
-        if (addBtn) addBtn.style.display = 'none';
-        btn.textContent = '↺ Ripeti';
-        btn.onclick = () => {
-          ET.value = ET.adjSec; disp.textContent = fmtSec(ET.adjSec);
-          disp.classList.remove('zero'); initExTimerBtn(ex);
-        };
-      }
-    } else {
-      ET.value++;
-      disp.textContent = fmtSec(ET.value);
-    }
-  }, 1000);
+function tickCountdown() {
+  if (!ET.running) return;
+  const ms = Math.max(0, ET.end - Date.now());
+  const left = Math.ceil(ms / 1000);
+  const disp = document.getElementById('ex-timer-display'), bar = document.getElementById('cd-bar');
+  if (disp) { disp.textContent = fmtSec(left); disp.classList.toggle('zero', left <= 5); }
+  if (bar) bar.style.width = (ms / (ET.total * 1000) * 100) + '%';
+  if (left <= 0) fineCountdown(false);
 }
-function initExTimerBtn(ex) {
-  const btn = document.getElementById('ex-timer-btn');
-  if (!btn) return;
-  btn.textContent = ex.tempoMax ? '▶ Avvia cronometro' : '▶ Avvia timer';
-  btn.onclick = toggleExTimer;
+
+function piu15() {
+  if (!ET.running) return;
+  ET.end += 15000; ET.total += 15;
+  tickCountdown();
+}
+
+// Fine countdown (o "Salta"): segna la serie e torna al valore iniziale per la successiva
+function fineCountdown(manuale) {
+  if (!ET.running) return;
+  const ex = findEx(ET.exId);
+  const durata = manuale ? Math.min(ET.total, Math.round((Date.now() - ET.startedAt) / 1000)) : ET.total;
+  clearInterval(ET.interval); ET.interval = null; ET.running = false;
+  if (!manuale) segnaleFinale();
+  if (!ex || !S.giorno) return;
+  S.postCountdown = ex.id;
+  completaSerie(ex, durata);
 }
 
 // =========================================================
 // NAV ESERCIZI
 // =========================================================
-function exPrec() { if (S.exIdx>0) { fermaRiposo(); fermaExTimer(); S.exIdx--; S.serieN=1; renderEx(); } }
+function exPrec() { if (S.exIdx>0) apriEx(S.exIdx - 1); }
 function exSucc() {
-  fermaRiposo(); fermaExTimer();
-  const G = SCHEDA[S.giorno];
-  if (S.exIdx < G.esercizi.length-1) { S.exIdx++; S.serieN=1; renderEx(); }
+  const G = GIORNI[S.giorno];
+  if (S.exIdx < G.esercizi.length-1) apriEx(S.exIdx + 1);
   else { renderLista(); setTimeout(()=>window.scrollTo(0,9999),50); }
 }
 
 // =========================================================
 // PROGRESSI
 // =========================================================
+const FILTRI = { sett: ['Ultima settimana', 7], mese: ['Ultimo mese', 30], tutto: ['Tutto', null] };
+function filtraStoria(h) {
+  const giorni = FILTRI[S.progFiltro][1];
+  if (!giorni) return h;
+  const da = giorniFa(giorni);
+  return h.filter(r => r.data >= da);
+}
+function filtriHTML() {
+  return `<div class="filter-row">${Object.entries(FILTRI).map(([k, [lbl]]) =>
+    `<button class="fchip ${S.progFiltro===k?'active':''}" onclick="setFiltro('${k}')">${lbl}</button>`).join('')}</div>`;
+}
+function setFiltro(f) {
+  S.progFiltro = f;
+  if (S.progDettaglioId) renderDettaglio(S.progDettaglioId);
+  else renderProgressi();
+}
+
 function apriProgressi() {
   S.backStack = [goHome];
-  S.progTab = 'pesi';
+  S.progTab = 'pesi'; S.progDettaglioId = null;
   setHeader('I miei progressi', '← Home');
   show('s-progress');
   renderProgressi();
+  // online: aggiorna dal cloud e ridisegna
+  aggiornaDaCloud().then(ok => {
+    if (ok && S.screen === 's-progress' && !S.progDettaglioId) renderProgressi();
+  });
+}
+
+function progTabsHTML() {
+  const g = S.progGiorno, pesi = S.progTab === 'pesi';
+  return `
+    <div class="prog-tabs">
+      ${Object.keys(GIORNI).map(k =>
+        `<div class="ptab ${g===k&&pesi?'active':''}" onclick="S.progTab='pesi';S.progGiorno='${k}';renderProgressi()">Giorno ${k}</div>`).join('')}
+      <div class="ptab ${!pesi?'active':''}" onclick="S.progTab='salti';renderProgressi()">⏭ Salti</div>
+    </div>
+    ${filtriHTML()}`;
+}
+
+function healthConnectHTML() {
+  return `
+    <div class="hc-block">
+      <label class="hc-row"><span>🏃 Connetti smartwatch</span><input type="checkbox" class="switch" disabled ${HEALTH_CONNECT.enabled?'checked':''}></label>
+      <div class="hc-note">Disponibile con smartwatch Android compatibile con Health Connect (Pixel Watch, Galaxy Watch, Garmin con Android).</div>
+    </div>
+    ${HEALTH_CONNECT.enabled ? `
+    <div class="prog-list" style="margin-top:12px;">
+      <div class="pd-chart"><div class="pd-chart-title">Dati smartwatch</div><div class="pd-empty">Nessun dato.</div></div>
+    </div>` : ''}`;
 }
 
 function renderProgressi() {
   if (S.progTab === 'salti') { renderSalti(); return; }
 
   const storia = loadStoria();
-  const carichi = loadCarichi();
-  const g = S.progGiorno;
-  const G = SCHEDA[g];
+  const G = GIORNI[S.progGiorno];
 
-  let html = `
-    <div class="prog-tabs">
-      <div class="ptab ${g==='A'&&S.progTab==='pesi'?'active':''}" onclick="S.progTab='pesi';S.progGiorno='A';renderProgressi()">Giorno A</div>
-      <div class="ptab ${g==='B'&&S.progTab==='pesi'?'active':''}" onclick="S.progTab='pesi';S.progGiorno='B';renderProgressi()">Giorno B</div>
-      <div class="ptab ${S.progTab==='salti'?'active':''}" onclick="S.progTab='salti';renderProgressi()">⏭ Salti</div>
-    </div>
-    <div class="prog-list">`;
-
-  const conPeso = G.esercizi.filter(ex => ex.sugPeso !== undefined);
+  let html = progTabsHTML() + `<div class="prog-list">`;
   let tracciati = 0;
 
-  conPeso.forEach(ex => {
-    const h = storia[ex.id] || [];
+  G.esercizi.filter(ex => !ex.warm).forEach(ex => {
+    const h = filtraStoria(storia[ex.id] || []);
     if (!h.length) return;
     tracciati++;
+    const u = unita(ex);
     const latest = parseFloat(h[0].peso) || 0;
     const prev = h[1] ? parseFloat(h[1].peso) || 0 : null;
     let deltaHTML = '';
     if (prev !== null && latest !== prev) {
-      const d = latest - prev;
-      deltaHTML = `<span class="pc-delta ${d>0?'up':'down'}">${d>0?'↑':'↓'} ${Math.abs(d)} kg vs prec.</span>`;
+      const d = Math.round((latest - prev) * 10) / 10;
+      deltaHTML = `<span class="pc-delta ${d>0?'up':'down'}">${d>0?'↑':'↓'} ${Math.abs(d)} ${u} vs prec.</span>`;
     } else if (prev !== null) {
       deltaHTML = `<span class="pc-delta same">= stabile</span>`;
     }
     const sparkSVG = makeSpark(h.slice(0,8).reverse().map(r=>parseFloat(r.peso)||0));
     html += `
       <div class="prog-card" onclick="apriDettaglio('${ex.id}')">
-        <div class="pc-name">${ex.nome}</div>
+        <div class="pc-name">${esc(ex.nome)}</div>
         <div class="pc-meta">${h.length} sessione${h.length>1?'i':''} · ultima: ${fmtData(h[0].data)}</div>
-        <div><span class="pc-latest">${latest} kg</span>${deltaHTML}</div>
+        <div><span class="pc-latest">${latest} ${u}</span>${deltaHTML}</div>
         <div class="sparkline">${sparkSVG}</div>
       </div>`;
   });
 
   if (!tracciati) {
-    html += `<div class="pd-empty">Nessun dato ancora.<br>Completa qualche esercizio e i tuoi progressi appariranno qui.</div>`;
+    html += `<div class="pd-empty">Nessun dato${S.progFiltro!=='tutto'?' in questo periodo':' ancora'}.<br>Completa qualche esercizio e i tuoi progressi appariranno qui.</div>`;
   }
 
-  html += `</div>`;
+  html += `</div>` + healthConnectHTML();
   document.getElementById('s-progress').innerHTML = html;
 }
 
 function renderSalti() {
-  const log = loadSkipLog();
-  let html = `
-    <div class="prog-tabs">
-      <div class="ptab" onclick="S.progTab='pesi';renderProgressi()">Giorno A</div>
-      <div class="ptab" onclick="S.progTab='pesi';S.progGiorno='B';renderProgressi()">Giorno B</div>
-      <div class="ptab active">⏭ Salti</div>
-    </div>
-    <div class="prog-list">`;
+  const log = filtraStoria(loadSkipLog());
+  let html = progTabsHTML() + `<div class="prog-list">`;
 
   if (!log.length) {
-    html += `<div class="pd-empty">Nessun esercizio saltato finora.</div>`;
+    html += `<div class="pd-empty">Nessun esercizio saltato${S.progFiltro!=='tutto'?' in questo periodo':' finora'}.</div>`;
   } else {
     log.forEach(s => {
       html += `
         <div class="prog-card" style="cursor:default;">
-          <div class="pc-name">${s.nome} <span style="color:var(--text2);font-weight:400;font-size:12px;">— Giorno ${s.giorno}</span></div>
+          <div class="pc-name">${esc(s.nome)} <span style="color:var(--text2);font-weight:400;font-size:12px;">— Giorno ${esc(s.giorno)}</span></div>
           <div class="pc-meta">${fmtData(s.data)}</div>
-          ${s.nota?`<div style="font-size:13px;color:var(--text2);margin-top:4px;">"${s.nota}"</div>`:''}
+          ${s.nota?`<div style="font-size:13px;color:var(--text2);margin-top:4px;">"${esc(s.nota)}"</div>`:''}
         </div>`;
     });
   }
@@ -1404,41 +1545,35 @@ function renderSalti() {
 
 function apriDettaglio(exId) {
   S.progDettaglioId = exId;
-  S.backStack.push(() => { S.progDettaglioId=null; renderProgressi(); });
-  const storia = loadStoria();
-  const h = storia[exId] || [];
+  S.backStack.push(() => { S.progDettaglioId=null; setHeader('I miei progressi', '← Home'); renderProgressi(); });
+  renderDettaglio(exId);
+}
 
-  // Trova nome esercizio
-  let nomeEx = exId;
-  for (const g of ['A','B']) {
-    const ex = SCHEDA[g].esercizi.find(e=>e.id===exId);
-    if (ex) { nomeEx = ex.nome; break; }
-  }
+function renderDettaglio(exId) {
+  const ex = findEx(exId);
+  const u = ex ? unita(ex) : 'kg';
+  setHeader(ex ? ex.nome : exId, '← Progressi');
 
-  setHeader(nomeEx, '← Progressi');
-
+  const h = filtraStoria(loadStoria()[exId] || []);
   if (!h.length) {
-    document.getElementById('s-progress').innerHTML = `<div class="pd-empty" style="padding-top:40px;">Nessun dato per questo esercizio.</div>`;
+    document.getElementById('s-progress').innerHTML = `<div style="padding-top:14px;">${filtriHTML()}</div><div class="pd-empty">Nessun dato per questo esercizio in questo periodo.</div>`;
     return;
   }
 
-  const pesi = h.map(r=>parseFloat(r.peso)||0);
-  const maxP = Math.max(...pesi);
   const chartSVG = makeBarChart(h.slice(0,10).reverse());
-
-  let rows = h.map(r => {
-    const p = parseFloat(r.peso)||0;
-    return `<tr><td>${fmtData(r.data)}</td><td><strong>${r.peso} kg</strong></td><td style="color:var(--text2)">${r.rip}</td></tr>`;
-  }).join('');
+  const rows = h.map(r =>
+    `<tr><td>${fmtData(r.data)}</td><td><strong>${esc(r.peso)} ${u}</strong></td><td style="color:var(--text2)">${esc(r.rip || '–')}</td></tr>`
+  ).join('');
 
   document.getElementById('s-progress').innerHTML = `
-    <div style="padding:16px 16px 0;">
+    <div style="padding-top:14px;">${filtriHTML()}</div>
+    <div style="padding:0 16px;">
       <div class="pd-chart">
-        <div class="pd-chart-title">Progressione peso (ultime 10 sessioni)</div>
+        <div class="pd-chart-title">Progressione ${u==='sec'?'tempo':'peso'} (ultime 10 sessioni)</div>
         ${chartSVG}
       </div>
       <table class="pd-table">
-        <thead><tr><th>Data</th><th>Peso</th><th>Rip.</th></tr></thead>
+        <thead><tr><th>Data</th><th>${u==='sec'?'Tempo':'Peso'}</th><th>Rip.</th></tr></thead>
         <tbody>${rows}</tbody>
       </table>
       <div style="margin-top:16px;text-align:center;">
@@ -1448,11 +1583,13 @@ function apriDettaglio(exId) {
 }
 
 function resetStoriaEx(exId) {
-  if (!confirm('Cancellare tutto lo storico per questo esercizio?')) return;
+  if (!confirm('Cancellare tutto lo storico locale per questo esercizio?')) return;
   const st = loadStoria();
   delete st[exId];
   saveStoria(st);
   S.backStack.pop();
+  S.progDettaglioId = null;
+  setHeader('I miei progressi', '← Home');
   renderProgressi();
   toast('Storico cancellato');
 }
@@ -1527,7 +1664,7 @@ if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('./sw.js').catch(()=>{});
 }
 
-goHome();
+loadScheda();
 </script>
 </body>
 </html>

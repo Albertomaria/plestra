@@ -1,5 +1,5 @@
-const CACHE = 'plestra-v5';
-const FILES = ['./', './index.html', './manifest.json'];
+const CACHE = 'palestra-v6';
+const FILES = ['./', './index.html', './manifest.json', './scheda_v2.json', './esercizi_info.json', './Icona_finale.jpg'];
 
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(FILES)));
@@ -14,14 +14,20 @@ self.addEventListener('activate', e => {
 
 // Network-first: prova sempre a scaricare la versione fresca da internet.
 // Se non c'è connessione, usa la copia salvata in cache (così l'app funziona offline).
+// Le chiamate a Supabase (e qualsiasi POST) passano dirette: mai in cache.
 self.addEventListener('fetch', e => {
+  const req = e.request;
+  if (req.method !== 'GET') return;
+  if (new URL(req.url).hostname.endsWith('.supabase.co')) return;
   e.respondWith(
-    fetch(e.request)
+    fetch(req)
       .then(resp => {
-        const copy = resp.clone();
-        caches.open(CACHE).then(c => c.put(e.request, copy));
+        if (resp.ok || resp.type === 'opaque') {
+          const copy = resp.clone();
+          caches.open(CACHE).then(c => c.put(req, copy));
+        }
         return resp;
       })
-      .catch(() => caches.match(e.request))
+      .catch(() => caches.match(req))
   );
 });
