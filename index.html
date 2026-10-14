@@ -292,6 +292,25 @@ body { max-width: 480px; margin: 0 auto; }
 .superset-block { background: rgba(191,90,242,.12); border: 1.5px solid var(--superset); border-radius: 12px; padding: 10px 14px; margin-bottom: 12px; font-size: 14px; line-height: 1.45; }
 .superset-block .ne-lbl { color: var(--superset); }
 
+/* Superset in lista: blocco unico A ↕ B */
+.ss-block { margin: 8px 12px; border: 1.5px solid var(--superset); border-radius: 14px; overflow: hidden; background: rgba(191,90,242,.06); }
+.ss-hdr { padding: 9px 14px 7px; font-size: 11px; font-weight: 800; letter-spacing: .8px; color: var(--superset); border-bottom: 1px solid rgba(191,90,242,.35); }
+.ss-block .ex-row { border-bottom: none; }
+.er-num.ss-letter { color: var(--superset); font-weight: 800; font-size: 15px; }
+.ss-arrow { color: var(--superset); font-size: 15px; padding: 0 0 0 16px; margin: -6px 0; }
+.ss-foot { padding: 8px 14px 10px; font-size: 12px; color: var(--text2); border-top: 1px solid rgba(191,90,242,.35); line-height: 1.5; }
+.next-ex-block.ss-next { border-left-color: var(--superset); background: rgba(191,90,242,.12); }
+.ss-next .ne-lbl { color: var(--superset); font-weight: 700; }
+
+/* Golf a casa */
+.day-card.golf-card { border-color: rgba(50,215,75,.45); }
+.day-card.golf-card:active { border-color: var(--golf); }
+.golf-intro { margin: 14px 16px 6px; }
+.btn-info-big { width: 100%; padding: 16px; border: 1.5px solid var(--golf); border-radius: 14px; background: rgba(50,215,75,.1); color: var(--golf); font-size: 16px; font-weight: 700; cursor: pointer; margin-bottom: 12px; font-family: inherit; }
+.btn-info-big:active { background: rgba(50,215,75,.2); }
+.info-extra { font-size: 14px; line-height: 1.5; margin-bottom: 12px; color: var(--text); }
+.info-extra strong { display: block; font-size: 11px; color: var(--text2); text-transform: uppercase; letter-spacing: .5px; margin-bottom: 3px; }
+
 /* Countdown esercizi a tempo */
 .cd-input {
   width: 140px; background: var(--bg3); border: 1.5px solid var(--bg4); border-radius: 14px;
@@ -433,7 +452,24 @@ function preparaScheda() {
     })));
     GIORNI[k] = { ...g, esercizi };
   });
+
+  // Golf a casa → sessione "G": niente carichi, niente riposo automatico, info come elemento principale
+  const golf = SCHEDA.golf_casa;
+  if (golf) {
+    const infoGolf = ESERCIZI_INFO._golf_casa || {};
+    const m = /(\d+)\s*minuti/.exec(golf.descrizione || '');
+    GIORNI.G = {
+      ...golf, golf: true,
+      durata_stimata_min: m ? parseInt(m[1]) : 12,
+      sottotitolo: golf.sottotitolo || 'Sequenza cinetica e swing',
+      esercizi: golf.esercizi.map(e => ({
+        ...e, sez: golf.nome, golf: true, badges: e.badges || [], note: e.obiettivo,
+        info: infoGolf[(e.info_id || '').split('.').pop()] || null
+      }))
+    };
+  }
 }
+function giorniPalestra() { return Object.keys(GIORNI).filter(k => !GIORNI[k].golf); }
 
 function findEx(id) {
   for (const g of Object.values(GIORNI)) {
@@ -474,7 +510,6 @@ let S = {
   progGiorno: 'A', progDettaglioId: null,
   progTab: 'pesi',     // 'pesi' | 'salti'
   progFiltro: 'tutto', // 'sett' | 'mese' | 'tutto'
-  backStack: [],       // stack schermate per il tasto back
   riposaAdj: {},       // { exId: secondi } override tempo riposo
   postCountdown: null, // exId il cui countdown è appena finito (mostra "Inizia riposo")
 };
@@ -803,12 +838,18 @@ function setHeader(title, backLabel) {
   else bb.classList.add('hidden');
 }
 
-document.getElementById('btn-back').addEventListener('click', () => {
-  if (S.backStack.length) {
-    const prev = S.backStack.pop();
-    prev();
+// Il "back" dipende solo dalla schermata corrente (prima era uno stack che si svuotava
+// dopo esercizio → lista, lasciando "← Home" senza effetto)
+function tornaIndietro() {
+  if (S.screen === 's-exercise') renderLista();
+  else if (S.screen === 's-progress' && S.progDettaglioId) {
+    S.progDettaglioId = null;
+    setHeader('I miei progressi', '← Home');
+    renderProgressi();
   }
-});
+  else goHome();
+}
+document.getElementById('btn-back').addEventListener('click', tornaIndietro);
 
 // =========================================================
 // BADGE
@@ -834,7 +875,6 @@ function goHome() {
   fermaRiposo(); fermaExTimer();
   document.getElementById('s-timer').classList.add('hidden');
   S.giorno = null; S.done = {}; S.serie = {};
-  S.backStack = [];
   setHeader('Palestra Alberto', null);
   show('s-home');
 
@@ -855,12 +895,25 @@ function goHome() {
     </button>`;
   };
 
+  let golfCard = '';
+  if (GIORNI.G) {
+    const G = GIORNI.G;
+    const fatti = Object.keys(loadDone('G').items).length;
+    golfCard = `
+    <button class="day-card golf-card" onclick="apriGiorno('G')">
+      <h2>⛳ ${esc(G.nome)}</h2>
+      <div class="dmeta" style="margin:0 0 3px;">${G.esercizi.length} esercizi · ~${G.durata_stimata_min} min${fatti ? ` · ▶ oggi ${fatti}/${G.esercizi.length}` : ''}</div>
+      <div class="dsub">${esc(G.sottotitolo)}</div>
+    </button>`;
+  }
+
   document.getElementById('s-home').innerHTML = `
     <div class="home-hero">
       <h1>💪 Palestra Alberto</h1>
       <p>${p.eta} anni · ${p.altezza_cm} cm · ${p.peso_kg} kg</p>
     </div>
-    ${Object.keys(GIORNI).map(card).join('')}
+    ${giorniPalestra().map(card).join('')}
+    ${golfCard}
     <button class="btn-prog" onclick="apriProgressi()">
       📊 I miei progressi
     </button>
@@ -883,7 +936,6 @@ function apriGiorno(g) {
   const d = loadDone(g);
   S.done = d.items; S.serie = d.serie;
   startSessionTimer(apriSessione(g).start);
-  S.backStack = [goHome];
   // riparti dal primo esercizio non ancora fatto
   const i = GIORNI[g].esercizi.findIndex(e => !S.done[e.id]);
   if (i >= 0) S.exIdx = i;
@@ -897,24 +949,54 @@ function renderLista() {
   show('s-list');
 
   let html = '', sez = '';
-  G.esercizi.forEach((ex, i) => {
-    if (ex.sez !== sez) { sez = ex.sez; html += `<div class="sec-hdr">${esc(sez)}</div>`; }
+  if (G.golf) {
+    html += `<div class="info-box golf-intro">
+      ${esc(G.descrizione)}
+      ${G.frequenza ? `<br><br><strong style="color:var(--text);">Frequenza:</strong> ${esc(G.frequenza)}` : ''}
+      ${G.attrezzatura ? `<br><strong style="color:var(--text);">Attrezzatura:</strong> ${G.attrezzatura.map(esc).join(' · ')}` : ''}
+    </div>`;
+  }
+
+  const riga = (ex, i, lettera) => {
     const voce = S.done[ex.id];
     const isDone = voce === 'done';
     const isSkip = voce && typeof voce === 'object' && voce.skip;
     const fatte = S.serie[ex.id] || 0;
-    const badges = badgesHTML(ex, false);
+    const badges = badgesHTML(ex, false).filter(b => !b.includes('SUPERSET')); // nel blocco superset è già chiaro
     if (isSkip) badges.push(`<span class="bs-skip">⏭ SALTATO</span>`);
-    html += `<div class="ex-row ${isDone?'done':''} ${isSkip?'skipped':''} ${i===S.exIdx?'current':''}" onclick="apriEx(${i})">
-      <div class="er-num">${i+1}</div>
+    let dettaglio = `${ex.serie}× · ${esc(repsTarget(ex))}`;
+    if (G.golf) dettaglio += ex.obiettivo ? ` · ${esc(ex.obiettivo)}` : '';
+    else if (lettera === 'A') dettaglio += ` · ${getRiposa(partner(ex) || ex)}" riposo totale`;
+    else if (!lettera && ex.riposo_sec) dettaglio += ` · ⏱${ex.riposo_sec}"`;
+    return `<div class="ex-row ${isDone?'done':''} ${isSkip?'skipped':''} ${i===S.exIdx?'current':''}" onclick="apriEx(${i})">
+      <div class="er-num ${lettera?'ss-letter':''}">${lettera || i+1}</div>
       <div class="er-info">
         <div class="er-name">${esc(ex.nome)}</div>
-        <div class="er-detail">${ex.serie}× · ${esc(repsTarget(ex))}${ex.riposo_sec?' · ⏱'+ex.riposo_sec+'"':''}</div>
+        <div class="er-detail">${dettaglio}</div>
         ${badges.length?`<div class="er-badges">${badges.join('')}</div>`:''}
       </div>
       <div class="er-check">${isDone?'✅':isSkip?'⏭':fatte?`<span class="er-prog">${fatte}/${ex.serie}</span>`:'›'}</div>
     </div>`;
-  });
+  };
+
+  for (let i = 0; i < G.esercizi.length; i++) {
+    const ex = G.esercizi[i];
+    if (!G.golf && ex.sez !== sez) { sez = ex.sez; html += `<div class="sec-hdr">${esc(sez)}</div>`; }
+    const next = G.esercizi[i + 1];
+    // superset: i due esercizi (consecutivi) in un blocco unico
+    if (ex.superset_con && next && next.id === ex.superset_con) {
+      html += `<div class="ss-block">
+        <div class="ss-hdr">🔄 SUPERSET</div>
+        ${riga(ex, i, 'A')}
+        <div class="ss-arrow">↕</div>
+        ${riga(next, i + 1, 'B')}
+        <div class="ss-foot">Esegui A → poi B senza riposo<br>Il riposo parte dopo B</div>
+      </div>`;
+      i++;
+      continue;
+    }
+    html += riga(ex, i, null);
+  }
 
   const nFatti = Object.keys(S.done).length;
   if (nFatti === G.esercizi.length) {
@@ -947,7 +1029,6 @@ function confermaResetScheda() {
 function apriEx(idx) {
   S.exIdx = idx;
   fermaRiposo(); fermaExTimer();
-  S.backStack = [renderLista];
   renderEx();
   window.scrollTo(0, 0);
 }
@@ -985,15 +1066,14 @@ function renderEx() {
   const bloccato = isDone || isSkip;
   const r = getRiposa(ex);
 
-  // Superset
+  // Superset: su A l'indicazione "vai subito a B" sta in basso, su B in alto
   const p = partner(ex);
+  const primoSuperset = p && G.esercizi.indexOf(ex) < G.esercizi.indexOf(p);
   let supersetHTML = '';
-  if (p) {
-    const primo = G.esercizi.indexOf(ex) < G.esercizi.indexOf(p);
-    supersetHTML = `<div class="superset-block"><div class="ne-lbl">🔗 Superset</div>${primo
-      ? `Fai subito dopo: <strong>${esc(p.nome)}</strong> — senza riposo`
-      : `In coppia con <strong>${esc(p.nome)}</strong> — il riposo parte dopo questo esercizio`}</div>`;
+  if (p && !primoSuperset) {
+    supersetHTML = `<div class="superset-block"><div class="ne-lbl">🔄 Superset · B</div>Dopo <strong>${esc(p.nome)}</strong> — il riposo parte dopo questo esercizio</div>`;
   }
+  const golf = !!ex.golf;
 
   // Countdown esercizi a tempo
   let timerHTML = '';
@@ -1029,7 +1109,7 @@ function renderEx() {
 
   // Ripetizioni + carico (solo esercizi a ripetizioni)
   let infoRowHTML = '';
-  if (!tempo) {
+  if (!tempo && !golf) {
     const sugLabel = ex.peso_suggerito_kg ? `suggerito: ${ex.peso_suggerito_kg} kg` : 'peso libero';
     infoRowHTML = `
       <div class="info-row">
@@ -1068,8 +1148,10 @@ function renderEx() {
   // Prossimo esercizio
   const nex = G.esercizi[S.exIdx + 1];
   let nextHTML;
-  if (nex) {
-    const gruppo = nex.info ? nex.info.muscoli.split(',')[0].trim() : nex.sez;
+  if (primoSuperset) {
+    nextHTML = `<div class="next-ex-block ss-next"><div class="ne-lbl">VAI SUBITO A →</div><div class="ne-name">${esc(p.nome)}</div><div class="ne-muscoli">senza riposo · il riposo parte dopo</div></div>`;
+  } else if (nex) {
+    const gruppo = nex.info && nex.info.muscoli ? nex.info.muscoli.split(',')[0].trim() : (nex.obiettivo || nex.sez);
     nextHTML = `<div class="next-ex-block"><div class="ne-lbl">PROSSIMO</div><div class="ne-name">${esc(nex.nome)}</div><div class="ne-muscoli">${esc(gruppo)} · ${nex.serie}×${esc(repsTarget(nex))}</div></div>`;
   } else {
     nextHTML = `<div class="next-ex-block"><div class="ne-lbl">PROSSIMO</div><div class="ne-name">🏁 Fine sessione</div></div>`;
@@ -1079,9 +1161,11 @@ function renderEx() {
     <div class="ex-hdr">
       <h2>${esc(ex.nome)}</h2>
       ${badges.length?`<div class="bdg-row">${badges.join('')}</div>`:''}
-      ${ex.note?`<div class="ex-note">${esc(ex.note)}</div>`:''}
+      ${ex.note?`<div class="ex-note">${golf ? '🎯 ' : ''}${esc(ex.note)}</div>`:''}
+      ${golf && ex.info && ex.info.attrezzatura ? `<div class="ex-note">🧰 ${esc(ex.info.attrezzatura)}</div>` : ''}
     </div>
     <div class="ex-body">
+      ${golf && ex.info ? `<button class="btn-info-big" onclick="apriInfo('${ex.id}')">ℹ️ Come si fa — passo per passo</button>` : ''}
       ${supersetHTML}
       ${ex.acquisto_necessario ? `<div class="banner-warn">🛒 ${esc(ex.note_acquisto || 'Attrezzo da acquistare')}</div>` : ''}
       <div class="series-block">
@@ -1094,7 +1178,7 @@ function renderEx() {
       </div>
       ${timerHTML}
       ${infoRowHTML}
-      ${!bloccato && r > 0 ? `
+      ${!bloccato && r > 0 && !golf ? `
       <div class="riposo-adj">
         <span class="riposo-adj-lbl">⏱ Riposo serie</span>
         <div class="riposo-adj-btns">
@@ -1104,6 +1188,7 @@ function renderEx() {
         </div>
       </div>` : ''}
       ${!tempo || bloccato ? `<button class="btn-fs" id="btn-fs" onclick="fineSerie()" ${bloccato?'disabled':''}>${esc(labelFineSerie(ex))}</button>` : ''}
+      ${golf && !tempo && r > 0 && !S.restTimer ? `<div style="text-align:center;margin:-4px 0 12px;"><button class="btn-skip" onclick="avviaPausaGolf()">⏱ Pausa ${r}" (opzionale)</button></div>` : ''}
       <div class="rest-block ${S.restTimer ? 'active' : ''}" id="rest-block">
         <div class="rl">⏱ Riposo</div>
         <div class="rt" id="rt">0:00</div>
@@ -1112,8 +1197,8 @@ function renderEx() {
       </div>
       ${skipHTML}
       <div class="ex-actions">
-        ${ex.link_musclewiki ? `<a href="${esc(ex.link_musclewiki)}" target="_blank" rel="noopener" class="btn-vid">📹 Video</a>` : ''}
-        ${ex.info ? `<button class="btn-info" onclick="apriInfo('${ex.id}')">ℹ️ Info</button>` : ''}
+        ${linkVideo(ex) ? `<a href="${esc(linkVideo(ex))}" target="_blank" rel="noopener" class="btn-vid">📹 Video</a>` : ''}
+        ${ex.info && !golf ? `<button class="btn-info" onclick="apriInfo('${ex.id}')">ℹ️ Info</button>` : ''}
       </div>
       ${nextHTML}
     </div>
@@ -1168,6 +1253,7 @@ function setRiposaAdj(delta) {
 
 // Secondi di riposo dopo aver completato la serie n (0 = nessun riposo)
 function riposoDopo(ex, n) {
+  if (ex.golf) return 0; // golf: solo pausa manuale opzionale
   const G = GIORNI[S.giorno];
   const p = partner(ex);
   const tuttoFatto = n >= ex.serie && (!p || S.done[p.id]);
@@ -1306,10 +1392,16 @@ function apriInfo(exId) {
       <div class="info-drawer-title">${esc(ex.nome)}</div>
       <button class="info-drawer-close" onclick="chiudiInfo()">✕</button>
     </div>
-    <div class="info-muscoli">💪 ${esc(ex.info.muscoli)}</div>
+    ${ex.info.muscoli ? `<div class="info-muscoli">💪 ${esc(ex.info.muscoli)}</div>` : ''}
+    ${ex.info.obiettivo ? `<div class="info-extra"><strong>🎯 Obiettivo</strong>${esc(ex.info.obiettivo)}</div>` : ''}
+    ${ex.info.perche ? `<div class="info-extra"><strong>Perché</strong>${esc(ex.info.perche)}</div>` : ''}
+    ${ex.info.attrezzatura ? `<div class="info-extra"><strong>🧰 Attrezzatura</strong>${esc(ex.info.attrezzatura)}</div>` : ''}
     <ol class="info-steps">${steps}</ol>
+    ${ex.info.link_alternativo ? `<a class="btn-vid" style="margin-top:14px" href="${esc(ex.info.link_alternativo)}" target="_blank" rel="noopener">📹 Video / guida esterna</a>` : ''}
   `;
 }
+
+function linkVideo(ex) { return ex.link_musclewiki || (ex.info && ex.info.link_alternativo) || null; }
 
 function chiudiInfo() {
   document.getElementById('info-overlay').classList.add('hidden');
@@ -1354,6 +1446,10 @@ function saltaRiposo() {
   const cb = S.restOnEnd;
   fermaRiposo();
   if (cb) cb();
+}
+function avviaPausaGolf() {
+  avviaRiposo(getRiposa(exCorrente()), renderEx);
+  renderEx(); // nasconde il pulsante mentre la pausa è attiva
 }
 function iniziaRiposo() {
   const ex = exCorrente();
@@ -1447,7 +1543,6 @@ function setFiltro(f) {
 }
 
 function apriProgressi() {
-  S.backStack = [goHome];
   S.progTab = 'pesi'; S.progDettaglioId = null;
   setHeader('I miei progressi', '← Home');
   show('s-progress');
@@ -1462,7 +1557,7 @@ function progTabsHTML() {
   const g = S.progGiorno, pesi = S.progTab === 'pesi';
   return `
     <div class="prog-tabs">
-      ${Object.keys(GIORNI).map(k =>
+      ${giorniPalestra().map(k =>
         `<div class="ptab ${g===k&&pesi?'active':''}" onclick="S.progTab='pesi';S.progGiorno='${k}';renderProgressi()">Giorno ${k}</div>`).join('')}
       <div class="ptab ${!pesi?'active':''}" onclick="S.progTab='salti';renderProgressi()">⏭ Salti</div>
     </div>
@@ -1545,7 +1640,6 @@ function renderSalti() {
 
 function apriDettaglio(exId) {
   S.progDettaglioId = exId;
-  S.backStack.push(() => { S.progDettaglioId=null; setHeader('I miei progressi', '← Home'); renderProgressi(); });
   renderDettaglio(exId);
 }
 
@@ -1587,7 +1681,6 @@ function resetStoriaEx(exId) {
   const st = loadStoria();
   delete st[exId];
   saveStoria(st);
-  S.backStack.pop();
   S.progDettaglioId = null;
   setHeader('I miei progressi', '← Home');
   renderProgressi();

@@ -5,8 +5,16 @@
     "eta": 41,
     "altezza_cm": 184,
     "peso_kg": 84,
-    "note_fisiche": ["iperlordosi lombare", "spalla instabile in rinforzo"],
-    "obiettivi": ["forza", "definizione", "stabilità spalla", "propedeutica golf"]
+    "note_fisiche": [
+      "iperlordosi lombare",
+      "spalla instabile in rinforzo"
+    ],
+    "obiettivi": [
+      "forza",
+      "definizione",
+      "stabilità spalla",
+      "propedeutica golf"
+    ]
   },
   "progressione": {
     "tipo": "doppia",
@@ -54,7 +62,10 @@
               "riposo_sec": 0,
               "tipo": "rip",
               "note": "Porta le scapole indietro e in basso, tieni 2 secondi. Senza peso.",
-              "badges": ["spalla"]
+              "badges": [
+                "spalla"
+              ],
+              "link_musclewiki": "https://musclewiki.com/it-it/exercise/scapular-retraction?model=m"
             },
             {
               "id": "A_W4",
@@ -64,7 +75,10 @@
               "riposo_sec": 0,
               "tipo": "rip",
               "note": "Schiena al muro, braccia a 90° appoggiate, sali mantenendo il contatto.",
-              "badges": ["spalla"]
+              "badges": [
+                "spalla"
+              ],
+              "link_musclewiki": "https://www.muscleandstrength.com/node/49356"
             },
             {
               "id": "A_W5",
@@ -74,7 +88,10 @@
               "riposo_sec": 0,
               "tipo": "rip",
               "note": "Rotazione esterna + spinta al cavo. Prepara la cuffia dei rotatori.",
-              "badges": ["spalla"]
+              "badges": [
+                "spalla"
+              ],
+              "link_musclewiki": "https://musclewiki.com/it-it/exercise/cable-external-rotation?model=m"
             },
             {
               "id": "A_W6",
@@ -84,7 +101,11 @@
               "riposo_sec": 0,
               "tipo": "rip",
               "note": "Quattro zampe, schiena piatta. Estendi braccio e gamba opposti simultaneamente.",
-              "badges": ["lordosi", "golf"]
+              "badges": [
+                "lordosi",
+                "golf"
+              ],
+              "link_musclewiki": "https://musclewiki.com/it-it/exercise/bird-dog?model=m"
             },
             {
               "id": "A_W7",
@@ -94,7 +115,9 @@
               "riposo_sec": 0,
               "tipo": "rip",
               "note": "Appeso, spingi bacino in avanti e verso l'alto. Tieni 2-3 secondi.",
-              "badges": ["lordosi"]
+              "badges": [
+                "lordosi"
+              ]
             }
           ]
         },
@@ -113,7 +136,9 @@
               "tipo": "rip",
               "peso_suggerito_kg": null,
               "note": "Scapole retratte e abbassate PRIMA di spingere. Movimento guidato — protegge la spalla durante il rinforzo.",
-              "badges": ["spalla"],
+              "badges": [
+                "spalla"
+              ],
               "superset_con": "A2",
               "link_musclewiki": "https://musclewiki.com/it-it/exercise/machine-chest-press?model=m"
             },
@@ -142,7 +167,7 @@
               "peso_suggerito_kg": null,
               "note": "Cavi bassi o medi. Gomiti fissi leggermente piegati per tutta la serie. Tensione costante — meglio delle croci con manubri per la spalla.",
               "badges": [],
-              "link_musclewiki": "https://musclewiki.com/it-it/exercise/cable-fly?model=m"
+              "link_musclewiki": "https://musclewiki.com/it-it/exercise/cable-pec-fly?model=m"
             },
             {
               "id": "A4",
@@ -154,8 +179,10 @@
               "tipo": "rip",
               "peso_suggerito_kg": null,
               "note": "Cavo all'altezza del viso, accessorio corda. Tira verso la fronte aprendo le mani alla fine. Fondamentale per la salute della spalla.",
-              "badges": ["spalla"],
-              "link_musclewiki": "https://musclewiki.com/it-it/exercise/cable-face-pull?model=m"
+              "badges": [
+                "spalla"
+              ],
+              "link_musclewiki": "https://musclewiki.com/it-it/exercise/machine-face-pulls?model=m"
             },
             {
               "id": "A5",
@@ -167,8 +194,11 @@
               "tipo": "rip",
               "peso_suggerito_kg": 15,
               "note": "Seduto con schienale. Contrai 3 secondi l'addome PRIMA di ogni serie. Se incarchi la schiena il peso è troppo — scendi.",
-              "badges": ["lordosi", "spalla"],
-              "link_musclewiki": "https://musclewiki.com/it-it/exercise/dumbbell-shoulder-press?model=m"
+              "badges": [
+                "lordosi",
+                "spalla"
+              ],
+              "link_musclewiki": "https://musclewiki.com/it-it/exercise/dumbbell-overhead-press?model=m"
             },
             {
               "id": "A6",
@@ -213,7 +243,10 @@
               "riposo_sec": 60,
               "tipo": "rip",
               "note": "Cavo all'altezza del petto, braccia tese davanti. Resisti alla rotazione — non girare il busto.",
-              "badges": ["lordosi", "golf"],
+              "badges": [
+                "lordosi",
+                "golf"
+              ],
               "link_musclewiki": "https://musclewiki.com/it-it/exercise/cable-pallof-press?model=m"
             },
             {
@@ -224,7 +257,9 @@
               "riposo_sec": 60,
               "tipo": "tempo",
               "note": "Retroversione attiva del bacino. Obiettivo: +5 secondi ogni settimana.",
-              "badges": ["lordosi"],
+              "badges": [
+                "lordosi"
+              ],
               "link_musclewiki": "https://musclewiki.com/it-it/exercise/hand-plank?model=m"
             }
           ]
@@ -271,7 +306,10 @@
               "riposo_sec": 0,
               "tipo": "rip",
               "note": "Come Giorno A",
-              "badges": ["spalla"]
+              "badges": [
+                "spalla"
+              ],
+              "link_musclewiki": "https://musclewiki.com/it-it/exercise/scapular-retraction?model=m"
             },
             {
               "id": "B_W4",
@@ -281,7 +319,10 @@
               "riposo_sec": 0,
               "tipo": "rip",
               "note": "Come Giorno A",
-              "badges": ["spalla"]
+              "badges": [
+                "spalla"
+              ],
+              "link_musclewiki": "https://www.muscleandstrength.com/node/49356"
             },
             {
               "id": "B_W5",
@@ -291,7 +332,9 @@
               "riposo_sec": 0,
               "tipo": "rip",
               "note": "Corpo dritto, contrai addome e glutei prima di scendere. Se cede il bacino, fallo sulle ginocchia.",
-              "badges": ["lordosi"],
+              "badges": [
+                "lordosi"
+              ],
               "link_musclewiki": "https://musclewiki.com/it-it/exercise/push-up?model=m"
             },
             {
@@ -302,7 +345,11 @@
               "riposo_sec": 0,
               "tipo": "rip",
               "note": "Come Giorno A",
-              "badges": ["lordosi", "golf"]
+              "badges": [
+                "lordosi",
+                "golf"
+              ],
+              "link_musclewiki": "https://musclewiki.com/it-it/exercise/bird-dog?model=m"
             },
             {
               "id": "B_W7",
@@ -312,7 +359,9 @@
               "riposo_sec": 0,
               "tipo": "rip",
               "note": "Come Giorno A",
-              "badges": ["lordosi"]
+              "badges": [
+                "lordosi"
+              ]
             },
             {
               "id": "B_W8",
@@ -322,7 +371,10 @@
               "riposo_sec": 0,
               "tipo": "tempo",
               "note": "Mani sui fianchi, ginocchia piegate. Scioglie anca e lombari.",
-              "badges": ["lordosi", "golf"]
+              "badges": [
+                "lordosi",
+                "golf"
+              ]
             }
           ]
         },
@@ -354,7 +406,9 @@
               "tipo": "rip",
               "peso_suggerito_kg": null,
               "note": "Piedi alti e larghi. Fermati PRIMA che il bacino inizi a ruotare — non scendere oltre.",
-              "badges": ["lordosi"],
+              "badges": [
+                "lordosi"
+              ],
               "link_musclewiki": "https://musclewiki.com/it-it/exercise/machine-leg-press?model=m"
             },
             {
@@ -367,7 +421,9 @@
               "tipo": "rip",
               "peso_suggerito_kg": null,
               "note": "In piedi, un cavo per braccio incrociati. Apri le braccia posteriormente con gomiti leggermente piegati. Molto più controllato della versione su panca.",
-              "badges": ["spalla"],
+              "badges": [
+                "spalla"
+              ],
               "link_musclewiki": "https://musclewiki.com/it-it/exercise/dumbbell-rear-delt-fly?model=m"
             },
             {
@@ -438,9 +494,12 @@
               "riposo_sec": 60,
               "tipo": "rip",
               "note": "Inginocchiato. Vai avanti solo fino a dove mantieni la schiena piatta — non cedere con la lombare. Inizia corto, aumenta gradualmente.",
-              "badges": ["lordosi"],
+              "badges": [
+                "lordosi"
+              ],
               "acquisto_necessario": true,
-              "note_acquisto": "Ruota per addominali — circa €10 su Amazon"
+              "note_acquisto": "Ruota per addominali — circa €10 su Amazon",
+              "link_musclewiki": "https://musclewiki.com/it-it/exercise/machine-roll-outs?model=m"
             },
             {
               "id": "B_C2",
@@ -450,12 +509,91 @@
               "riposo_sec": 60,
               "tipo": "rip",
               "note": "Come Giorno A. Resisti alla rotazione.",
-              "badges": ["lordosi", "golf"],
+              "badges": [
+                "lordosi",
+                "golf"
+              ],
               "link_musclewiki": "https://musclewiki.com/it-it/exercise/cable-pallof-press?model=m"
             }
           ]
         }
       ]
     }
+  },
+  "golf_casa": {
+    "nome": "Golf a casa",
+    "descrizione": "Routine da 10-12 minuti per migliorare la sequenza cinetica e la propriocezione dello swing. Ideale come pausa durante la giornata lavorativa. Non serve riscaldamento — basta qualche minuto di camminata sul posto.",
+    "frequenza": "3 volte a settimana, anche nei giorni di lavoro",
+    "attrezzatura": [
+      "bastone da golf o ombrello",
+      "asciugamano",
+      "oggetto morbido leggero (cuscino o pallone)"
+    ],
+    "esercizi": [
+      {
+        "id": "G1",
+        "nome": "Step-and-turn drill",
+        "serie": 1,
+        "rip": "10 per lato",
+        "riposo_sec": 30,
+        "obiettivo": "Separazione anche-spalle",
+        "info_id": "_golf_casa.step_and_turn"
+      },
+      {
+        "id": "G2",
+        "nome": "Split-stance rotation",
+        "serie": 1,
+        "rip": "12-15 per lato",
+        "riposo_sec": 30,
+        "obiettivo": "Isolare rotazione busto",
+        "info_id": "_golf_casa.split_stance_rotation"
+      },
+      {
+        "id": "G3",
+        "nome": "Wall drill — caricamento anca",
+        "serie": 1,
+        "rip": "8-10 per lato",
+        "riposo_sec": 30,
+        "obiettivo": "Caricare l'anca senza scivolare",
+        "info_id": "_golf_casa.wall_drill"
+      },
+      {
+        "id": "G4",
+        "nome": "Rotational throw",
+        "serie": 1,
+        "rip": "8 per lato",
+        "riposo_sec": 30,
+        "obiettivo": "Transfer di energia anche→busto→braccia",
+        "info_id": "_golf_casa.med_ball_throw"
+      },
+      {
+        "id": "G5",
+        "nome": "Single-leg loading hold",
+        "serie": 3,
+        "rip": "15-20 secondi per gamba",
+        "riposo_sec": 20,
+        "tipo": "tempo",
+        "obiettivo": "Stabilità nella posizione di caricamento",
+        "info_id": "_golf_casa.single_leg_hold"
+      },
+      {
+        "id": "G6",
+        "nome": "Single-leg clock reach",
+        "serie": 1,
+        "rip": "2 giri per gamba",
+        "riposo_sec": 30,
+        "obiettivo": "Propriocezione e equilibrio dinamico",
+        "info_id": "_golf_casa.clock_reach"
+      },
+      {
+        "id": "G7",
+        "nome": "Tempo swing a occhi chiusi",
+        "serie": 2,
+        "rip": "10 swing",
+        "riposo_sec": 30,
+        "obiettivo": "Percezione interna della sequenza cinetica",
+        "info_id": "_golf_casa.eyes_closed_swing"
+      }
+    ]
   }
 }

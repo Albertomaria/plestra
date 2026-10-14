@@ -277,3 +277,56 @@ Nella schermata progressi aggiungi un toggle disabilitato "🏃 Connetti smartwa
 - Supabase è opzionale — se non configurato, tutto funziona con localStorage
 - Non usare framework (no React, no Vue) — vanilla JS come ora
 - Testa il timer bloccando lo schermo del telefono per 30 secondi e verificando che continui correttamente
+
+---
+
+## AGGIORNAMENTO — Sezione Golf a casa + Superset + Fix descrizioni
+
+### Nuova tab "Golf 🏌️" nella home
+
+Aggiungi un terzo pulsante nella home accanto a Giorno A e Giorno B:
+
+```
+┌─────────────────────────────┐
+│  ⛳ Golf a casa              │
+│  7 esercizi · ~12 min       │
+│  Sequenza cinetica e swing  │
+└─────────────────────────────┘
+```
+
+La sezione golf carica da `scheda.golf_casa` nel JSON. Struttura analoga alle altre sessioni ma senza serie/riposo classici — ogni esercizio ha solo obiettivo, step e rip. Il pulsante ℹ️ Info è l'elemento principale (non c'è video per questi esercizi). Nessun countdown di riposo — solo un timer manuale opzionale.
+
+### Superset — modo migliore per mostrarli
+
+Il concetto di superset non è immediato. Invece di due esercizi separati in lista con una proprietà "superset_con", mostrali come un blocco unico:
+
+```
+┌─────────────────────────────────┐
+│  🔄 SUPERSET                    │
+│  ─────────────────────────────  │
+│  A  Chest press alla macchina   │
+│     4×8-12 · 90" riposo totale  │
+│  ↕                              │
+│  B  Low row al cavo             │
+│     4×8-12                      │
+│                                 │
+│  Esegui A → poi B senza riposo  │
+│  Il riposo parte dopo B         │
+└─────────────────────────────────┘
+```
+
+Nella schermata esercizio, quando l'utente è sull'esercizio A del superset:
+- Mostra in basso: "VAI SUBITO A → Low row al cavo"
+- Dopo aver premuto "Fine serie" su A, avanza direttamente a B senza avviare il countdown
+- Il countdown parte solo dopo aver completato anche B
+
+### Descrizioni esercizi aggiornate
+
+Il file `esercizi_info.json` è stato aggiornato con:
+- **Push and pull al cavo** (A_W5): descrizione completamente riscritta — spiega posizione del corpo, del gomito, differenza tra pull e press
+- **Retrazione scapolare** (A_W3): aggiunta spiegazione del "perché" e rimosso linguaggio tecnico
+- **Bird dog** (A_W6): chiarito che "quattro zampe" = mani+ginocchia a terra, aggiunto controllo del bacino
+- **Wall slide** (A_W4/B_W4): già aggiornata nella sessione precedente — posizione a "W" → "Y"
+- **Golf a casa** (_golf_casa): 7 esercizi con step dettagliati, attrezzatura necessaria, sensazione da cercare
+
+Leggi `esercizi_info.json` aggiornato per tutti i testi — non riscrivere le descrizioni, usale esattamente come sono nel file.
