@@ -128,19 +128,19 @@
           "esercizi": [
             {
               "id": "A1",
-              "nome": "Chest press alla macchina",
+              "nome": "Panca piana con manubri (presa neutra)",
               "serie": 4,
               "rip_min": 8,
               "rip_max": 12,
               "riposo_sec": 90,
               "tipo": "rip",
-              "peso_suggerito_kg": null,
-              "note": "Scapole retratte e abbassate PRIMA di spingere. Movimento guidato — protegge la spalla durante il rinforzo.",
+              "peso_suggerito_kg": 10,
+              "note": "Glutei sempre a contatto con la panca, addome contratto 3 secondi prima di spingere, piedi ben piantati. Presa neutra (palmi che si guardano). Parti da 10 kg per braccio. Superset con low row: fai A1 poi A2 senza riposo, poi 90\".",
               "badges": [
                 "spalla"
               ],
               "superset_con": "A2",
-              "link_musclewiki": "https://musclewiki.com/it-it/exercise/machine-chest-press?model=m"
+              "link_musclewiki": "https://musclewiki.com/it-it/exercise/dumbbell-bench-press?model=m"
             },
             {
               "id": "A2",
@@ -151,23 +151,23 @@
               "riposo_sec": 90,
               "tipo": "rip",
               "peso_suggerito_kg": null,
-              "note": "Schiena dritta, tira verso l'ombelico, stringi le scapole in fondo. Superset con chest press: fai A1 → A2 senza riposo, poi 90\".",
+              "note": "Schiena dritta, tira verso l'ombelico, stringi le scapole in fondo. Superset con panca piana: fai A1 → A2 senza riposo, poi 90\".",
               "badges": [],
               "superset_con": "A1",
               "link_musclewiki": "https://musclewiki.com/it-it/exercise/machine-neutral-row?model=m"
             },
             {
               "id": "A3",
-              "nome": "Croci ai cavi",
+              "nome": "Pec deck (macchina, chiusura braccia)",
               "serie": 3,
               "rip_min": 10,
               "rip_max": 15,
               "riposo_sec": 75,
               "tipo": "rip",
               "peso_suggerito_kg": null,
-              "note": "Cavi bassi o medi. Gomiti fissi leggermente piegati per tutta la serie. Tensione costante — meglio delle croci con manubri per la spalla.",
+              "note": "Seduto con la schiena sul cuscino, maniglie all'altezza del petto. I gomiti non vanno dietro la linea del busto. Movimento lento, stringi il petto 1 secondo.",
               "badges": [],
-              "link_musclewiki": "https://musclewiki.com/it-it/exercise/cable-pec-fly?model=m"
+              "link_musclewiki": "https://musclewiki.com/it-it/exercise/machine-pec-fly?model=m"
             },
             {
               "id": "A4",

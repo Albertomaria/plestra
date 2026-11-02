@@ -1,3 +1,10 @@
 video/
 .claude/
 *.mp4
+
+# Documenti di lavoro (non servono all'app online)
+files/
+*.zip
+descrizioniEsercizi/
+SCHEDA_V2.md
+TABELLA_LINK_ESERCIZI.md
